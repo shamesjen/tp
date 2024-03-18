@@ -17,6 +17,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -92,9 +93,10 @@ public class MarkCommand extends Command {
         Phone phone = personToMark.getPhone();
         Email email = personToMark.getEmail();
         Address address = personToMark.getAddress();
+        Remark remark = personToMark.getRemark();
         Set<Tag> tags = personToMark.getTags();
 
-        return new Person(name, phone, email, address, tags, updatedParticipationScores);
+        return new Person(name, phone, email, address, remark, tags, updatedParticipationScores);
     }
 
     @Override
