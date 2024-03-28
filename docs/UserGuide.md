@@ -88,7 +88,7 @@ Format: `help`
 
 ### 2. Adding a person : `add`
 
-Adds a person to the address book.
+Adds a person to the telegramHandle book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -102,13 +102,13 @@ Examples:
 
 ### 3. Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the telegramHandle book.
 
 Format: `list`
 
 ### 4. Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the telegramHandle book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -120,7 +120,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the matricNumber number and email telegramHandle of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### 5. Locating persons by name : `find`
@@ -143,7 +143,7 @@ Examples:
 
 ### 6. Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from the telegramHandle book.
 
 Format: `delete INDEX`
 
@@ -152,12 +152,12 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list` followed by `delete 2` deletes the 2nd person in the telegramHandle book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### 7. Remove a tag : `Remove Tag`
 
-Deletes the specified person from the address book.
+Deletes the specified person from the telegramHandle book.
 
 Format: `Remove Tag INDEX [t/TAG]…`
 
@@ -167,12 +167,12 @@ Format: `Remove Tag INDEX [t/TAG]…`
 * The tag must exist on the person
 
 Examples:
-* `list` followed by `Remove Tag 2 t/friend` Removes the friend tag from the 2nd person in the address book.
+* `list` followed by `Remove Tag 2 t/friend` Removes the friend tag from the 2nd person in the telegramHandle book.
 
 
 ### 8. Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the telegramHandle book.
 
 Format: `clear`
 

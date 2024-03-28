@@ -65,8 +65,8 @@ public class RemoveTagCommand extends Command {
             }
             newSet.remove(tag);
         }
-        Person removedTagPerson = new Person(personToRemove.getName(), personToRemove.getPhone(),
-            personToRemove.getEmail(), personToRemove.getAddress(), newSet);
+        Person removedTagPerson = new Person(personToRemove.getName(), personToRemove.getMatricNumber(),
+            personToRemove.getEmail(), personToRemove.getTelegramHandle(), newSet);
         model.setPerson(personToRemove, removedTagPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         if (model.shouldPurgeAddressBook()) {
