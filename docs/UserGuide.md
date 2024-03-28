@@ -88,29 +88,29 @@ Format: `help`
 
 ### 2. Adding a person : `add`
 
-Adds a person to the telegramHandle book.
+Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME m/MATRIC_NUMBER e/EMAIL tl/telegramHandle [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe m/A1234567Z e/johnd@u.nus.edu tl/johndoe01`
+* `add n/Betsy Crowe t/friend e/betsycrowe@u.nus.edu tl/betsyyyc m/A7654321Y t/criminal`
 
 ### 3. Listing all persons : `list`
 
-Shows a list of all persons in the telegramHandle book.
+Shows a list of all persons in the address book.
 
 Format: `list`
 
 ### 4. Editing a person : `edit`
 
-Edits an existing person in the telegramHandle book.
+Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [m/MATRIC_NUMBER] [e/EMAIL] [tl/TELEGRAM_HANDLE] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -120,7 +120,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the matricNumber number and email telegramHandle of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 1 m/A1111111Z e/johndoe@gmail.com` Edits the matric number and email address of the 1st person to be `A1111111Z` and `johndoe@gmail.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### 5. Locating persons by name : `find`
@@ -143,7 +143,7 @@ Examples:
 
 ### 6. Deleting a person : `delete`
 
-Deletes the specified person from the telegramHandle book.
+Deletes the specified person from the address book.
 
 Format: `delete INDEX`
 
@@ -152,12 +152,12 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the telegramHandle book.
+* `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### 7. Remove a tag : `Remove Tag`
 
-Deletes the specified person from the telegramHandle book.
+Deletes the specified person from the address book.
 
 Format: `Remove Tag INDEX [t/TAG]…`
 
@@ -167,12 +167,12 @@ Format: `Remove Tag INDEX [t/TAG]…`
 * The tag must exist on the person
 
 Examples:
-* `list` followed by `Remove Tag 2 t/friend` Removes the friend tag from the 2nd person in the telegramHandle book.
+* `list` followed by `Remove Tag 2 t/friend` Removes the friend tag from the 2nd person in the address book.
 
 
 ### 8. Clearing all entries : `clear`
 
-Clears all entries from the telegramHandle book.
+Clears all entries from the address book.
 
 Format: `clear`
 
@@ -258,8 +258,8 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Add** | `add n/NAME m/MATRIC_NUMBER e/EMAIL tl/TELEGRAM_HANDLE [t/TAG]…​` <br> e.g., `add n/James Ho m/A1234567Z e/jamesho@u.nus.edy tl/jameshohoho t/friend t/colleague`
+**Edit** | `edit INDEX [n/NAME] [m/MATRIC_NUMBER] [e/EMAIL] [tl/TELEGRAM_HANDLE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@u.nus.edu`
 **Mark** | `mark INDEX WEEKNUMBER` <br> e.g., `mark 1 5`
 **Remove Tag** | `Remove Tag INDEX [t/TAG]…` <br> e.g., `Remove Tag 1 t/friends`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
