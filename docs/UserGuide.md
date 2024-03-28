@@ -2,8 +2,11 @@
 layout: page
 title: User Guide
 ---
+Are you a CS2109S TA (Teaching Assistant) conducting multiple tutorials a week? Are you having troubles with keeping track of student details and their progress?
 
-nerdTrackerPlus is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, nerdTrackerPlus can get your contact management tasks done faster than traditional GUI apps.
+Introducing nerdTrackerPlus, your ultimate companion in managing student details and tracking their progress effortlessly!
+
+nerdTrackerPlus is a **desktop app** specifically designed for **CS2109S tutors**. It helps you manage student details and progress for your tutorials. nerdTrackerPlus is optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, nerdTrackerPlus can get your contact management tasks done faster than traditional GUI apps.
 
 ### Table of Contents
 - [Quick Start](#quick-start)
@@ -28,11 +31,11 @@ nerdTrackerPlus is a **desktop app for managing contacts, optimized for use via 
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `nerdTrackerPlus.jar` from [here](https://github.com/AY2324S2-CS2103T-F11-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your nerdTrackerPlus.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar nerdTrackerPlus.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -191,12 +194,27 @@ Format: `filter [all/any] NUMBEROFTAGS TAGNAME [TAGNAME]`
 
 Marks the participation scores of particular students for a particular week.
 
-Format: `mark INDEX WEEKNUMBER`
+<h4>Fields:</h4>
 
+|    Field     |  Prefix  |  Required  | Requirements                                                                                                             |
+|:------------:|:--------:|:----------:|:-------------------------------------------------------------------------------------------------------------------------|
+|    `INDEX`     |   NONE   |    YES     | INDEX **must be a positive integer** 1, 2, 3 …​ <br><br> INDEX cannot be greater than the number of students in the list.|
+|  `WEEKNUMBER`  |   NONE   |    YES     | WEEKNUMBER **must be a valid week from the range [1, 13].                                                                |                                                                                                              
+
+<h4>Format:</h4>
+```
+mark INDEX WEEKNUMBER
+```
+
+<h4>Notes:</h4>
 * Marks the participation score of the student at the specified `INDEX` in the specified `WEEK`.
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* The week must be a valid week from the range [1, 13].
+
+<h4>Example Usage:</h4>
+
+Command: `mark 1 1`
+
+**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
 
 ### 11. Undoing a previous command : `undo`
 
@@ -224,15 +242,15 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+nerdTrackerPlus data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+nerdTrackerPlus data are saved automatically as a JSON file `[JAR file location]/data/nerdTrackerPlus.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, nerdTrackerPlus will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the nerdTrackerPlus to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -244,7 +262,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous nerdTrackerPlus home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -256,18 +274,18 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Mark** | `mark INDEX WEEKNUMBER` <br> e.g., `mark 1 5`
-**Remove Tag** | `Remove Tag INDEX [t/TAG]…` <br> e.g., `Remove Tag 1 t/friends`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Filter** | `filter [all/any] NUMBEROFTAGS TAGNAME [TAGNAME]` <br> e.g., `filter [all/any] 2 friends colleagues`
-**List** | `list`
-**Clear** | `clear`
-**Undo** | `undo`
-**Redo** | `redo`
-**Help** | `help`
-**Exit** | `exit`
+Action | Format| Examples                                                                                           |
+--------|------- |----------------------------------------------------------------------------------------------------|
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`| `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`| `edit 2 n/James Lee e/jameslee@example.com`                                                        |
+**Mark** | `mark INDEX WEEKNUMBER`| `mark 1 1`                                                                                         |
+**Remove Tag** | `Remove Tag INDEX [t/TAG]…`| `Remove Tag 1 t/friends`                                                                           |
+**Delete** | `delete INDEX`| `delete 3`                                                                                         |
+**Find** | `find KEYWORD [MORE_KEYWORDS]`|`find James Jake`|
+**Filter** | `filter [all/any] NUMBEROFTAGS TAGNAME [TAGNAME]`|`filter [all/any] 2 friends colleagues`|
+**List** | `list`|`list`|
+**Clear** | `clear`|`clear`|
+**Undo** | `undo`|`undo`|
+**Redo** | `redo`|`redo`|
+**Help** | `help`|`help`|
+**Exit** | `exit`|`exit`|
