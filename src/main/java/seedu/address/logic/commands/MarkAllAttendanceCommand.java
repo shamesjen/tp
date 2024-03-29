@@ -19,32 +19,29 @@ import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Tag;
 
 /**
- * Marks the tutorial attendance of a student
+ * Marks the tutorial attendance of all filtered student
  */
 
-public class MarkCommand extends Command {
+public class MarkAllAttendanceCommand extends Command {
 
-    public static final String COMMAND_WORD = "mark";
+    public static final String COMMAND_WORD = "markall";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks the attendance of the person identified "
-            + "by the index number used in the last person listing.\n"
+            + ": Marks the attendance of the person identified \n"
             + "Parameters: INDEX (must be a positive integer), WEEK (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1 " + "5";
+            + "Example: " + COMMAND_WORD + " 1 ";
 
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Week Number: %2$d";
-    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked Person: %1$s";
-    private final Index targetIndex;
+    public static final String MESSAGE_ARGUMENTS = "Week Number: %2$d";
+    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked all";
     private final Index weekNumber;
 
     /**
      * @param index of the person in the filtered person list to edit
      * @param weekNumber week number to mark the person with
      */
-    public MarkCommand(Index index, Index weekNumber) {
-        requireAllNonNull(index, weekNumber);
+    public MarkAllAttendanceCommand(Index weekNumber) {
+        requireAllNonNull(weekNumber);
 
-        this.targetIndex = index;
         this.weekNumber = weekNumber;
     }
 
@@ -53,29 +50,25 @@ public class MarkCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
         if (weekNumber.getZeroBased() > 13) {
             throw new CommandException(Messages.MESSAGE_INVALID_WEEK);
         }
+        for (int i = 0; i < lastShownList.size(); i++) {
+            Person personToMark = lastShownList.get(i);
+            List<Integer> oldParticipationScores = personToMark.getParticipationScores();
+            List<Integer> newParticipationScores = new ArrayList<>();
+            int weekIndex = weekNumber.getZeroBased();
 
-        Person personToMark = lastShownList.get(targetIndex.getZeroBased());
-        List<Integer> oldParticipationScores = personToMark.getParticipationScores();
-        List<Integer> newParticipationScores = new ArrayList<>();
-        int weekIndex = weekNumber.getZeroBased() - 1;
-
-        for (int i = 0; i < oldParticipationScores.size(); i++) {
-            if (i == weekIndex) {
-                newParticipationScores.add(1);
-            } else {
-                newParticipationScores.add(oldParticipationScores.get(i));
+            for (int j = 0; j < oldParticipationScores.size(); j++) {
+                if (j == weekIndex) {
+                    newParticipationScores.add(1);
+                } else {
+                    newParticipationScores.add(oldParticipationScores.get(j));
+                }
             }
+            Person updatedPerson = createMarkedPerson(personToMark, newParticipationScores);
+            model.setPerson(personToMark, updatedPerson);
         }
-
-        Person updatedPerson = createMarkedPerson(personToMark, newParticipationScores);
-
-        model.setPerson(personToMark, updatedPerson);
         if (model.shouldPurgeAddressBook()) {
             model.purgeAddressBook();
         }
@@ -99,7 +92,6 @@ public class MarkCommand extends Command {
 
         return new Person(name, matricNumber, email, telegramHandle, tags, updatedParticipationScores);
     }
-
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
@@ -108,14 +100,13 @@ public class MarkCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof MarkCommand)) {
+        if (!(other instanceof MarkAllAttendanceCommand)) {
             return false;
         }
 
         // state check
-        MarkCommand e = (MarkCommand) other;
-        return targetIndex.equals(e.targetIndex)
-                && weekNumber.equals(e.weekNumber);
+        MarkAllAttendanceCommand e = (MarkAllAttendanceCommand) other;
+        return weekNumber.equals(e.weekNumber);
     }
 
 }
