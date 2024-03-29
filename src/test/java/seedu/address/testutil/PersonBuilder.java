@@ -5,11 +5,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.MatricNumber;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -19,14 +19,14 @@ import seedu.address.model.util.SampleDataUtil;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_PHONE = "85355255";
+    public static final String DEFAULT_MATRIC_NUMBER = "A1234567Z";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_TELEGRAM_HANDLE = "yeohyeoh01";
 
     private Name name;
-    private Phone phone;
+    private MatricNumber matricNumber;
     private Email email;
-    private Address address;
+    private TelegramHandle telegramHandle;
     private Set<Tag> tags;
     private List<Integer> participationScores = new ArrayList<>();
 
@@ -35,9 +35,9 @@ public class PersonBuilder {
      */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
-        phone = new Phone(DEFAULT_PHONE);
+        matricNumber = new MatricNumber(DEFAULT_MATRIC_NUMBER);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
+        telegramHandle = new TelegramHandle(DEFAULT_TELEGRAM_HANDLE);
         tags = new HashSet<>();
 
         for (int i = 0; i < 13; i++) {
@@ -50,9 +50,9 @@ public class PersonBuilder {
      */
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
-        phone = personToCopy.getPhone();
+        matricNumber = personToCopy.getMatricNumber();
         email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
+        telegramHandle = personToCopy.getTelegramHandle();
         tags = new HashSet<>(personToCopy.getTags());
         participationScores = personToCopy.getParticipationScores();
     }
@@ -74,18 +74,18 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
+     * Sets the {@code TelegramHandle} of the {@code Person} that we are building.
      */
-    public PersonBuilder withAddress(String address) {
-        this.address = new Address(address);
+    public PersonBuilder withTelegramHandle(String telegramHandle) {
+        this.telegramHandle = new TelegramHandle(telegramHandle);
         return this;
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
+     * Sets the {@code MatricNumber} of the {@code Person} that we are building.
      */
-    public PersonBuilder withPhone(String phone) {
-        this.phone = new Phone(phone);
+    public PersonBuilder withMatricNumber(String matricNumber) {
+        this.matricNumber = new MatricNumber(matricNumber);
         return this;
     }
 
@@ -106,7 +106,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, matricNumber, email, telegramHandle, tags);
     }
 
 }

@@ -22,11 +22,11 @@ public class Person {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
+    private final MatricNumber matricNumber;
     private final Email email;
+    private final TelegramHandle telegramHandle;
 
     // Data fields
-    private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final List<Integer> participationScores;
 
@@ -34,12 +34,12 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, MatricNumber matricNumber, Email email, TelegramHandle telegramHandle, Set<Tag> tags) {
+        requireAllNonNull(name, matricNumber, email, telegramHandle, tags);
         this.name = name;
-        this.phone = phone;
+        this.matricNumber = matricNumber;
         this.email = email;
-        this.address = address;
+        this.telegramHandle = telegramHandle;
         this.tags.addAll(tags);
         this.participationScores = new ArrayList<>();
 
@@ -51,13 +51,13 @@ public class Person {
     /**
      * The overloaded Person constructor. Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address,
+    public Person(Name name, MatricNumber matricNumber, Email email, TelegramHandle telegramHandle,
                   Set<Tag> tags, List<Integer> participationScores) {
-        requireAllNonNull(name, phone, email, address, tags, participationScores);
+        requireAllNonNull(name, matricNumber, email, telegramHandle, tags, participationScores);
         this.name = name;
-        this.phone = phone;
+        this.matricNumber = matricNumber;
         this.email = email;
-        this.address = address;
+        this.telegramHandle = telegramHandle;
         this.tags.addAll(tags);
         this.participationScores = participationScores;
     }
@@ -66,16 +66,16 @@ public class Person {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public MatricNumber getMatricNumber() {
+        return matricNumber;
     }
 
     public Email getEmail() {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public TelegramHandle getTelegramHandle() {
+        return telegramHandle;
     }
 
     /**
@@ -135,25 +135,25 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
+                && matricNumber.equals(otherPerson.matricNumber)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
+                && telegramHandle.equals(otherPerson.telegramHandle)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, matricNumber, email, telegramHandle, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("phone", phone)
+                .add("phone", matricNumber)
                 .add("email", email)
-                .add("address", address)
+                .add("address", telegramHandle)
                 .add("tags", tags)
                 .toString();
     }
