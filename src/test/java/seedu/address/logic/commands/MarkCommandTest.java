@@ -33,8 +33,7 @@ public class MarkCommandTest {
                 .withParticipationScores(participationScoresStub).build();
         MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_WEEK);
 
-        String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_PERSON_SUCCESS,
-                Messages.format(personToMark));
+        String expectedMessage = MarkCommand.MESSAGE_MARK_PERSON_SUCCESS;
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), markedPerson);

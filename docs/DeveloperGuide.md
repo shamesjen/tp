@@ -155,6 +155,24 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Mark Participation feature
+
+The `mark` command allows users to mark the participation score of students for a particular week. It takes in an index representing the index of the person to mark in the list, as well as a week number representing the target week to mark.
+
+To better understand how the mark command is executed, below is a sequence diagram to provide a visual representation.
+
+![MarkParticipationSequenceDiagram](assets/dg/MarkSequenceDiagram.png)
+
+The sequence diagrams below provide information for the respective reference frames.
+
+![MarkParticipation](assets/dg/SDMarkParticipation.png)
+
+![CreateMarkCommandResult](assets/dg/SDMarkParticipationCommandResult.png)
+
+![CommitAddressbook](assets/dg/SDCommitAddressbook.png)
+
+#### Implementation
+
 ### Undo/redo feature
 
 #### Implementation
@@ -292,18 +310,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                | I want to …​                                                  | So that I can…​                                                                               |
 |---------|------------------------|---------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
 | `* * *` | new user               | see usage instructions                                        | refer to instructions when I forget how to use the App                                        |
-| `* * *` | CS2103T teaching staff | add a new student                                             | keep track of their contact details                                                           |
-| `* * *` | CS2103T teaching staff | delete a student                                              | remove student entries that I no longer need                                                  |
-| `* * *` | CS2103T teaching staff | list students                                                 | view all students currently in my contacts                                                    |
-| `* * *` | CS2103T teaching staff | find a student by name                                        | locate details of students without having to go through the entire list                       |
-| `* * *` | CS2103T teaching staff | edit student details                                          | ensure that student details is always updated                                                 |
-| `* * *` | CS2103T teaching staff | filter students by tag                                        | make it easier to search for particular students                                              |
-| `* * *` | CS2103T teaching staff | add tags to students                                          | categorize student contacts for reference                                                     |
-| `* * *` | CS2103T teaching staff | delete tags                                                   | remove tags that are currently unused                                                         |
-| `* * *` | CS2103T teaching staff | delete tags from students                                     | remove tags from students that do not belong to that category                                 |
-| `* * *` | CS2103T teaching staff | mark the participation score for a student for specific weeks | so that I can keep track of their tutorial participation scores over the course of the module |
-| `* * *` | CS2103T teaching staff | undo a previously issued command                              | so that it is convenient to undo any mistakes made                                            |
-| `* * *` | CS2103T teaching staff | redo a previously undone command                              | so that I can restore the last changes that were undone                                       |
+| `* * *` | CS2109S teaching staff | add a new student                                             | keep track of their contact details                                                           |
+| `* * *` | CS2109S teaching staff | delete a student                                              | remove student entries that I no longer need                                                  |
+| `* * *` | CS2109S teaching staff | list students                                                 | view all students currently in my contacts                                                    |
+| `* * *` | CS2109S teaching staff | find a student by name                                        | locate details of students without having to go through the entire list                       |
+| `* * *` | CS2109S teaching staff | edit student details                                          | ensure that student details is always updated                                                 |
+| `* * *` | CS2109S teaching staff | filter students by tag                                        | make it easier to search for particular students                                              |
+| `* * *` | CS2109S teaching staff | add tags to students                                          | categorize student contacts for reference                                                     |
+| `* * *` | CS2109S teaching staff | delete tags                                                   | remove tags that are currently unused                                                         |
+| `* * *` | CS2109S teaching staff | delete tags from students                                     | remove tags from students that do not belong to that category                                 |
+| `* * *` | CS2109S teaching staff | mark the participation score for a student for specific weeks | so that I can keep track of their tutorial participation scores over the course of the module |
+| `* * *` | CS2109S teaching staff | undo a previously issued command                              | so that it is convenient to undo any mistakes made                                            |
+| `* * *` | CS2109S teaching staff | redo a previously undone command                              | so that I can restore the last changes that were undone                                       |
 | `* * *` | user                   | close and exit the app                                        |                                                                                               |
 
 
