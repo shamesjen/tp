@@ -11,11 +11,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.MatricNumber;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -85,14 +85,13 @@ public class MarkAllAttendanceCommand extends Command {
         assert personToMark != null;
 
         Name name = personToMark.getName();
-        Phone phone = personToMark.getPhone();
+        MatricNumber matricNumber = personToMark.getMatricNumber();
         Email email = personToMark.getEmail();
-        Address address = personToMark.getAddress();
+        TelegramHandle telegramHandle = personToMark.getTelegramHandle();
         Set<Tag> tags = personToMark.getTags();
 
-        return new Person(name, phone, email, address, tags, updatedParticipationScores);
+        return new Person(name, matricNumber, email, telegramHandle, tags, updatedParticipationScores);
     }
-
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
