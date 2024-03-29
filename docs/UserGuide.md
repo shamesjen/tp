@@ -216,7 +216,53 @@ Command: `mark 1 1`
 
 **TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
 
-### 11. Undoing a previous command : `undo`
+### 11. Removing tags from user : `RemoveTag`
+
+Removes tag(s) from a single user by index
+
+|    Field     |  Prefix  |  Required  | Requirements                                                                                                             |
+|:------------:|:--------:|:----------:|:-------------------------------------------------------------------------------------------------------------------------|
+|    `INDEX`     |   NONE   |    YES     | INDEX **must be a positive integer** 1, 2, 3 …​ <br><br> INDEX cannot be greater than the number of students in the list.|
+|  `[TAG]...`  |   t/   |    YES     | TAG **must be a valid tag that exists on the user.                                                                |                                                                    
+
+<h4>Format:</h4>
+```
+RemoveTag INDEX t/TAG...
+```
+
+<h4>Notes:</h4>
+* Removes tags from the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+
+<h4>Example Usage:</h4>
+
+Command: `RemoveTag 1 t/friends t/group4`
+
+**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+
+### 12. Removing all instances of tags from all users : `RemoveTagAll`
+
+Removes tag(s) from a single user by index
+
+|    Field     |  Prefix  |  Required  | Requirements                                                                                                             |
+|:------------:|:--------:|:----------:|:-------------------------------------------------------------------------------------------------------------------------|
+|  `[TAG]...`  |   t/   |    YES     | TAG **must be a valid tag that exists on the user.                                                                |                                                                    
+
+<h4>Format:</h4>
+```
+RemoveTagAll t/TAG...
+```
+
+<h4>Notes:</h4>
+* Removes tags from all students that have it.
+
+<h4>Example Usage:</h4>
+
+Command: `RemoveTagAll t/friends t/group4`
+
+**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+
+### 13. Undoing a previous command : `undo`
 
 Undoes the previous command that changed data.
 
@@ -225,7 +271,7 @@ Format: `undo`
 * Only undoes a command if it changed data.
 * Will not undo if no commands were issued beforehand.
 
-### 12. Redoing a previously undone command : `redo`
+### 14. Redoing a previously undone command : `redo`
 
 Redoes the previously undone command.
 
@@ -234,7 +280,7 @@ Format: `redo`
 * Will only redo the command that was undone immediately prior.
 * Will not redo if no commands were undone beforehand.
 
-### 13. Exiting the program : `exit`
+### 15. Exiting the program : `exit`
 
 Exits the program.
 
