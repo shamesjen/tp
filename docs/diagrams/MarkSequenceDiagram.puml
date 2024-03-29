@@ -1,0 +1,61 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor white
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":MarkCommandParser" as MarkCommandParser LOGIC_COLOR
+participant "mc:MarkCommand" as MarkCommand LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("mark 1 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("mark 1 1")
+activate AddressBookParser
+
+create MarkCommandParser
+AddressBookParser -> MarkCommandParser : MarkCommandParser()
+activate MarkCommandParser
+
+MarkCommandParser --> AddressBookParser
+deactivate MarkCommandParser
+
+AddressBookParser -> MarkCommandParser : parse("mark 1 1")
+activate MarkCommandParser
+
+create MarkCommand
+MarkCommandParser -> MarkCommand : MarkCommand(1, 1)
+activate MarkCommand
+
+MarkCommand --> MarkCommandParser : mc
+deactivate MarkCommand
+
+MarkCommandParser --> AddressBookParser : mc
+deactivate MarkCommandParser
+MarkCommandParser -[hidden]-> AddressBookParser
+destroy MarkCommandParser
+
+AddressBookParser --> LogicManager : mc
+deactivate AddressBookParser
+
+LogicManager -> MarkCommand : execute(mc)
+activate MarkCommand
+
+ref over MarkCommand : Mark person at specified week
+
+ref over MarkCommand : Create successful CommandResult
+
+ref over MarkCommand : Commit addressbook
+
+MarkCommand --> LogicManager : r
+deactivate MarkCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+MarkCommand -[hidden]-> LogicManager
+destroy MarkCommand
+
+[<--LogicManager : r
+deactivate LogicManager
+@enduml
