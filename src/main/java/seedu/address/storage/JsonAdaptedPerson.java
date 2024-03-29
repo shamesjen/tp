@@ -49,7 +49,6 @@ class JsonAdaptedPerson {
         if (participationScores != null) {
             this.participationScores.addAll(participationScores);
         }
-        System.out.println(this.participationScores);
     }
 
     /**

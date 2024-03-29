@@ -61,7 +61,7 @@ public class PersonCard extends UiPart<Region> {
 
         List<Integer> scores = person.getParticipationScores();
         for (int i = 0; i < scores.size(); i++) {
-            Label label = new Label("Week " + (i + 1) + ": " + scores.get(i) + " ");
+            Label label = new Label("Week " + (i + 3) + ": " + scores.get(i) + " ");
             if (scores.get(i) == 0) {
                 label.setStyle("-fx-background-color: red");
             } else {
