@@ -351,12 +351,25 @@
     -fx-font-size: 11;
 }
 
-#participationScores {
+#participation {
     -fx-hgap: 7;
     -fx-vgap: 3;
 }
 
-#participationScores .label {
+#participation .label {
+    -fx-text-fill: white;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+#attendance {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#attendance .label {
     -fx-text-fill: white;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;

@@ -29,7 +29,7 @@ public class Person {
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
     private final List<Integer> participationScores;
-
+    private final List<Integer> attendanceScores;
 
     /**
      * Every field must be present and not null.
@@ -42,9 +42,11 @@ public class Person {
         this.telegramHandle = telegramHandle;
         this.tags.addAll(tags);
         this.participationScores = new ArrayList<>();
+        this.attendanceScores = new ArrayList<>();
 
         for (int i = 0; i < NUMBER_OF_WEEKS; i++) {
             participationScores.add(0);
+            attendanceScores.add(0);
         }
     }
 
@@ -52,14 +54,15 @@ public class Person {
      * The overloaded Person constructor. Every field must be present and not null.
      */
     public Person(Name name, MatricNumber matricNumber, Email email, TelegramHandle telegramHandle,
-                  Set<Tag> tags, List<Integer> participationScores) {
-        requireAllNonNull(name, matricNumber, email, telegramHandle, tags, participationScores);
+                  Set<Tag> tags, List<Integer> participationScores, List<Integer> attendanceScores) {
+        requireAllNonNull(name, matricNumber, email, telegramHandle, tags, participationScores, attendanceScores);
         this.name = name;
         this.matricNumber = matricNumber;
         this.email = email;
         this.telegramHandle = telegramHandle;
         this.tags.addAll(tags);
         this.participationScores = participationScores;
+        this.attendanceScores = attendanceScores;
     }
 
     public Name getName() {
@@ -92,6 +95,14 @@ public class Person {
      */
     public List<Integer> getParticipationScores() {
         return Collections.unmodifiableList(participationScores);
+    }
+
+    /**
+     * Returns an immutable attendance score list, which throws (@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public List<Integer> getAttendanceScores() {
+        return Collections.unmodifiableList(attendanceScores);
     }
 
     /**

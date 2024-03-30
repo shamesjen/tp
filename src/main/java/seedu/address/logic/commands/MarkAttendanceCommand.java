@@ -22,9 +22,9 @@ import seedu.address.model.tag.Tag;
  * Marks the tutorial attendance of a student
  */
 
-public class MarkParticipationCommand extends Command {
+public class MarkAttendanceCommand extends Command {
 
-    public static final String COMMAND_WORD = "markp";
+    public static final String COMMAND_WORD = "marka";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the attendance of the person identified "
@@ -42,7 +42,7 @@ public class MarkParticipationCommand extends Command {
      * @param index of the person in the filtered person list to edit
      * @param weekNumber week number to mark the person with
      */
-    public MarkParticipationCommand(Index index, Index weekNumber) {
+    public MarkAttendanceCommand(Index index, Index weekNumber) {
         requireAllNonNull(index, weekNumber);
 
         this.targetIndex = index;
@@ -62,35 +62,35 @@ public class MarkParticipationCommand extends Command {
         }
 
         Person personToMark = lastShownList.get(targetIndex.getZeroBased());
-        List<Integer> oldParticipationScores = personToMark.getParticipationScores();
-        List<Integer> newParticipationScores = new ArrayList<>();
+        List<Integer> oldAttendanceScores = personToMark.getAttendanceScores();
+        List<Integer> newAttendanceScores = new ArrayList<>();
         int weekIndex = weekNumber.getZeroBased() - 3;
 
-        for (int i = 0; i < oldParticipationScores.size(); i++) {
+        for (int i = 0; i < oldAttendanceScores.size(); i++) {
             if (i == weekIndex) {
-                newParticipationScores.add(1);
+                newAttendanceScores.add(1);
             } else {
-                newParticipationScores.add(oldParticipationScores.get(i));
+                newAttendanceScores.add(oldAttendanceScores.get(i));
             }
         }
 
-        Person updatedPerson = createMarkedPerson(personToMark, newParticipationScores);
+        Person updatedPerson = createMarkedPerson(personToMark, newAttendanceScores);
 
         model.setPerson(personToMark, updatedPerson);
         if (model.shouldPurgeAddressBook()) {
             model.purgeAddressBook();
         }
-        CommandResult markParticipationCommandResult =
+        CommandResult markAttendanceCommandResult =
                 new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, updatedPerson.getName()));
-        model.commitAddressBook(markParticipationCommandResult);
-        return markParticipationCommandResult;
+        model.commitAddressBook(markAttendanceCommandResult);
+        return markAttendanceCommandResult;
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToMark}
-     * with the updated participation scores. Utilizes the overload Person constructor.
+     * with the updated Attendance scores. Utilizes the overload Person constructor.
      */
-    private static Person createMarkedPerson(Person personToMark, List<Integer> updatedParticipationScores) {
+    private static Person createMarkedPerson(Person personToMark, List<Integer> updatedAttendanceScores) {
         assert personToMark != null;
 
         Name name = personToMark.getName();
@@ -98,10 +98,10 @@ public class MarkParticipationCommand extends Command {
         Email email = personToMark.getEmail();
         TelegramHandle telegramHandle = personToMark.getTelegramHandle();
         Set<Tag> tags = personToMark.getTags();
-        List<Integer> attendanceScores = personToMark.getAttendanceScores();
+        List<Integer> participationScores = personToMark.getParticipationScores();
 
         return new Person(name, matricNumber, email, telegramHandle,
-                    tags, updatedParticipationScores, attendanceScores);
+                 tags, participationScores, updatedAttendanceScores);
     }
 
     @Override
@@ -112,12 +112,12 @@ public class MarkParticipationCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof MarkParticipationCommand)) {
+        if (!(other instanceof MarkAttendanceCommand)) {
             return false;
         }
 
         // state check
-        MarkParticipationCommand e = (MarkParticipationCommand) other;
+        MarkAttendanceCommand e = (MarkAttendanceCommand) other;
         return targetIndex.equals(e.targetIndex)
                 && weekNumber.equals(e.weekNumber);
     }

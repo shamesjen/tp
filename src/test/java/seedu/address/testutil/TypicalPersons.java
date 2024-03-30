@@ -24,49 +24,72 @@ import seedu.address.model.person.Person;
 public class TypicalPersons {
 
     public static final List<Integer> PARTICIPATION_SCORES_DEFAULT =
-            new ArrayList<>(Arrays.asList(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
+            new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
+    public static final List<Integer> ATTENDANCE_SCORES_DEFAULT =
+            new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withTelegramHandle("alicep01").withEmail("alice@example.com")
             .withMatricNumber("A1234567Z")
-            .withTags("friends").build();
+            .withTags("friends")
+            .withParticipationScores(PARTICIPATION_SCORES_DEFAULT)
+            .withAttendanceScores(ATTENDANCE_SCORES_DEFAULT).build();
 
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withTelegramHandle("bm01")
             .withEmail("johnd@example.com").withMatricNumber("A9999999Y")
             .withTags("owesMoney", "friends")
-            .withParticipationScores(PARTICIPATION_SCORES_DEFAULT).build();
+            .withParticipationScores(PARTICIPATION_SCORES_DEFAULT)
+            .withAttendanceScores(ATTENDANCE_SCORES_DEFAULT).build();
 
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withMatricNumber("A2222222Y")
-            .withEmail("heinz@example.com").withTelegramHandle("kurzzz").build();
+            .withEmail("heinz@example.com").withTelegramHandle("kurzzz")
+            .withParticipationScores(PARTICIPATION_SCORES_DEFAULT)
+            .withAttendanceScores(ATTENDANCE_SCORES_DEFAULT).build();;
 
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withMatricNumber("A7654321Z")
-            .withEmail("cornelia@example.com").withTelegramHandle("meiermeier").withTags("friends").build();
+            .withEmail("cornelia@example.com").withTelegramHandle("meiermeier").withTags("friends")
+            .withParticipationScores(PARTICIPATION_SCORES_DEFAULT)
+            .withAttendanceScores(ATTENDANCE_SCORES_DEFAULT).build();;
 
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withMatricNumber("A7778887X")
-            .withEmail("werner@example.com").withTelegramHandle("ellebelle").build();
+            .withEmail("werner@example.com").withTelegramHandle("ellebelle")
+            .withParticipationScores(PARTICIPATION_SCORES_DEFAULT)
+            .withAttendanceScores(ATTENDANCE_SCORES_DEFAULT).build();;
 
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withMatricNumber("A1231234Z")
-            .withEmail("lydia@example.com").withTelegramHandle("ShreksWife").build();
+            .withEmail("lydia@example.com").withTelegramHandle("ShreksWife")
+            .withParticipationScores(PARTICIPATION_SCORES_DEFAULT)
+            .withAttendanceScores(ATTENDANCE_SCORES_DEFAULT).build();;
 
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withMatricNumber("A4455667Y")
-            .withEmail("anna@example.com").withTelegramHandle("theBestGeorge").build();
+            .withEmail("anna@example.com").withTelegramHandle("theBestGeorge")
+            .withParticipationScores(PARTICIPATION_SCORES_DEFAULT)
+            .withAttendanceScores(ATTENDANCE_SCORES_DEFAULT).build();;
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withMatricNumber("A1357531G")
-            .withEmail("stefan@example.com").withTelegramHandle("BeeHoon99").build();
+            .withEmail("stefan@example.com").withTelegramHandle("BeeHoon99")
+            .withParticipationScores(PARTICIPATION_SCORES_DEFAULT)
+            .withAttendanceScores(ATTENDANCE_SCORES_DEFAULT).build();;
 
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withMatricNumber("A7788776H")
-            .withEmail("hans@example.com").withTelegramHandle("IdrisIda").build();
+            .withEmail("hans@example.com").withTelegramHandle("IdrisIda")
+            .withParticipationScores(PARTICIPATION_SCORES_DEFAULT)
+            .withAttendanceScores(ATTENDANCE_SCORES_DEFAULT).build();;
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)
             .withMatricNumber(VALID_MATRIC_NUMBER_AMY).withEmail(VALID_EMAIL_AMY)
-            .withTelegramHandle(VALID_TELEGRAM_HANDLE_AMY).withTags(VALID_TAG_FRIEND).build();
+            .withTelegramHandle(VALID_TELEGRAM_HANDLE_AMY).withTags(VALID_TAG_FRIEND)
+            .withParticipationScores(PARTICIPATION_SCORES_DEFAULT)
+            .withAttendanceScores(ATTENDANCE_SCORES_DEFAULT).build();;
 
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
             .withMatricNumber(VALID_MATRIC_NUMBER_BOB).withEmail(VALID_EMAIL_BOB)
-            .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .withParticipationScores(PARTICIPATION_SCORES_DEFAULT)
+            .withAttendanceScores(ATTENDANCE_SCORES_DEFAULT).build();;
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

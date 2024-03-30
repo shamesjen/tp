@@ -30,6 +30,7 @@ class JsonAdaptedPerson {
     private final String telegramHandle;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<Integer> participationScores = new ArrayList<>();
+    private final List<Integer> attendanceScores = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -38,7 +39,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("matricNumber") String matricNumber,
                              @JsonProperty("email") String email, @JsonProperty("telegramHandle") String telegramHandle,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                             @JsonProperty("participationScores") List<Integer> participationScores) {
+                             @JsonProperty("participationScores") List<Integer> participationScores,
+                             @JsonProperty("attendanceScores") List<Integer> attendanceScores) {
         this.name = name;
         this.matricNumber = matricNumber;
         this.email = email;
@@ -48,6 +50,9 @@ class JsonAdaptedPerson {
         }
         if (participationScores != null) {
             this.participationScores.addAll(participationScores);
+        }
+        if (attendanceScores != null) {
+            this.attendanceScores.addAll(attendanceScores);
         }
     }
 
@@ -63,6 +68,7 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         participationScores.addAll(source.getParticipationScores());
+        attendanceScores.addAll(source.getAttendanceScores());
     }
 
     /**
@@ -113,9 +119,10 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         final List<Integer> modelParticipationScores = new ArrayList<>(participationScores);
+        final List<Integer> modelAttendanceScores = new ArrayList<>(attendanceScores);
 
         return new Person(modelName, modelMatricNumber, modelEmail, modelTelegramHandleHandle, modelTags,
-                modelParticipationScores);
+                modelParticipationScores, modelAttendanceScores);
     }
 
 }
