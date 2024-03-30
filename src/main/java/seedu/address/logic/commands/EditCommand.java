@@ -207,11 +207,21 @@ public class EditCommand extends Command {
         }
 
         /**
+         * Returns an unmodifiable assignment list, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code assignments} is null.
+         */
+        public Optional<List<Assignment>> getAssignments() {
+            return (assignments != null) ? Optional.of(Collections.unmodifiableList(assignments)) : Optional.empty();
+        }
+
+        /**
          * Sets {@code assignments} to this object's {@code assignments}.
          * A defensive copy of {@code assignments} is used internally.
          */
         public void setAssignments(List<Assignment> assignments) {
-            this.assignments = new ArrayList<>(assignments);
+            // how to make it be possibly null
+            this.assignments = (assignments != null) ? new ArrayList<>(assignments) : null;
         }
 
         /**
@@ -258,6 +268,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("telegramHandle", telegramHandle)
                     .add("tags", tags)
+                    .add("assignments", assignments)
                     .toString();
         }
     }

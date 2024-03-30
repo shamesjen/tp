@@ -65,7 +65,10 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getMatricNumber().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", telegramHandle="
                 + editPersonDescriptor.getTelegramHandle().orElse(null) + ", tags="
-                + editPersonDescriptor.getTags().orElse(null) + "}";
+                + editPersonDescriptor.getTags().orElse(null) + ", assignments="
+                + editPersonDescriptor.getAssignments().orElse(null) + "}";
+        System.out.println(editPersonDescriptor.toString());
+        System.out.println(expected);
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }
