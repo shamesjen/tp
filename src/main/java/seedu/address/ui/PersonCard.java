@@ -43,6 +43,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private FlowPane participationScores;
+    @FXML
+    private FlowPane assignments;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -69,5 +71,25 @@ public class PersonCard extends UiPart<Region> {
             }
             participationScores.getChildren().add(label);
         }
+
+        // diplay red if score is zero, green otherwise
+        if (person.getAssignments().isEmpty()) {
+            Label label = new Label("No assignments");
+            label.setStyle("-fx-background-color: red");
+            assignments.getChildren().add(label);
+        } else {
+            person.getAssignments().stream()
+            .sorted(Comparator.comparing(assignment -> assignment.assignmentName))
+            .forEach(assignment -> {
+                Label label = new Label(assignment.assignmentName + ": " + assignment.getAssignmentScore() + " ");
+                if (assignment.getAssignmentScore() == 0) {
+                    label.setStyle("-fx-background-color: orange");
+                } else {
+                    label.setStyle("-fx-background-color: green");
+                }
+                assignments.getChildren().add(label);
+            });
+        }
+        
     }
 }

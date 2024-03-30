@@ -28,13 +28,14 @@ public class Person {
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
+    private final List<Assignment> assignments;
     private final List<Integer> participationScores;
 
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, MatricNumber matricNumber, Email email, TelegramHandle telegramHandle, Set<Tag> tags) {
+    public Person(Name name, MatricNumber matricNumber, Email email, TelegramHandle telegramHandle, List<Assignment> assignments, Set<Tag> tags) {
         requireAllNonNull(name, matricNumber, email, telegramHandle, tags);
         this.name = name;
         this.matricNumber = matricNumber;
@@ -42,6 +43,7 @@ public class Person {
         this.telegramHandle = telegramHandle;
         this.tags.addAll(tags);
         this.participationScores = new ArrayList<>();
+        this.assignments = assignments;
 
         for (int i = 0; i < NUMBER_OF_WEEKS; i++) {
             participationScores.add(0);
@@ -52,7 +54,7 @@ public class Person {
      * The overloaded Person constructor. Every field must be present and not null.
      */
     public Person(Name name, MatricNumber matricNumber, Email email, TelegramHandle telegramHandle,
-                  Set<Tag> tags, List<Integer> participationScores) {
+                  Set<Tag> tags,  List<Assignment> assignments, List<Integer> participationScores) {
         requireAllNonNull(name, matricNumber, email, telegramHandle, tags, participationScores);
         this.name = name;
         this.matricNumber = matricNumber;
@@ -60,6 +62,7 @@ public class Person {
         this.telegramHandle = telegramHandle;
         this.tags.addAll(tags);
         this.participationScores = participationScores;
+        this.assignments = assignments;
     }
 
     public Name getName() {
@@ -78,6 +81,22 @@ public class Person {
         return telegramHandle;
     }
 
+    public List<Assignment> getAssignments() {
+        return assignments;
+    }
+
+    public void addAssignment(Assignment assignment) {
+        assignments.add(assignment);
+    }
+
+    // public void removeAssignment(Assignment assignment) {
+    //     assignments.remove(assignment);
+    // }
+
+    public boolean hasAssignment(Assignment assignment) {
+        return assignments.contains(assignment);
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -92,17 +111,6 @@ public class Person {
      */
     public List<Integer> getParticipationScores() {
         return Collections.unmodifiableList(participationScores);
-    }
-
-    /**
-     * Returns true if tag exists on the person.
-     */
-    public boolean hasTag(Tag tag) {
-        return tags.contains(tag);
-    }
-
-    public void removeTag(Tag tag) {
-        tags.remove(tag);
     }
 
     /**
@@ -154,6 +162,8 @@ public class Person {
                 .add("phone", matricNumber)
                 .add("email", email)
                 .add("address", telegramHandle)
+                .add("participationScores", participationScores)
+                .add("assignments", assignments)
                 .add("tags", tags)
                 .toString();
     }

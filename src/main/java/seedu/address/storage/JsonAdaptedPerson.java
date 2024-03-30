@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.Assignment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.MatricNumber;
 import seedu.address.model.person.Name;
@@ -28,6 +29,7 @@ class JsonAdaptedPerson {
     private final String matricNumber;
     private final String email;
     private final String telegramHandle;
+    private final List<JsonAdaptedAssignment> assignments = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<Integer> participationScores = new ArrayList<>();
 
@@ -38,7 +40,9 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("matricNumber") String matricNumber,
                              @JsonProperty("email") String email, @JsonProperty("telegramHandle") String telegramHandle,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                             @JsonProperty("participationScores") List<Integer> participationScores) {
+                             @JsonProperty("assignments") List<JsonAdaptedAssignment> assignments,
+                             @JsonProperty("participationScores") List<Integer> participationScores) 
+                            {
         this.name = name;
         this.matricNumber = matricNumber;
         this.email = email;
@@ -50,6 +54,10 @@ class JsonAdaptedPerson {
             this.participationScores.addAll(participationScores);
         }
         System.out.println(this.participationScores);
+
+        if (assignments != null) {
+            this.assignments.addAll(assignments);
+        }
     }
 
     /**
@@ -75,6 +83,10 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+        final List<Assignment> personAssignments = new ArrayList<>();
+        for (JsonAdaptedAssignment assignment : assignments) {
+            personAssignments.add(assignment.toModelType());
         }
 
         if (name == null) {
@@ -115,7 +127,9 @@ class JsonAdaptedPerson {
 
         final List<Integer> modelParticipationScores = new ArrayList<>(participationScores);
 
-        return new Person(modelName, modelMatricNumber, modelEmail, modelTelegramHandleHandle, modelTags,
+        final List<Assignment> modelAssignments = new ArrayList<>(personAssignments);
+
+        return new Person(modelName, modelMatricNumber, modelEmail, modelTelegramHandleHandle, modelTags, modelAssignments, 
                 modelParticipationScores);
     }
 

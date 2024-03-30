@@ -10,6 +10,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -21,6 +22,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Assignment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.MatricNumber;
 import seedu.address.model.person.Name;
@@ -107,9 +109,10 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         TelegramHandle updatedTelegramHandleHandle = editPersonDescriptor.getTelegramHandle().orElse(
                 personToEdit.getTelegramHandle());
+        List<Assignment> updatedAssignments = personToEdit.getAssignments();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedMatricNumber, updatedEmail, updatedTelegramHandleHandle, updatedTags);
+        return new Person(updatedName, updatedMatricNumber, updatedEmail, updatedTelegramHandleHandle, updatedAssignments, updatedTags);
     }
 
     @Override
@@ -146,6 +149,7 @@ public class EditCommand extends Command {
         private Email email;
         private TelegramHandle telegramHandle;
         private Set<Tag> tags;
+        private List<Assignment> assignments;
 
         public EditPersonDescriptor() {}
 
@@ -159,6 +163,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setTelegramHandle(toCopy.telegramHandle);
             setTags(toCopy.tags);
+            setAssignments(toCopy.assignments);
         }
 
         /**
@@ -198,6 +203,14 @@ public class EditCommand extends Command {
 
         public Optional<TelegramHandle> getTelegramHandle() {
             return Optional.ofNullable(telegramHandle);
+        }
+
+        /**
+         * Sets {@code assignments} to this object's {@code assignments}.
+         * A defensive copy of {@code assignments} is used internally.
+         */
+        public void setAssignments(List<Assignment> assignments) {
+            this.assignments =  new ArrayList<>(assignments);
         }
 
         /**

@@ -32,6 +32,7 @@
       <Label fx:id="telegramHandle" styleClass="cell_small_label" text="\$telegramHandle" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <FlowPane fx:id="participationScores" />
+      <FlowPane fx:id="assignments" />
     </VBox>
   </GridPane>
 </HBox>
