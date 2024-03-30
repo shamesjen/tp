@@ -13,6 +13,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Assignment;
 
 
+/**
+ * Parses input arguments and creates a new AddAssignmentCommand object
+ */
 public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> {
 
     /**
@@ -24,7 +27,7 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ASSIGNMENT);
         System.out.println(argMultimap.getPreamble());
-        if (!arePrefixesPresent(argMultimap, PREFIX_ASSIGNMENT)||!argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_ASSIGNMENT) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAssignmentCommand.MESSAGE_USAGE));
         }
         List<String> assignments = argMultimap.getAllValues(PREFIX_ASSIGNMENT);
@@ -36,12 +39,12 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
         return new AddAssignmentCommand(assignmentList);
     }
 
-     /**
+    /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
-     */
+    */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
-    
+
 }

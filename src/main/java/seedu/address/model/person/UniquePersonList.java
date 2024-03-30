@@ -49,7 +49,10 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.add(toAdd);
     }
 
-    // add assignment to all persons
+    /**
+     * Adds an assignment to all persons in the list.
+     * The assignment must not already exist in the list.
+     */
     public void addAssignmentToAllPersons(Assignment assignment) {
         requireNonNull(assignment);
         for (Person person : internalList) {

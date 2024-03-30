@@ -43,8 +43,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("assignments") List<JsonAdaptedAssignment> assignments,
                              @JsonProperty("participationScores") List<Integer> participationScores,
-                             @JsonProperty("attendanceScores") List<Integer> attendanceScores) 
-                            {
+                             @JsonProperty("attendanceScores") List<Integer> attendanceScores) {
         this.name = name;
         this.matricNumber = matricNumber;
         this.email = email;
@@ -136,8 +135,8 @@ class JsonAdaptedPerson {
 
         final List<Assignment> modelAssignments = new ArrayList<>(personAssignments);
 
-        return new Person(modelName, modelMatricNumber, modelEmail, modelTelegramHandleHandle, modelTags, modelAssignments, 
-                modelParticipationScores, modelAttendanceScores);
+        return new Person(modelName, modelMatricNumber, modelEmail, modelTelegramHandleHandle,
+         modelTags, modelAssignments, modelParticipationScores, modelAttendanceScores);
     }
 
 }

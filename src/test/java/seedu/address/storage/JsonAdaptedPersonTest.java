@@ -48,7 +48,8 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(INVALID_NAME, VALID_PHONE, VALID_EMAIL,
-                        VALID_ADDRESS, VALID_TAGS, VALID_ASSIGNMENTS, VALID_PARTICIPATION_SCORES, VALID_ATTENDNACE_SCORES);
+                        VALID_ADDRESS, VALID_TAGS, VALID_ASSIGNMENTS, VALID_PARTICIPATION_SCORES,
+                            VALID_ATTENDNACE_SCORES);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -65,7 +66,8 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, INVALID_MATRIC_NUMBER, VALID_EMAIL,
-                        VALID_ADDRESS, VALID_TAGS, VALID_ASSIGNMENTS, VALID_PARTICIPATION_SCORES, VALID_ATTENDNACE_SCORES);
+                        VALID_ADDRESS, VALID_TAGS, VALID_ASSIGNMENTS, VALID_PARTICIPATION_SCORES,
+                            VALID_ATTENDNACE_SCORES);
         String expectedMessage = MatricNumber.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -82,7 +84,8 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, INVALID_EMAIL,
-                        VALID_ADDRESS, VALID_TAGS, VALID_ASSIGNMENTS, VALID_PARTICIPATION_SCORES, VALID_ATTENDNACE_SCORES);
+                        VALID_ADDRESS, VALID_TAGS, VALID_ASSIGNMENTS, VALID_PARTICIPATION_SCORES,
+                            VALID_ATTENDNACE_SCORES);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -99,7 +102,8 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidAddress_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
-                        INVALID_TELEGRAM_HANDLE, VALID_TAGS, VALID_ASSIGNMENTS, VALID_PARTICIPATION_SCORES, VALID_ATTENDNACE_SCORES);
+                        INVALID_TELEGRAM_HANDLE, VALID_TAGS, VALID_ASSIGNMENTS,
+                            VALID_PARTICIPATION_SCORES, VALID_ATTENDNACE_SCORES);
         String expectedMessage = TelegramHandle.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -118,7 +122,8 @@ public class JsonAdaptedPersonTest {
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
-                        VALID_ADDRESS, invalidTags, VALID_ASSIGNMENTS, VALID_PARTICIPATION_SCORES, VALID_ATTENDNACE_SCORES);
+                        VALID_ADDRESS, invalidTags, VALID_ASSIGNMENTS,
+                            VALID_PARTICIPATION_SCORES, VALID_ATTENDNACE_SCORES);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 
@@ -128,7 +133,8 @@ public class JsonAdaptedPersonTest {
         invalidAssignments.add(new JsonAdaptedAssignment(INVALID_ASSIGNMENT));
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
-                        VALID_ADDRESS, VALID_TAGS, invalidAssignments, VALID_PARTICIPATION_SCORES, VALID_ATTENDNACE_SCORES);
+                        VALID_ADDRESS, VALID_TAGS, invalidAssignments,
+                            VALID_PARTICIPATION_SCORES, VALID_ATTENDNACE_SCORES);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 

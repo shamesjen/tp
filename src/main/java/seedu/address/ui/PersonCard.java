@@ -90,17 +90,17 @@ public class PersonCard extends UiPart<Region> {
             assignments.getChildren().add(label);
         } else {
             person.getAssignments().stream()
-            .sorted(Comparator.comparing(assignment -> assignment.assignmentName))
-            .forEach(assignment -> {
-                Label label = new Label(assignment.assignmentName + ": " + assignment.getAssignmentScore() + " ");
-                if (assignment.getAssignmentScore() == 0) {
-                    label.setStyle("-fx-background-color: orange");
-                } else {
-                    label.setStyle("-fx-background-color: green");
-                }
-                assignments.getChildren().add(label);
-            });
+                .sorted(Comparator.comparing(assignment -> assignment.assignmentName))
+                .forEach(assignment -> {
+                    Label label = new Label(assignment.assignmentName + ": " + assignment.getAssignmentScore() + " ");
+                    if (assignment.getAssignmentScore() == 0) {
+                        label.setStyle("-fx-background-color: orange");
+                    } else {
+                        label.setStyle("-fx-background-color: green");
+                    }
+                    assignments.getChildren().add(label);
+                });
         }
-        
+
     }
 }

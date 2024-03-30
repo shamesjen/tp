@@ -94,7 +94,7 @@ public class MarkAllAttendanceCommand extends Command {
         List<Assignment> assignments = personToMark.getAssignments();
 
         return new Person(name, matricNumber, email, telegramHandle,
-                tags,assignments, updatedParticipationScores, attendanceScores);
+                tags, assignments, updatedParticipationScores, attendanceScores);
     }
     @Override
     public boolean equals(Object other) {

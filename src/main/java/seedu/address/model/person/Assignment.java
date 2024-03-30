@@ -3,13 +3,17 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents an Assignment in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidAssignmentName(String)}
+ */
 public class Assignment {
 
     public static final String MESSAGE_CONSTRAINTS = "Assignment names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String assignmentName;
-    
+
     private int assignmentScore;
 
     /**

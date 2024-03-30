@@ -34,7 +34,7 @@ public class MarkParticipationCommand extends Command {
             + "Parameters: INDEX (must be a positive integer), WEEK (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 " + "5";
 
-   
+
     public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked Person: %1$s";
     private static final int FIRST_WEEK = 3;
     private static final int LAST_WEEK = 13;

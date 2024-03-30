@@ -8,9 +8,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -112,7 +112,8 @@ public class EditCommand extends Command {
         List<Assignment> updatedAssignments = personToEdit.getAssignments();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedMatricNumber, updatedEmail, updatedTelegramHandleHandle, updatedAssignments, updatedTags);
+        return new Person(updatedName, updatedMatricNumber, updatedEmail,
+         updatedTelegramHandleHandle, updatedAssignments, updatedTags);
     }
 
     @Override
@@ -210,7 +211,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code assignments} is used internally.
          */
         public void setAssignments(List<Assignment> assignments) {
-            this.assignments =  new ArrayList<>(assignments);
+            this.assignments = new ArrayList<>(assignments);
         }
 
         /**

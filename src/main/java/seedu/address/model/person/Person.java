@@ -35,7 +35,8 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, MatricNumber matricNumber, Email email, TelegramHandle telegramHandle, List<Assignment> assignments, Set<Tag> tags) {
+    public Person(Name name, MatricNumber matricNumber, Email email, TelegramHandle telegramHandle,
+            List<Assignment> assignments, Set<Tag> tags) {
         requireAllNonNull(name, matricNumber, email, telegramHandle, tags);
         this.name = name;
         this.matricNumber = matricNumber;
@@ -56,7 +57,8 @@ public class Person {
      * The overloaded Person constructor. Every field must be present and not null.
      */
     public Person(Name name, MatricNumber matricNumber, Email email, TelegramHandle telegramHandle,
-            Set<Tag> tags,  List<Assignment> assignments, List<Integer> participationScores, List<Integer> attendanceScores) {
+            Set<Tag> tags, List<Assignment> assignments, List<Integer> participationScores,
+             List<Integer> attendanceScores) {
         requireAllNonNull(name, matricNumber, email, telegramHandle, tags, participationScores, attendanceScores);
         this.name = name;
         this.matricNumber = matricNumber;

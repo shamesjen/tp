@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ import seedu.address.model.person.Person;
  * Adds an assignment to all students in the address book.
  */
 public class AddAssignmentCommand extends Command {
-    
+
     public static final String COMMAND_WORD = "addAssignment";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -50,21 +50,24 @@ public class AddAssignmentCommand extends Command {
                     continue;
                 }
             }
-            
-            Person newPerson = new Person(person.getName(), person.getMatricNumber(), person.getEmail(), person.getTelegramHandle(),
+
+            Person newPerson = new Person(person.getName(), person.getMatricNumber(),
+                person.getEmail(), person.getTelegramHandle(),
                     newAssignments, person.getTags());
-                model.setPerson(person, newPerson);
+            model.setPerson(person, newPerson);
             System.out.println("newPerson: " + newPerson);
         }
         if (hasAssignment) {
-            throw new CommandException("No new assignments added. All students already have the assignment(s) specified.");
+            throw new CommandException(
+                "No new assignments added. All students already have the assignment(s) specified.");
         }
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         if (model.shouldPurgeAddressBook()) {
             model.purgeAddressBook();
         }
 
-        CommandResult addAssignmenCommandResult = new CommandResult(String.format(MESSAGE_SUCCESS, assignments.toString()));
+        CommandResult addAssignmenCommandResult = new CommandResult(
+            String.format(MESSAGE_SUCCESS, assignments.toString()));
         model.commitAddressBook(addAssignmenCommandResult);
         return addAssignmenCommandResult;
     }
