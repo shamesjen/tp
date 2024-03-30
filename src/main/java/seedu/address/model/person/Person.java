@@ -18,7 +18,7 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
 
-    private static final int NUMBER_OF_WEEKS = 13;
+    private static final int NUMBER_OF_WEEKS = 11;
 
     // Identity fields
     private final Name name;
