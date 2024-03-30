@@ -26,12 +26,10 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ASSIGNMENT);
-        System.out.println(argMultimap.getPreamble());
         if (!arePrefixesPresent(argMultimap, PREFIX_ASSIGNMENT) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAssignmentCommand.MESSAGE_USAGE));
         }
         List<String> assignments = argMultimap.getAllValues(PREFIX_ASSIGNMENT);
-        System.out.println(assignments);
         List<Assignment> assignmentList = new ArrayList<>();
         for (String assignment : assignments) {
             assignmentList.add(new Assignment(assignment));

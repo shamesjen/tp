@@ -17,7 +17,7 @@ import seedu.address.model.person.Person;
  */
 public class AddAssignmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "addAssignment";
+    public static final String COMMAND_WORD = "adda";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": Creates assignment(s) on all students.\n"

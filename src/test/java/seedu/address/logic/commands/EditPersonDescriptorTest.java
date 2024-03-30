@@ -67,8 +67,6 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getTelegramHandle().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + ", assignments="
                 + editPersonDescriptor.getAssignments().orElse(null) + "}";
-        System.out.println(editPersonDescriptor.toString());
-        System.out.println(expected);
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }
