@@ -33,13 +33,13 @@ public class MarkAllParticipationCommandTest {
         Index weekNumber = Index.fromOneBased(4);
         MarkAllParticipationCommand markAllParticipationCommand = new MarkAllParticipationCommand(weekNumber);
 
-        // Expected model for comparison
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         List<Person> updatedPersons = model.getFilteredPersonList().stream()
                 .map(person -> {
                     List<Integer> oldParticipationScores = person.getParticipationScores();
                     List<Integer> newParticipationScores = IntStream.range(0, oldParticipationScores.size())
-                            .mapToObj(index -> index == weekNumber.getZeroBased() - 3 ? oldParticipationScores.get(index) + 1 : oldParticipationScores.get(index))
+                            .mapToObj(index -> index == weekNumber.getZeroBased() - 3
+                                ? oldParticipationScores.get(index) + 1 : oldParticipationScores.get(index))
                             .collect(Collectors.toList());
                     return new PersonBuilder(person)
                             .withParticipationScores(newParticipationScores)
@@ -55,7 +55,7 @@ public class MarkAllParticipationCommandTest {
 
     @Test
     public void execute_invalidWeekNumber_throwsCommandException() {
-        Index invalidWeekNumber = Index.fromOneBased(15);
+        Index invalidWeekNumber = Index.fromZeroBased(15);
         MarkAllParticipationCommand markAllParticipationCommand = new MarkAllParticipationCommand(invalidWeekNumber);
 
         assertCommandFailure(markAllParticipationCommand, model, Messages.MESSAGE_INVALID_WEEK);

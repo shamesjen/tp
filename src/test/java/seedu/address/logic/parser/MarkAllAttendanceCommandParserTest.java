@@ -15,21 +15,17 @@ public class MarkAllAttendanceCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsMarkAllCommand() {
-        // Assuming the valid argument is a single positive integer representing the week
-        assertParseSuccess(parser, "3", new MarkAllAttendanceCommand(Index.fromOneBased(3)));
+        assertParseSuccess(parser, "3", new MarkAllAttendanceCommand(Index.fromZeroBased(3)));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        // Test data: A non-integer input
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
             MarkAllAttendanceCommand.MESSAGE_USAGE));
 
-        // Test data: A negative integer
         assertParseFailure(parser, "-1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
             MarkAllAttendanceCommand.MESSAGE_USAGE));
 
-        // Test data: Empty string
         assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
             MarkAllAttendanceCommand.MESSAGE_USAGE));
 

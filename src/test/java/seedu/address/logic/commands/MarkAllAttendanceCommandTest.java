@@ -53,7 +53,7 @@ public class MarkAllAttendanceCommandTest {
 
     @Test
     public void execute_invalidWeekNumber_throwsCommandException() {
-        Index invalidWeekNumber = Index.fromOneBased(14);
+        Index invalidWeekNumber = Index.fromZeroBased(14);
         MarkAllAttendanceCommand markAllAttendanceCommand = new MarkAllAttendanceCommand(invalidWeekNumber);
 
         assertCommandFailure(markAllAttendanceCommand, model, Messages.MESSAGE_INVALID_WEEK);
