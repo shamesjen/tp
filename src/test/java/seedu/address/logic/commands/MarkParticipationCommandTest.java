@@ -23,15 +23,17 @@ import seedu.address.testutil.PersonBuilder;
 
 public class MarkParticipationCommandTest {
 
-    private static final List<Integer> participationScoresStub =
+    private static final List<Integer> PARTICIPATION_SCORES_STUB_ONE =
             new ArrayList<>(Arrays.asList(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
+    private static final List<Integer> PARTICIPATION_SCORES_STUB_TWO =
+            new ArrayList<>(Arrays.asList(2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexAndWeekNumber_success() {
         Person personToMark = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person markedPerson = new PersonBuilder(personToMark)
-                .withParticipationScores(participationScoresStub).build();
+                .withParticipationScores(PARTICIPATION_SCORES_STUB_ONE).build();
         MarkParticipationCommand markParticipationCommand =
                 new MarkParticipationCommand(INDEX_FIRST_PERSON, INDEX_FIRST_WEEK);
 
@@ -41,6 +43,26 @@ public class MarkParticipationCommandTest {
         expectedModel.setPerson(model.getFilteredPersonList().get(0), markedPerson);
 
         assertCommandSuccess(markParticipationCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_scoreGreaterThanOne_success() {
+        Person personToMark = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person markedPersonOne = new PersonBuilder(personToMark)
+                .withParticipationScores(PARTICIPATION_SCORES_STUB_ONE).build();
+        Person markedPersonTwo = new PersonBuilder(personToMark)
+                .withParticipationScores(PARTICIPATION_SCORES_STUB_TWO).build();
+        MarkParticipationCommand markParticipationCommand =
+                new MarkParticipationCommand(INDEX_FIRST_PERSON, INDEX_FIRST_WEEK);
+
+        String expectedMessage = String.format(MESSAGE_MARK_PERSON_SUCCESS, markedPersonOne.getName());
+
+        ModelManager expectedModelOne = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModelTwo = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModelOne.setPerson(model.getFilteredPersonList().get(0), markedPersonOne);
+        expectedModelTwo.setPerson(model.getFilteredPersonList().get(0), markedPersonTwo);
+
+        assertCommandSuccess(markParticipationCommand, model, expectedMessage, expectedModelTwo);
     }
 
     @Test

@@ -71,7 +71,7 @@ public class MarkParticipationCommand extends Command {
 
         for (int i = 0; i < oldParticipationScores.size(); i++) {
             if (i == weekIndex) {
-                newParticipationScores.add(1);
+                newParticipationScores.add(oldParticipationScores.get(i) + 1);
             } else {
                 newParticipationScores.add(oldParticipationScores.get(i));
             }
