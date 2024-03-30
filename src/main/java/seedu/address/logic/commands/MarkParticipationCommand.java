@@ -67,7 +67,7 @@ public class MarkParticipationCommand extends Command {
         Person personToMark = lastShownList.get(targetIndex.getZeroBased());
         List<Integer> oldParticipationScores = personToMark.getParticipationScores();
         List<Integer> newParticipationScores = new ArrayList<>();
-        int weekIndex = weekNumber.getZeroBased() - 1;
+        int weekIndex = weekNumber.getZeroBased() - 3;
 
         for (int i = 0; i < oldParticipationScores.size(); i++) {
             if (i == weekIndex) {

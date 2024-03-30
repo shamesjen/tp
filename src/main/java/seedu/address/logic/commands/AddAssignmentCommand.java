@@ -43,7 +43,6 @@ public class AddAssignmentCommand extends Command {
             List<Assignment> newAssignments = new ArrayList<>(oldAssignments);
             for (Assignment assignment : this.assignments) {
                 if (!person.hasAssignment(assignment)) {
-                    System.out.println("assignment: " + assignment + " person: " + person);
                     newAssignments.add(assignment);
                     hasAssignment = false;
                 } else {
