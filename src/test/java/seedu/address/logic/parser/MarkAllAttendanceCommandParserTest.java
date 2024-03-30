@@ -16,7 +16,7 @@ public class MarkAllAttendanceCommandParserTest {
     @Test
     public void parse_validArgs_returnsMarkAllCommand() {
         // Assuming the valid argument is a single positive integer representing the week
-        assertParseSuccess(parser, "1", new MarkAllAttendanceCommand(Index.fromOneBased(1)));
+        assertParseSuccess(parser, "3", new MarkAllAttendanceCommand(Index.fromOneBased(3)));
     }
 
     @Test
