@@ -38,8 +38,8 @@ public class MarkAllAttendanceCommandTest {
         List<Person> updatedPersons = model.getFilteredPersonList().stream()
                 .map(person -> new PersonBuilder(person)
                         .withParticipationScores(IntStream.range(0, 14) // Assuming 14 weeks in total
-                                                  .mapToObj(week -> week == weekNumber.getZeroBased() ? 1 : 0)
-                                                  .collect(Collectors.toList()))
+                                .mapToObj(week -> week == weekNumber.getZeroBased() ? 1 : 0)
+                                .collect(Collectors.toList()))
                         .build())
                 .collect(Collectors.toList());
         for (int i = 0; i < updatedPersons.size(); i++) {
