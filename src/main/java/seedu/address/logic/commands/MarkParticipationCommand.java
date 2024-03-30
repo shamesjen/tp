@@ -24,7 +24,7 @@ import seedu.address.model.tag.Tag;
 
 public class MarkParticipationCommand extends Command {
 
-    public static final String COMMAND_WORD = "mark";
+    public static final String COMMAND_WORD = "markp";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the attendance of the person identified "
