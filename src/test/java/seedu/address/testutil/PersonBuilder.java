@@ -29,6 +29,7 @@ public class PersonBuilder {
     private Email email;
     private TelegramHandle telegramHandle;
     private Set<Tag> tags;
+    private List<Integer> attendanceScores = new ArrayList<>();
     private List<Integer> participationScores = new ArrayList<>();
     private List<Assignment> assignments;
 
@@ -43,8 +44,9 @@ public class PersonBuilder {
         tags = new HashSet<>();
         assignments = new ArrayList<>();
 
-        for (int i = 0; i < 13; i++) {
+        for (int i = 0; i < 11; i++) {
             participationScores.add(0);
+            attendanceScores.add(0);
         }
     }
 
@@ -58,6 +60,7 @@ public class PersonBuilder {
         telegramHandle = personToCopy.getTelegramHandle();
         tags = new HashSet<>(personToCopy.getTags());
         participationScores = personToCopy.getParticipationScores();
+        attendanceScores = personToCopy.getAttendanceScores();
     }
 
     /**
@@ -105,6 +108,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withParticipationScores(List<Integer> participationScores) {
         this.participationScores = participationScores;
+        return this;
+    }
+
+    /**
+     * Sets the {@code attendanceScores} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAttendanceScores(List<Integer> attendanceScores) {
+        this.attendanceScores = attendanceScores;
         return this;
     }
 

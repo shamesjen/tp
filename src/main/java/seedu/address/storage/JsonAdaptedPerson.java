@@ -32,6 +32,7 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedAssignment> assignments = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<Integer> participationScores = new ArrayList<>();
+    private final List<Integer> attendanceScores = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -41,7 +42,8 @@ class JsonAdaptedPerson {
                              @JsonProperty("email") String email, @JsonProperty("telegramHandle") String telegramHandle,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("assignments") List<JsonAdaptedAssignment> assignments,
-                             @JsonProperty("participationScores") List<Integer> participationScores) 
+                             @JsonProperty("participationScores") List<Integer> participationScores,
+                             @JsonProperty("attendanceScores") List<Integer> attendanceScores) 
                             {
         this.name = name;
         this.matricNumber = matricNumber;
@@ -58,6 +60,9 @@ class JsonAdaptedPerson {
         if (assignments != null) {
             this.assignments.addAll(assignments);
         }
+        if (attendanceScores != null) {
+            this.attendanceScores.addAll(attendanceScores);
+        }
     }
 
     /**
@@ -72,6 +77,7 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         participationScores.addAll(source.getParticipationScores());
+        attendanceScores.addAll(source.getAttendanceScores());
     }
 
     /**
@@ -126,11 +132,12 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         final List<Integer> modelParticipationScores = new ArrayList<>(participationScores);
+        final List<Integer> modelAttendanceScores = new ArrayList<>(attendanceScores);
 
         final List<Assignment> modelAssignments = new ArrayList<>(personAssignments);
 
         return new Person(modelName, modelMatricNumber, modelEmail, modelTelegramHandleHandle, modelTags, modelAssignments, 
-                modelParticipationScores);
+                modelParticipationScores, modelAttendanceScores);
     }
 
 }

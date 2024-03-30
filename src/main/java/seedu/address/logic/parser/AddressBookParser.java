@@ -19,7 +19,9 @@ import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.MarkCommand;
+import seedu.address.logic.commands.MarkAllAttendanceCommand;
+import seedu.address.logic.commands.MarkAttendanceCommand;
+import seedu.address.logic.commands.MarkParticipationCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RemoveTagCommand;
 import seedu.address.logic.commands.RemoveTagFromAllCommand;
@@ -87,8 +89,14 @@ public class AddressBookParser {
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
 
-        case MarkCommand.COMMAND_WORD:
-            return new MarkCommandParser().parse(arguments);
+        case MarkAllAttendanceCommand.COMMAND_WORD:
+            return new MarkAllAttendanceCommandParser().parse(arguments);
+
+        case MarkParticipationCommand.COMMAND_WORD:
+            return new MarkParticipationCommandParser().parse(arguments);
+
+        case MarkAttendanceCommand.COMMAND_WORD:
+            return new MarkAttendanceCommandParser().parse(arguments);
 
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);

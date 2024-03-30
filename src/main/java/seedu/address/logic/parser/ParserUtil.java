@@ -9,7 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.MarkCommand;
+import seedu.address.logic.commands.MarkParticipationCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.MatricNumber;
@@ -43,11 +43,12 @@ public class ParserUtil {
      * @throws ParseException if any of the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index[] parseIndexes(String oneBasedIndexes) throws ParseException {
-        String[] indexArray = oneBasedIndexes.trim().split(" ");
+        String[] indexArray = oneBasedIndexes.trim().split("\\s+");
         Index[] indexes = new Index[2];
 
         if (indexArray.length != 2) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    MarkParticipationCommand.MESSAGE_USAGE));
         }
 
         String personIndex = indexArray[0];

@@ -42,9 +42,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private FlowPane participationScores;
-    @FXML
     private FlowPane assignments;
+    @FXML
+    private FlowPane attendance;
+    @FXML
+    private FlowPane participation;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -61,15 +63,24 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
-        List<Integer> scores = person.getParticipationScores();
-        for (int i = 0; i < scores.size(); i++) {
-            Label label = new Label("Week " + (i + 1) + ": " + scores.get(i) + " ");
-            if (scores.get(i) == 0) {
-                label.setStyle("-fx-background-color: red");
+        List<Integer> participationScores = person.getParticipationScores();
+        List<Integer> attendanceScores = person.getAttendanceScores();
+        for (int i = 0; i < participationScores.size(); i++) {
+            Label participationLabel = new Label("Week " + (i + 3) + ": " + participationScores.get(i) + " ");
+            Label attendanceLabel = new Label("Week " + (i + 3) + ": " + attendanceScores.get(i) + " ");
+            if (participationScores.get(i) == 0) {
+                participationLabel.setStyle("-fx-background-color: red");
             } else {
-                label.setStyle("-fx-background-color: green");
+                participationLabel.setStyle("-fx-background-color: green");
             }
-            participationScores.getChildren().add(label);
+
+            if (attendanceScores.get(i) == 0) {
+                attendanceLabel.setStyle("-fx-background-color: red");
+            } else {
+                attendanceLabel.setStyle("-fx-background-color: green");
+            }
+            participation.getChildren().add(participationLabel);
+            attendance.getChildren().add(attendanceLabel);
         }
 
         // diplay red if score is zero, green otherwise
