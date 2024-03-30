@@ -89,8 +89,10 @@ public class MarkAllAttendanceCommand extends Command {
         Email email = personToMark.getEmail();
         TelegramHandle telegramHandle = personToMark.getTelegramHandle();
         Set<Tag> tags = personToMark.getTags();
+        List<Integer> attendanceScores = personToMark.getAttendanceScores();
 
-        return new Person(name, matricNumber, email, telegramHandle, tags, updatedParticipationScores);
+        return new Person(name, matricNumber, email, telegramHandle,
+                tags, updatedParticipationScores, attendanceScores);
     }
     @Override
     public boolean equals(Object other) {

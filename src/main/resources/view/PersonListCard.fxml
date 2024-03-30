@@ -31,7 +31,10 @@
       <Label fx:id="matricNumber" styleClass="cell_small_label" text="\$matricNumber" />
       <Label fx:id="telegramHandle" styleClass="cell_small_label" text="\$telegramHandle" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <FlowPane fx:id="participationScores" />
+      <Label text="Attendance Scores" styleClass="cell_small_label" />
+      <FlowPane fx:id="attendance" />
+      <Label text="Participation Scores" styleClass="cell_small_label" />
+      <FlowPane fx:id="participation" />
     </VBox>
   </GridPane>
 </HBox>

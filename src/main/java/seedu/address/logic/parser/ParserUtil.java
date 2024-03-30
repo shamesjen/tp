@@ -43,7 +43,7 @@ public class ParserUtil {
      * @throws ParseException if any of the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index[] parseIndexes(String oneBasedIndexes) throws ParseException {
-        String[] indexArray = oneBasedIndexes.trim().split(" ");
+        String[] indexArray = oneBasedIndexes.trim().split("\\s+");
         Index[] indexes = new Index[2];
 
         if (indexArray.length != 2) {

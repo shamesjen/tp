@@ -22,9 +22,9 @@ import seedu.address.model.tag.Tag;
  * Marks the tutorial attendance of a student
  */
 
-public class MarkCommand extends Command {
+public class MarkAttendanceCommand extends Command {
 
-    public static final String COMMAND_WORD = "mark";
+    public static final String COMMAND_WORD = "marka";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the attendance of the person identified "
@@ -32,8 +32,9 @@ public class MarkCommand extends Command {
             + "Parameters: INDEX (must be a positive integer), WEEK (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 " + "5";
 
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Week Number: %2$d";
     public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked Person: %1$s";
+    private static final int FIRST_WEEK = 3;
+    private static final int LAST_WEEK = 13;
     private final Index targetIndex;
     private final Index weekNumber;
 
@@ -41,7 +42,7 @@ public class MarkCommand extends Command {
      * @param index of the person in the filtered person list to edit
      * @param weekNumber week number to mark the person with
      */
-    public MarkCommand(Index index, Index weekNumber) {
+    public MarkAttendanceCommand(Index index, Index weekNumber) {
         requireAllNonNull(index, weekNumber);
 
         this.targetIndex = index;
@@ -56,39 +57,40 @@ public class MarkCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        if (weekNumber.getZeroBased() > 13) {
+        if (weekNumber.getZeroBased() < FIRST_WEEK | weekNumber.getZeroBased() > LAST_WEEK) {
             throw new CommandException(Messages.MESSAGE_INVALID_WEEK);
         }
 
         Person personToMark = lastShownList.get(targetIndex.getZeroBased());
-        List<Integer> oldParticipationScores = personToMark.getParticipationScores();
-        List<Integer> newParticipationScores = new ArrayList<>();
-        int weekIndex = weekNumber.getZeroBased() - 1;
+        List<Integer> oldAttendanceScores = personToMark.getAttendanceScores();
+        List<Integer> newAttendanceScores = new ArrayList<>();
+        int weekIndex = weekNumber.getZeroBased() - 3;
 
-        for (int i = 0; i < oldParticipationScores.size(); i++) {
+        for (int i = 0; i < oldAttendanceScores.size(); i++) {
             if (i == weekIndex) {
-                newParticipationScores.add(1);
+                newAttendanceScores.add(1);
             } else {
-                newParticipationScores.add(oldParticipationScores.get(i));
+                newAttendanceScores.add(oldAttendanceScores.get(i));
             }
         }
 
-        Person updatedPerson = createMarkedPerson(personToMark, newParticipationScores);
+        Person updatedPerson = createMarkedPerson(personToMark, newAttendanceScores);
 
         model.setPerson(personToMark, updatedPerson);
         if (model.shouldPurgeAddressBook()) {
             model.purgeAddressBook();
         }
-        CommandResult markCommandResult = new CommandResult(MESSAGE_MARK_PERSON_SUCCESS);
-        model.commitAddressBook(markCommandResult);
-        return markCommandResult;
+        CommandResult markAttendanceCommandResult =
+                new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, updatedPerson.getName()));
+        model.commitAddressBook(markAttendanceCommandResult);
+        return markAttendanceCommandResult;
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToMark}
-     * with the updated participation scores. Utilizes the overload Person constructor.
+     * with the updated Attendance scores. Utilizes the overload Person constructor.
      */
-    private static Person createMarkedPerson(Person personToMark, List<Integer> updatedParticipationScores) {
+    private static Person createMarkedPerson(Person personToMark, List<Integer> updatedAttendanceScores) {
         assert personToMark != null;
 
         Name name = personToMark.getName();
@@ -96,10 +98,10 @@ public class MarkCommand extends Command {
         Email email = personToMark.getEmail();
         TelegramHandle telegramHandle = personToMark.getTelegramHandle();
         Set<Tag> tags = personToMark.getTags();
-        List<Integer> attendanceScores = personToMark.getAttendanceScores();
+        List<Integer> participationScores = personToMark.getParticipationScores();
 
         return new Person(name, matricNumber, email, telegramHandle,
-                    tags, updatedParticipationScores, attendanceScores);
+                 tags, participationScores, updatedAttendanceScores);
     }
 
     @Override
@@ -110,12 +112,12 @@ public class MarkCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof MarkCommand)) {
+        if (!(other instanceof MarkAttendanceCommand)) {
             return false;
         }
 
         // state check
-        MarkCommand e = (MarkCommand) other;
+        MarkAttendanceCommand e = (MarkAttendanceCommand) other;
         return targetIndex.equals(e.targetIndex)
                 && weekNumber.equals(e.weekNumber);
     }
