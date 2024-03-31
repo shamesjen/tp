@@ -12,26 +12,36 @@ import seedu.address.model.person.Assignment;
 class JsonAdaptedAssignment {
 
     private final String assignmentName;
+    private final int score;
 
     /**
      * Constructs a {@code JsonAdaptedAssignment} with the given {@code assignmentName}.
      */
     @JsonCreator
-    public JsonAdaptedAssignment(String assignmentName) {
+    public JsonAdaptedAssignment(String assignmentName, int score) {
         this.assignmentName = assignmentName;
+        this.score = score;
     }
 
     /**
      * Converts a given {@code Assignment} into this class for Jackson use.
      */
-    public JsonAdaptedAssignment(Assignment source) {
+    @JsonCreator
+    public JsonAdaptedAssignment(Assignment source, int score) {
         assignmentName = source.assignmentName;
+        this.score = score;
     }
 
     @JsonValue
     public String getassignmentName() {
         return assignmentName;
     }
+
+    @JsonValue
+    public int getScore() {
+        return score;
+    }
+
 
     /**
      * Converts this Jackson-friendly adapted assignment object into the model's {@code Assignment} object.
