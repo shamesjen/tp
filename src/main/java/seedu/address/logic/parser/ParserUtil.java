@@ -11,6 +11,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.MarkParticipationCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Assignment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.MatricNumber;
 import seedu.address.model.person.Name;
@@ -23,6 +24,8 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_ARGUMENTS_MARKASSIGNMENT =
+        "Invalid arguments provided for MarkAssignmentCommand.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -58,7 +61,6 @@ public class ParserUtil {
     public static Index[] parseIndexes(String oneBasedIndexes) throws ParseException {
         String[] indexArray = oneBasedIndexes.trim().split("\\s+");
         Index[] indexes = new Index[2];
-
         if (indexArray.length != 2) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     MarkParticipationCommand.MESSAGE_USAGE));
@@ -161,5 +163,20 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String assignment} into an {@code Assignment}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code assignment} is invalid.
+     */
+    public static Assignment parseAssignment(String assignment) throws ParseException {
+        requireNonNull(assignment);
+        String trimmedAssignment = assignment.trim();
+        if (!Assignment.isValidAssignmentName(trimmedAssignment)) {
+            throw new ParseException(Assignment.MESSAGE_CONSTRAINTS);
+        }
+        return new Assignment(trimmedAssignment);
     }
 }
