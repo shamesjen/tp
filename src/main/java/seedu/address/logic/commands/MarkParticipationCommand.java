@@ -19,7 +19,7 @@ import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Tag;
 
 /**
- * Marks the tutorial attendance of a student
+ * Marks the tutorial participation of a student
  */
 
 public class MarkParticipationCommand extends Command {
@@ -32,8 +32,8 @@ public class MarkParticipationCommand extends Command {
             + "Parameters: INDEX (must be a positive integer), WEEK (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 " + "5";
 
-    public static final String MESSAGE_MARK_PARTICIPATION_SUCCESS = "Marked Participation for: %1$s in Week %2$d " +
-            "\nCurrent Participation Score: %3$s";
+    public static final String MESSAGE_MARK_PARTICIPATION_SUCCESS = "Marked Participation for: %1$s in Week %2$d "
+            + "\nCurrent Participation Score: %3$s";
     private static final int FIRST_WEEK = 3;
     private static final int LAST_WEEK = 13;
     private final Index targetIndex;

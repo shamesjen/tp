@@ -49,11 +49,11 @@ public class MarkParticipationCommandTest {
     }
 
     @Test
-    public void execute_scoreGreaterThanOne_success() throws Exception {
+    public void execute_scoreGreaterThanOne_success() throws CommandException {
         Person personToMark = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person markedPersonTwo = new PersonBuilder(personToMark)
                 .withParticipationScores(PARTICIPATION_SCORES_STUB_TWO).build();
-        CommandResult markParticipationCommand =
+        CommandResult markParticipationCommandResult =
                 new MarkParticipationCommand(INDEX_FIRST_PERSON, INDEX_FIRST_WEEK).execute(model);
         MarkParticipationCommand markParticipationTwoCommand =
                 new MarkParticipationCommand(INDEX_FIRST_PERSON, INDEX_FIRST_WEEK);

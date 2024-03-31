@@ -32,8 +32,8 @@ public class UnmarkParticipationCommand extends Command {
             + "Parameters: INDEX (must be a positive integer), WEEK (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 " + "5";
 
-    public static final String MESSAGE_UNMARK_PERSON_SUCCESS = "Unmarked Participation for: %1$s in Week %2$d " +
-            "\nCurrent Participation Score: %3$s";
+    public static final String MESSAGE_UNMARK_PARTICIPATION_SUCCESS = "Unmarked Participation for: %1$s in Week %2$d "
+            + "\nCurrent Participation Score: %3$s";
     private static final int FIRST_WEEK = 3;
     private static final int LAST_WEEK = 13;
     private final Index targetIndex;
@@ -71,12 +71,12 @@ public class UnmarkParticipationCommand extends Command {
         if (model.shouldPurgeAddressBook()) {
             model.purgeAddressBook();
         }
-        CommandResult UnmarkParticipationCommandResult =
-                new CommandResult(String.format(MESSAGE_UNMARK_PERSON_SUCCESS, updatedPerson.getName(),
+        CommandResult unmarkParticipationCommandResult =
+                new CommandResult(String.format(MESSAGE_UNMARK_PARTICIPATION_SUCCESS, updatedPerson.getName(),
                         weekNumber.getOneBased(),
                         updatedPerson.getParticipationScores().get(weekNumber.getZeroBased() - 3)));
-        model.commitAddressBook(UnmarkParticipationCommandResult);
-        return UnmarkParticipationCommandResult;
+        model.commitAddressBook(unmarkParticipationCommandResult);
+        return unmarkParticipationCommandResult;
     }
 
     /**
