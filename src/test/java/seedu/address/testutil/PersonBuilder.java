@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import seedu.address.model.person.Assignment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.MatricNumber;
 import seedu.address.model.person.Name;
@@ -30,6 +31,7 @@ public class PersonBuilder {
     private Set<Tag> tags;
     private List<Integer> attendanceScores = new ArrayList<>();
     private List<Integer> participationScores = new ArrayList<>();
+    private List<Assignment> assignments;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -40,6 +42,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         telegramHandle = new TelegramHandle(DEFAULT_TELEGRAM_HANDLE);
         tags = new HashSet<>();
+        assignments = new ArrayList<>();
 
         for (int i = 0; i < 11; i++) {
             participationScores.add(0);
@@ -117,7 +120,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, matricNumber, email, telegramHandle, tags);
+        return new Person(name, matricNumber, email, telegramHandle, assignments, tags);
     }
 
 }

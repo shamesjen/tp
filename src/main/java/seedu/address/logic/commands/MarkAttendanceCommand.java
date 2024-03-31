@@ -11,6 +11,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Assignment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.MatricNumber;
 import seedu.address.model.person.Name;
@@ -99,9 +100,10 @@ public class MarkAttendanceCommand extends Command {
         TelegramHandle telegramHandle = personToMark.getTelegramHandle();
         Set<Tag> tags = personToMark.getTags();
         List<Integer> participationScores = personToMark.getParticipationScores();
+        List<Assignment> assignments = personToMark.getAssignments();
 
         return new Person(name, matricNumber, email, telegramHandle,
-                 tags, participationScores, updatedAttendanceScores);
+                 tags, assignments, participationScores, updatedAttendanceScores);
     }
 
     @Override
