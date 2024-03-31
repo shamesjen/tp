@@ -35,6 +35,8 @@
       <FlowPane fx:id="attendance" />
       <Label text="Participation Scores" styleClass="cell_small_label" />
       <FlowPane fx:id="participation" />
+      <Label text="Assignments" styleClass="cell_small_label" />
+      <FlowPane fx:id="assignments" />
     </VBox>
   </GridPane>
 </HBox>

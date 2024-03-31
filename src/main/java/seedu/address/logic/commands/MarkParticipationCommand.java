@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Assignment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.MatricNumber;
 import seedu.address.model.person.Name;
@@ -113,9 +115,11 @@ public class MarkParticipationCommand extends Command {
         TelegramHandle telegramHandle = personToMark.getTelegramHandle();
         Set<Tag> tags = personToMark.getTags();
         List<Integer> attendanceScores = personToMark.getAttendanceScores();
+        List<Assignment> assignments = personToMark.getAssignments();
+
 
         return new Person(name, matricNumber, email, telegramHandle,
-                    tags, updatedParticipationScores, attendanceScores);
+         tags, assignments, updatedParticipationScores, attendanceScores);
     }
 
     @Override

@@ -42,6 +42,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
+    private FlowPane assignments;
+    @FXML
     private FlowPane attendance;
     @FXML
     private FlowPane participation;
@@ -80,5 +82,25 @@ public class PersonCard extends UiPart<Region> {
             participation.getChildren().add(participationLabel);
             attendance.getChildren().add(attendanceLabel);
         }
+
+        // diplay red if score is zero, green otherwise
+        if (person.getAssignments().isEmpty()) {
+            Label label = new Label("No assignments");
+            label.setStyle("-fx-background-color: red");
+            assignments.getChildren().add(label);
+        } else {
+            person.getAssignments().stream()
+                .sorted(Comparator.comparing(assignment -> assignment.assignmentName))
+                .forEach(assignment -> {
+                    Label label = new Label(assignment.assignmentName + ": " + assignment.getAssignmentScore() + " ");
+                    if (assignment.getAssignmentScore() == 0) {
+                        label.setStyle("-fx-background-color: orange");
+                    } else {
+                        label.setStyle("-fx-background-color: green");
+                    }
+                    assignments.getChildren().add(label);
+                });
+        }
+
     }
 }
