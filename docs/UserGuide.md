@@ -262,7 +262,27 @@ Command: `RemoveTagAll t/friends t/group4`
 
 **TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
 
-### 13. Undoing a previous command : `undo`
+### 13. Adding a custom assignment : `adda`
+
+Adds assignment(s) to all users if they do not already exist.
+
+|       Field       | Prefix |  Required  | Requirements                                      |
+|:-----------------:|:------:|:----------:|:--------------------------------------------------|
+| `[ASSIGNMENT]...` |   a/   |    YES     | Assignment **must have a valid alphanumeric name. |                                                                    
+
+<h4>Format:</h4>
+```
+adda a/ASSIGNMENT...
+```
+
+<h4>Notes:</h4>
+* Adds assignment to all users who dont already have it.
+
+<h4>Example Usage:</h4>
+
+Command: `adda a/assignment1 t/assignment2`
+
+### 14. Undoing a previous command : `undo`
 
 Undoes the previous command that changed data.
 
@@ -271,7 +291,7 @@ Format: `undo`
 * Only undoes a command if it changed data.
 * Will not undo if no commands were issued beforehand.
 
-### 14. Redoing a previously undone command : `redo`
+### 15. Redoing a previously undone command : `redo`
 
 Redoes the previously undone command.
 
@@ -280,11 +300,12 @@ Format: `redo`
 * Will only redo the command that was undone immediately prior.
 * Will not redo if no commands were undone beforehand.
 
-### 15. Exiting the program : `exit`
+### 16. Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
+
 
 ### Saving the data
 
