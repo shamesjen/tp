@@ -28,13 +28,15 @@ public class Person {
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
+    private final List<Assignment> assignments;
     private final List<Integer> participationScores;
     private final List<Integer> attendanceScores;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, MatricNumber matricNumber, Email email, TelegramHandle telegramHandle, Set<Tag> tags) {
+    public Person(Name name, MatricNumber matricNumber, Email email, TelegramHandle telegramHandle,
+            List<Assignment> assignments, Set<Tag> tags) {
         requireAllNonNull(name, matricNumber, email, telegramHandle, tags);
         this.name = name;
         this.matricNumber = matricNumber;
@@ -42,6 +44,7 @@ public class Person {
         this.telegramHandle = telegramHandle;
         this.tags.addAll(tags);
         this.participationScores = new ArrayList<>();
+        this.assignments = assignments;
         this.attendanceScores = new ArrayList<>();
 
         for (int i = 0; i < NUMBER_OF_WEEKS; i++) {
@@ -54,7 +57,8 @@ public class Person {
      * The overloaded Person constructor. Every field must be present and not null.
      */
     public Person(Name name, MatricNumber matricNumber, Email email, TelegramHandle telegramHandle,
-                  Set<Tag> tags, List<Integer> participationScores, List<Integer> attendanceScores) {
+            Set<Tag> tags, List<Assignment> assignments, List<Integer> participationScores,
+             List<Integer> attendanceScores) {
         requireAllNonNull(name, matricNumber, email, telegramHandle, tags, participationScores, attendanceScores);
         this.name = name;
         this.matricNumber = matricNumber;
@@ -62,6 +66,7 @@ public class Person {
         this.telegramHandle = telegramHandle;
         this.tags.addAll(tags);
         this.participationScores = participationScores;
+        this.assignments = assignments;
         this.attendanceScores = attendanceScores;
     }
 
@@ -79,6 +84,22 @@ public class Person {
 
     public TelegramHandle getTelegramHandle() {
         return telegramHandle;
+    }
+
+    public List<Assignment> getAssignments() {
+        return assignments;
+    }
+
+    public void addAssignment(Assignment assignment) {
+        assignments.add(assignment);
+    }
+
+    // public void removeAssignment(Assignment assignment) {
+    //     assignments.remove(assignment);
+    // }
+
+    public boolean hasAssignment(Assignment assignment) {
+        return assignments.contains(assignment);
     }
 
     /**
@@ -165,6 +186,8 @@ public class Person {
                 .add("phone", matricNumber)
                 .add("email", email)
                 .add("address", telegramHandle)
+                .add("participationScores", participationScores)
+                .add("assignments", assignments)
                 .add("tags", tags)
                 .toString();
     }

@@ -105,5 +105,4 @@ public interface Model {
     CommandResult getAddressBookUndoneCommand();
 
     CommandResult getAddressBookRedoneCommand();
-
 }

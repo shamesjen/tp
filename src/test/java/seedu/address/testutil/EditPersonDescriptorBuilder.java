@@ -1,10 +1,12 @@
 package seedu.address.testutil;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.person.Assignment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.MatricNumber;
 import seedu.address.model.person.Name;
@@ -37,6 +39,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setTelegramHandle(person.getTelegramHandle());
         descriptor.setTags(person.getTags());
+        descriptor.setAssignments(person.getAssignments());
     }
 
     /**
@@ -78,6 +81,16 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code assignments} into a {@code List<Assignment>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withAssignments(String... assignments) {
+        List<Assignment> assignmentSet = Stream.of(assignments).map(Assignment::new).collect(Collectors.toList());
+        descriptor.setAssignments(assignmentSet);
         return this;
     }
 
