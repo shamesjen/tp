@@ -89,10 +89,11 @@ public class PersonCard extends UiPart<Region> {
             label.setStyle("-fx-background-color: red");
             assignments.getChildren().add(label);
         } else {
+            // space out assignments
             person.getAssignments().stream()
                 .sorted(Comparator.comparing(assignment -> assignment.assignmentName))
                 .forEach(assignment -> {
-                    Label label = new Label(assignment.assignmentName + ": " + assignment.getAssignmentScore() + " ");
+                    Label label = new Label(assignment.assignmentName + ": " + assignment.getAssignmentScore() + ", ");
                     if (assignment.getAssignmentScore() == 0) {
                         label.setStyle("-fx-background-color: orange");
                     } else {
