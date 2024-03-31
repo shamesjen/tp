@@ -93,11 +93,12 @@ public class MarkAllAttendanceCommand extends Command {
         Email email = personToMark.getEmail();
         TelegramHandle telegramHandle = personToMark.getTelegramHandle();
         Set<Tag> tags = personToMark.getTags();
+        List<Assignment> assignments = personToMark.getAssignments();
 
         List<Integer> participationScores = personToMark.getParticipationScores();
 
         return new Person(name, matricNumber, email, telegramHandle,
-                 tags, participationScores, updatedAttendanceScores);
+                 tags, assignments, participationScores, updatedAttendanceScores);
     }
 
     @Override
