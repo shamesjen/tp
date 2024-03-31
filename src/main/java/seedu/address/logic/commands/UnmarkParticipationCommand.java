@@ -11,6 +11,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Assignment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.MatricNumber;
 import seedu.address.model.person.Name;
@@ -27,7 +28,7 @@ public class UnmarkParticipationCommand extends Command {
     public static final String COMMAND_WORD = "unmarkp";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Unmarks the attendance of the person identified "
+            + ": Unmarks the participation of the person identified "
             + "by the index number used in the last person listing.\n"
             + "Parameters: INDEX (must be a positive integer), WEEK (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 " + "5";
@@ -63,6 +64,9 @@ public class UnmarkParticipationCommand extends Command {
         }
 
         Person personToUnmark = lastShownList.get(targetIndex.getZeroBased());
+        if (personToUnmark.getParticipationScores().get(weekNumber.getZeroBased() - 3) == 0) {
+            throw new CommandException(Messages.MESSAGE_PARTICIPATION_ALREADY_ZERO);
+        }
         List<Integer> newParticipationScores = getNewParticipationScores(personToUnmark);
 
         Person updatedPerson = createMarkedPerson(personToUnmark, newParticipationScores);
@@ -73,7 +77,7 @@ public class UnmarkParticipationCommand extends Command {
         }
         CommandResult unmarkParticipationCommandResult =
                 new CommandResult(String.format(MESSAGE_UNMARK_PARTICIPATION_SUCCESS, updatedPerson.getName(),
-                        weekNumber.getOneBased(),
+                        weekNumber.getZeroBased(),
                         updatedPerson.getParticipationScores().get(weekNumber.getZeroBased() - 3)));
         model.commitAddressBook(unmarkParticipationCommandResult);
         return unmarkParticipationCommandResult;
@@ -113,9 +117,10 @@ public class UnmarkParticipationCommand extends Command {
         TelegramHandle telegramHandle = personToUnmark.getTelegramHandle();
         Set<Tag> tags = personToUnmark.getTags();
         List<Integer> attendanceScores = personToUnmark.getAttendanceScores();
+        List<Assignment> assignments = personToUnmark.getAssignments();
 
         return new Person(name, matricNumber, email, telegramHandle,
-                tags, updatedParticipationScores, attendanceScores);
+                tags, assignments, updatedParticipationScores, attendanceScores);
     }
 
     @Override

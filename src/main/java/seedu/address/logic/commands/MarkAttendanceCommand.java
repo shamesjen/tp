@@ -73,19 +73,19 @@ public class MarkAttendanceCommand extends Command {
         }
         CommandResult markAttendanceCommandResult =
                 new CommandResult(String.format(MESSAGE_MARK_ATTENDANCE_SUCCESS, updatedPerson.getName(),
-                        weekNumber.getOneBased()));
+                        weekNumber.getZeroBased()));
         model.commitAddressBook(markAttendanceCommandResult);
         return markAttendanceCommandResult;
     }
 
     /**
-     * Returns a list of updated participation scores for {@code personToMark}.
+     * Returns a list of updated attendance scores for {@code personToMark}.
      *
-     * @param personToMark the person to mark participation for
-     * @return a list of updated participation scores
+     * @param personToMark the person to mark attendance for
+     * @return a list of updated attendance scores
      */
     private List<Integer> getnewAttendanceScores(Person personToMark) {
-        List<Integer> oldAttendanceScores = personToMark.getParticipationScores();
+        List<Integer> oldAttendanceScores = personToMark.getAttendanceScores();
         List<Integer> newAttendanceScores = new ArrayList<>();
         int weekIndex = weekNumber.getZeroBased() - 3;
 

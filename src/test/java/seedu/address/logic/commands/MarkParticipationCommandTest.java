@@ -39,7 +39,7 @@ public class MarkParticipationCommandTest {
                 new MarkParticipationCommand(INDEX_FIRST_PERSON, INDEX_FIRST_WEEK);
 
         String expectedMessage = String.format(MESSAGE_MARK_PARTICIPATION_SUCCESS, markedPerson.getName(),
-                INDEX_FIRST_WEEK.getOneBased(),
+                INDEX_FIRST_WEEK.getZeroBased(),
                 PARTICIPATION_SCORES_STUB_ONE.get(INDEX_FIRST_WEEK.getZeroBased() - 3));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -59,7 +59,7 @@ public class MarkParticipationCommandTest {
                 new MarkParticipationCommand(INDEX_FIRST_PERSON, INDEX_FIRST_WEEK);
 
         String expectedMessage = String.format(MESSAGE_MARK_PARTICIPATION_SUCCESS, markedPersonTwo.getName(),
-                INDEX_FIRST_WEEK.getOneBased(),
+                INDEX_FIRST_WEEK.getZeroBased(),
                 PARTICIPATION_SCORES_STUB_TWO.get(INDEX_FIRST_WEEK.getZeroBased() - 3));
 
         ModelManager expectedModelTwo = new ModelManager(model.getAddressBook(), new UserPrefs());

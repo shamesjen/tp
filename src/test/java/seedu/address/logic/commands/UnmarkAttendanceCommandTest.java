@@ -38,7 +38,7 @@ public class UnmarkAttendanceCommandTest {
                 INDEX_FIRST_PERSON, INDEX_FIRST_WEEK);
 
         String expectedMessage = String.format(UnmarkAttendanceCommand.MESSAGE_UNMARK_ATTENDANCE_SUCCESS,
-                unmarkedPerson.getName(), INDEX_FIRST_WEEK.getOneBased());
+                unmarkedPerson.getName(), INDEX_FIRST_WEEK.getZeroBased());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), unmarkedPerson);

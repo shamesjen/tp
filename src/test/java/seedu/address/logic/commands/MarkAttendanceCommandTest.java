@@ -34,7 +34,7 @@ public class MarkAttendanceCommandTest {
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(INDEX_FIRST_PERSON, INDEX_FIRST_WEEK);
 
         String expectedMessage = String.format(MarkAttendanceCommand.MESSAGE_MARK_ATTENDANCE_SUCCESS,
-                markedPerson.getName(), INDEX_FIRST_WEEK.getOneBased());
+                markedPerson.getName(), INDEX_FIRST_WEEK.getZeroBased());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), markedPerson);

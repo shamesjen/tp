@@ -117,7 +117,7 @@ public class AddressBookParser {
 
         case UnmarkParticipationCommand.COMMAND_WORD:
             return new UnmarkParticipationCommandParser().parse(arguments);
-            
+
         case AddAssignmentCommand.COMMAND_WORD:
             return new AddAssignmentCommandParser().parse(arguments);
 

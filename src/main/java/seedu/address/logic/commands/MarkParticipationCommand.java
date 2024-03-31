@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +28,7 @@ public class MarkParticipationCommand extends Command {
     public static final String COMMAND_WORD = "markp";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks the attendance of the person identified "
+            + ": Marks the participation of the person identified "
             + "by the index number used in the last person listing.\n"
             + "Parameters: INDEX (must be a positive integer), WEEK (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 " + "5";
@@ -75,7 +74,7 @@ public class MarkParticipationCommand extends Command {
         }
         CommandResult markParticipationCommandResult =
                 new CommandResult(String.format(MESSAGE_MARK_PARTICIPATION_SUCCESS, updatedPerson.getName(),
-                        weekNumber.getOneBased(),
+                        weekNumber.getZeroBased(),
                         updatedPerson.getParticipationScores().get(weekNumber.getZeroBased() - 3)));
         model.commitAddressBook(markParticipationCommandResult);
         return markParticipationCommandResult;
@@ -116,7 +115,6 @@ public class MarkParticipationCommand extends Command {
         Set<Tag> tags = personToMark.getTags();
         List<Integer> attendanceScores = personToMark.getAttendanceScores();
         List<Assignment> assignments = personToMark.getAssignments();
-
 
         return new Person(name, matricNumber, email, telegramHandle,
          tags, assignments, updatedParticipationScores, attendanceScores);

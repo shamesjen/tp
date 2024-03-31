@@ -41,7 +41,7 @@ public class UnmarkParticipationCommandTest {
                 new UnmarkParticipationCommand(INDEX_FIRST_PERSON, INDEX_FIRST_WEEK);
 
         String expectedMessage = String.format(MESSAGE_UNMARK_PARTICIPATION_SUCCESS, unmarkedPerson.getName(),
-                INDEX_FIRST_WEEK.getOneBased(),
+                INDEX_FIRST_WEEK.getZeroBased(),
                 PARTICIPATION_SCORES_STUB_ZERO.get(INDEX_FIRST_WEEK.getZeroBased() - 3));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -63,7 +63,7 @@ public class UnmarkParticipationCommandTest {
                 new UnmarkParticipationCommand(INDEX_FIRST_PERSON, INDEX_FIRST_WEEK);
 
         String expectedMessage = String.format(MESSAGE_UNMARK_PARTICIPATION_SUCCESS, unmarkedPerson.getName(),
-                INDEX_FIRST_WEEK.getOneBased(),
+                INDEX_FIRST_WEEK.getZeroBased(),
                 PARTICIPATION_SCORES_STUB_ONE.get(INDEX_FIRST_WEEK.getZeroBased() - 3));
 
         ModelManager expectedModelTwo = new ModelManager(model.getAddressBook(), new UserPrefs());

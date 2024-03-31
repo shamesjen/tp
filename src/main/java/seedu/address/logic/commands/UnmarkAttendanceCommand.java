@@ -11,6 +11,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Assignment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.MatricNumber;
 import seedu.address.model.person.Name;
@@ -62,6 +63,9 @@ public class UnmarkAttendanceCommand extends Command {
         }
 
         Person personToUnmark = lastShownList.get(targetIndex.getZeroBased());
+        if (personToUnmark.getAttendanceScores().get(weekNumber.getZeroBased() - 3) == 0) {
+            throw new CommandException(Messages.MESSAGE_ATTENDANCE_ALREADY_ZERO);
+        }
         List<Integer> newAttendanceScores = getnewAttendanceScores(personToUnmark);
 
         Person updatedPerson = createUnmarkedPerson(personToUnmark, newAttendanceScores);
@@ -70,21 +74,21 @@ public class UnmarkAttendanceCommand extends Command {
         if (model.shouldPurgeAddressBook()) {
             model.purgeAddressBook();
         }
-        CommandResult markAttendanceCommandResult =
+        CommandResult unmarkAttendanceCommandResult =
                 new CommandResult(String.format(MESSAGE_UNMARK_ATTENDANCE_SUCCESS, updatedPerson.getName(),
-                        weekNumber.getOneBased()));
-        model.commitAddressBook(markAttendanceCommandResult);
-        return markAttendanceCommandResult;
+                        weekNumber.getZeroBased()));
+        model.commitAddressBook(unmarkAttendanceCommandResult);
+        return unmarkAttendanceCommandResult;
     }
 
     /**
-     * Returns a list of updated participation scores for {@code personToUnmark}.
+     * Returns a list of updated attendance scores for {@code personToUnmark}.
      *
-     * @param personToUnmark the person to unmark participation for
-     * @return a list of updated participation scores
+     * @param personToUnmark the person to unmark attendance for
+     * @return a list of updated attendance scores
      */
     private List<Integer> getnewAttendanceScores(Person personToUnmark) {
-        List<Integer> oldAttendanceScores = personToUnmark.getParticipationScores();
+        List<Integer> oldAttendanceScores = personToUnmark.getAttendanceScores();
         List<Integer> newAttendanceScores = new ArrayList<>();
         int weekIndex = weekNumber.getZeroBased() - 3;
 
@@ -111,9 +115,10 @@ public class UnmarkAttendanceCommand extends Command {
         TelegramHandle telegramHandle = personToUnmark.getTelegramHandle();
         Set<Tag> tags = personToUnmark.getTags();
         List<Integer> participationScores = personToUnmark.getParticipationScores();
+        List<Assignment> assignments = personToUnmark.getAssignments();
 
         return new Person(name, matricNumber, email, telegramHandle,
-                tags, participationScores, updatedAttendanceScores);
+                tags, assignments, participationScores, updatedAttendanceScores);
     }
 
     @Override
