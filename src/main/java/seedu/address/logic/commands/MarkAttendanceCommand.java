@@ -32,7 +32,7 @@ public class MarkAttendanceCommand extends Command {
             + "Parameters: INDEX (must be a positive integer), WEEK (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 " + "5";
 
-    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked Attendance for: %1$s in Week %2$d";
+    public static final String MESSAGE_MARK_ATTENDANCE_SUCCESS = "Marked Attendance for: %1$s in Week %2$d";
     private static final int FIRST_WEEK = 3;
     private static final int LAST_WEEK = 13;
     private final Index targetIndex;
@@ -62,7 +62,29 @@ public class MarkAttendanceCommand extends Command {
         }
 
         Person personToMark = lastShownList.get(targetIndex.getZeroBased());
-        List<Integer> oldAttendanceScores = personToMark.getAttendanceScores();
+        List<Integer> newAttendanceScores = getnewAttendanceScores(personToMark);
+
+        Person updatedPerson = createMarkedPerson(personToMark, newAttendanceScores);
+
+        model.setPerson(personToMark, updatedPerson);
+        if (model.shouldPurgeAddressBook()) {
+            model.purgeAddressBook();
+        }
+        CommandResult markAttendanceCommandResult =
+                new CommandResult(String.format(MESSAGE_MARK_ATTENDANCE_SUCCESS, updatedPerson.getName(),
+                        weekNumber.getOneBased()));
+        model.commitAddressBook(markAttendanceCommandResult);
+        return markAttendanceCommandResult;
+    }
+
+    /**
+     * Returns a list of updated participation scores for {@code personToMark}.
+     *
+     * @param personToMark the person to mark participation for
+     * @return a list of updated participation scores
+     */
+    private List<Integer> getnewAttendanceScores(Person personToMark) {
+        List<Integer> oldAttendanceScores = personToMark.getParticipationScores();
         List<Integer> newAttendanceScores = new ArrayList<>();
         int weekIndex = weekNumber.getZeroBased() - 3;
 
@@ -73,18 +95,7 @@ public class MarkAttendanceCommand extends Command {
                 newAttendanceScores.add(oldAttendanceScores.get(i));
             }
         }
-
-        Person updatedPerson = createMarkedPerson(personToMark, newAttendanceScores);
-
-        model.setPerson(personToMark, updatedPerson);
-        if (model.shouldPurgeAddressBook()) {
-            model.purgeAddressBook();
-        }
-        CommandResult markAttendanceCommandResult =
-                new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, updatedPerson.getName(),
-                        weekNumber.getOneBased()));
-        model.commitAddressBook(markAttendanceCommandResult);
-        return markAttendanceCommandResult;
+        return newAttendanceScores;
     }
 
     /**

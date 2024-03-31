@@ -19,7 +19,7 @@ import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Tag;
 
 /**
- * Marks the tutorial attendance of a student
+ * Unmarks the tutorial attendance of a student
  */
 
 public class UnmarkAttendanceCommand extends Command {
@@ -32,7 +32,7 @@ public class UnmarkAttendanceCommand extends Command {
             + "Parameters: INDEX (must be a positive integer), WEEK (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 " + "5";
 
-    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Unmarked Attendance for: %1$s in Week %2$d";
+    public static final String MESSAGE_UNMARK_ATTENDANCE_SUCCESS = "Unmarked Attendance for: %1$s in Week %2$d";
     private static final int FIRST_WEEK = 3;
     private static final int LAST_WEEK = 13;
     private final Index targetIndex;
@@ -62,7 +62,29 @@ public class UnmarkAttendanceCommand extends Command {
         }
 
         Person personToUnmark = lastShownList.get(targetIndex.getZeroBased());
-        List<Integer> oldAttendanceScores = personToUnmark.getAttendanceScores();
+        List<Integer> newAttendanceScores = getnewAttendanceScores(personToUnmark);
+
+        Person updatedPerson = createUnmarkedPerson(personToUnmark, newAttendanceScores);
+
+        model.setPerson(personToUnmark, updatedPerson);
+        if (model.shouldPurgeAddressBook()) {
+            model.purgeAddressBook();
+        }
+        CommandResult markAttendanceCommandResult =
+                new CommandResult(String.format(MESSAGE_UNMARK_ATTENDANCE_SUCCESS, updatedPerson.getName(),
+                        weekNumber.getOneBased()));
+        model.commitAddressBook(markAttendanceCommandResult);
+        return markAttendanceCommandResult;
+    }
+
+    /**
+     * Returns a list of updated participation scores for {@code personToUnmark}.
+     *
+     * @param personToUnmark the person to unmark participation for
+     * @return a list of updated participation scores
+     */
+    private List<Integer> getnewAttendanceScores(Person personToUnmark) {
+        List<Integer> oldAttendanceScores = personToUnmark.getParticipationScores();
         List<Integer> newAttendanceScores = new ArrayList<>();
         int weekIndex = weekNumber.getZeroBased() - 3;
 
@@ -73,18 +95,7 @@ public class UnmarkAttendanceCommand extends Command {
                 newAttendanceScores.add(oldAttendanceScores.get(i));
             }
         }
-
-        Person updatedPerson = createUnmarkedPerson(personToUnmark, newAttendanceScores);
-
-        model.setPerson(personToUnmark, updatedPerson);
-        if (model.shouldPurgeAddressBook()) {
-            model.purgeAddressBook();
-        }
-        CommandResult markAttendanceCommandResult =
-                new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, updatedPerson.getName(),
-                        weekNumber.getOneBased()));
-        model.commitAddressBook(markAttendanceCommandResult);
-        return markAttendanceCommandResult;
+        return newAttendanceScores;
     }
 
     /**
