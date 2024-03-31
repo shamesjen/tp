@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.MarkParticipationCommand.MESSAGE_MARK_PERSON_SUCCESS;
+import static seedu.address.logic.commands.MarkParticipationCommand.MESSAGE_MARK_PARTICIPATION_SUCCESS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_WEEK;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -37,7 +38,9 @@ public class MarkParticipationCommandTest {
         MarkParticipationCommand markParticipationCommand =
                 new MarkParticipationCommand(INDEX_FIRST_PERSON, INDEX_FIRST_WEEK);
 
-        String expectedMessage = String.format(MESSAGE_MARK_PERSON_SUCCESS, markedPerson.getName());
+        String expectedMessage = String.format(MESSAGE_MARK_PARTICIPATION_SUCCESS, markedPerson.getName(),
+                INDEX_FIRST_WEEK.getZeroBased(),
+                PARTICIPATION_SCORES_STUB_ONE.get(INDEX_FIRST_WEEK.getZeroBased() - 3));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), markedPerson);
@@ -46,23 +49,23 @@ public class MarkParticipationCommandTest {
     }
 
     @Test
-    public void execute_scoreGreaterThanOne_success() {
+    public void execute_scoreGreaterThanOne_success() throws CommandException {
         Person personToMark = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person markedPersonOne = new PersonBuilder(personToMark)
-                .withParticipationScores(PARTICIPATION_SCORES_STUB_ONE).build();
         Person markedPersonTwo = new PersonBuilder(personToMark)
                 .withParticipationScores(PARTICIPATION_SCORES_STUB_TWO).build();
-        MarkParticipationCommand markParticipationCommand =
+        CommandResult markParticipationCommandResult =
+                new MarkParticipationCommand(INDEX_FIRST_PERSON, INDEX_FIRST_WEEK).execute(model);
+        MarkParticipationCommand markParticipationTwoCommand =
                 new MarkParticipationCommand(INDEX_FIRST_PERSON, INDEX_FIRST_WEEK);
 
-        String expectedMessage = String.format(MESSAGE_MARK_PERSON_SUCCESS, markedPersonOne.getName());
+        String expectedMessage = String.format(MESSAGE_MARK_PARTICIPATION_SUCCESS, markedPersonTwo.getName(),
+                INDEX_FIRST_WEEK.getZeroBased(),
+                PARTICIPATION_SCORES_STUB_TWO.get(INDEX_FIRST_WEEK.getZeroBased() - 3));
 
-        ModelManager expectedModelOne = new ModelManager(model.getAddressBook(), new UserPrefs());
         ModelManager expectedModelTwo = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModelOne.setPerson(model.getFilteredPersonList().get(0), markedPersonOne);
         expectedModelTwo.setPerson(model.getFilteredPersonList().get(0), markedPersonTwo);
 
-        assertCommandSuccess(markParticipationCommand, model, expectedMessage, expectedModelTwo);
+        assertCommandSuccess(markParticipationTwoCommand, model, expectedMessage, expectedModelTwo);
     }
 
     @Test
