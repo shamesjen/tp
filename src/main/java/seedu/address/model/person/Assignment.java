@@ -45,7 +45,7 @@ public class Assignment {
 
     @Override
     public String toString() {
-        return assignmentName;
+        return assignmentName + " (" + assignmentScore + ")";
     }
 
     @Override

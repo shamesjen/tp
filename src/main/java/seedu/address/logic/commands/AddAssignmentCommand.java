@@ -27,7 +27,12 @@ public class AddAssignmentCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New assignment added: %1$s";
 
+    public static final String MESSAGE_ASSIGNMENT_EXISTS_FAILURE_STRING = "No new assignments added. "
+        + "All students already have the assignment(s) specified.";
+
     private final List<Assignment> assignments;
+
+    private boolean hasAssignment = true;
 
     public AddAssignmentCommand(List<Assignment> assignments) {
         this.assignments = assignments;
@@ -37,28 +42,19 @@ public class AddAssignmentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        boolean hasAssignment = true;
         for (Person person : lastShownList) {
-            List<Assignment> oldAssignments = person.getAssignments();
-            List<Assignment> newAssignments = new ArrayList<>(oldAssignments);
-            for (Assignment assignment : this.assignments) {
-                if (!person.hasAssignment(assignment)) {
-                    newAssignments.add(assignment);
-                    hasAssignment = false;
-                } else {
-                    continue;
-                }
+            List<Assignment> newAssignments = generateAssignmentList(person, assignments);
+            if (newAssignments.size() > person.getAssignments().size()) {
+                hasAssignment = false;
             }
-
             Person newPerson = new Person(person.getName(), person.getMatricNumber(),
                 person.getEmail(), person.getTelegramHandle(),
                     newAssignments, person.getTags());
             model.setPerson(person, newPerson);
-            System.out.println("newPerson: " + newPerson);
         }
         if (hasAssignment) {
             throw new CommandException(
-                "No new assignments added. All students already have the assignment(s) specified.");
+                MESSAGE_ASSIGNMENT_EXISTS_FAILURE_STRING);
         }
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         if (model.shouldPurgeAddressBook()) {
@@ -69,6 +65,25 @@ public class AddAssignmentCommand extends Command {
             String.format(MESSAGE_SUCCESS, assignments.toString()));
         model.commitAddressBook(addAssignmenCommandResult);
         return addAssignmenCommandResult;
+    }
+
+    /**
+     * Generates a new list of assignments for a person.
+     * @param person Person to add assignments to.
+     * @param assignments Assignments to add.
+     * @return List of assignments for the person.
+     */
+    public static List<Assignment> generateAssignmentList(Person person, List<Assignment> assignments ) {
+        List<Assignment> oldAssignments = person.getAssignments();
+        List<Assignment> newAssignments = new ArrayList<>(oldAssignments);
+        for (Assignment assignment : assignments) {
+            if (!person.hasAssignment(assignment)) {
+                newAssignments.add(assignment);
+            } else {
+                continue;
+            }
+        }
+        return newAssignments;
     }
 
     @Override
