@@ -119,6 +119,14 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code assignments} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAssignments(List<Assignment> assignments) {
+        this.assignments = assignments;
+        return this;
+    }
+
     public Person build() {
         return new Person(name, matricNumber, email, telegramHandle, assignments, tags);
     }
