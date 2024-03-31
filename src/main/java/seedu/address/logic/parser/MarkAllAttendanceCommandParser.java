@@ -12,13 +12,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MarkAllAttendanceCommandParser implements Parser<MarkAllAttendanceCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of MarkAllCommand
-     * and returns a MarkAllCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of MarkAllAttendanceCommand
+     * and returns a MarkAllAttendanceCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public MarkAllAttendanceCommand parse(String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args);
+            Index index = ParserUtil.parseZeroIndex(args);
             return new MarkAllAttendanceCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
