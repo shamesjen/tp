@@ -19,7 +19,8 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_WEEK = "The week provided is invalid";
-
+    public static final String MESSAGE_ATTENDANCE_ALREADY_ZERO = "Attendance is already 0";
+    public static final String MESSAGE_PARTICIPATION_ALREADY_ZERO = "Participation is already 0";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */

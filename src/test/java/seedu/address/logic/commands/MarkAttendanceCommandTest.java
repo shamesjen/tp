@@ -33,8 +33,8 @@ public class MarkAttendanceCommandTest {
                 .withAttendanceScores(attendanceScoresStub).build();
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(INDEX_FIRST_PERSON, INDEX_FIRST_WEEK);
 
-        String expectedMessage = String.format(MarkAttendanceCommand.MESSAGE_MARK_PERSON_SUCCESS,
-                markedPerson.getName());
+        String expectedMessage = String.format(MarkAttendanceCommand.MESSAGE_MARK_ATTENDANCE_SUCCESS,
+                markedPerson.getName(), INDEX_FIRST_WEEK.getZeroBased());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), markedPerson);
