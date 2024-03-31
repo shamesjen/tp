@@ -25,6 +25,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RemoveTagCommand;
 import seedu.address.logic.commands.RemoveTagFromAllCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.UnmarkAttendanceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -108,6 +109,9 @@ public class AddressBookParser {
 
         case RemoveTagFromAllCommand.COMMAND_WORD:
             return new RemoveTagFromAllCommandParser().parse(arguments);
+
+        case UnmarkAttendanceCommand.COMMAND_WORD:
+            return new UnmarkAttendanceCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
