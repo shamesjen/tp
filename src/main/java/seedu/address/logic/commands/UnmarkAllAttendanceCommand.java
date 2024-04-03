@@ -20,20 +20,20 @@ import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Tag;
 
 /**
- * Marks the tutorial attendance of all filtered students
+ * Unmarks the tutorial attendance of all filtered students
  */
 
-public class MarkAllAttendanceCommand extends Command {
+public class UnmarkAllAttendanceCommand extends Command {
 
-    public static final String COMMAND_WORD = "markalla";
+    public static final String COMMAND_WORD = "unmarkalla";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks the attendance of all filtered students \n"
+            + ": Unmarks the attendance of all filtered students \n"
             + "Parameters: WEEK (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 3 ";
 
     public static final String MESSAGE_ARGUMENTS = "Week Number: %2$d";
-    public static final String MESSAGE_MARK_ALL_ATTENDANCE_SUCCESS = "Marked all attendance for week %1$d";
+    public static final String MESSAGE_UNMARK_ALL_ATTENDANCE_SUCCESS = "Unmarked all attendance for week %1$d";
     private static final int FIRST_WEEK = 3;
     private static final int LAST_WEEK = 13;
     private final Index weekNumber;
@@ -41,7 +41,7 @@ public class MarkAllAttendanceCommand extends Command {
     /**
      * @param weekNumber week number to mark the person with
      */
-    public MarkAllAttendanceCommand(Index weekNumber) {
+    public UnmarkAllAttendanceCommand(Index weekNumber) {
         requireAllNonNull(weekNumber);
         this.weekNumber = weekNumber;
     }
@@ -54,34 +54,34 @@ public class MarkAllAttendanceCommand extends Command {
         if (weekNumber.getZeroBased() < FIRST_WEEK | weekNumber.getZeroBased() > LAST_WEEK) {
             throw new CommandException(Messages.MESSAGE_INVALID_WEEK);
         }
-        for (Person personToMark : lastShownList) {
-            List<Integer> newAttendanceScores = getNewAttendanceScores(personToMark);
-            Person updatedPerson = createMarkedPerson(personToMark, newAttendanceScores);
-            model.setPerson(personToMark, updatedPerson);
+        for (Person personToUnmark : lastShownList) {
+            List<Integer> newAttendanceScores = getNewAttendanceScores(personToUnmark);
+            Person updatedPerson = createUnmarkedPerson(personToUnmark, newAttendanceScores);
+            model.setPerson(personToUnmark, updatedPerson);
         }
         if (model.shouldPurgeAddressBook()) {
             model.purgeAddressBook();
         }
-        CommandResult markCommandResult = new CommandResult(String.format(MESSAGE_MARK_ALL_ATTENDANCE_SUCCESS,
+        CommandResult unmarkCommandResult = new CommandResult(String.format(MESSAGE_UNMARK_ALL_ATTENDANCE_SUCCESS,
                 weekNumber.getZeroBased()));
-        model.commitAddressBook(markCommandResult);
-        return markCommandResult;
+        model.commitAddressBook(unmarkCommandResult);
+        return unmarkCommandResult;
     }
 
     /**
-     * Returns a list of updated attendance scores for {@code personToMark}.
+     * Returns a list of updated attendance scores for {@code personToUnmark}.
      *
-     * @param personToMark the person to mark attendance for
+     * @param personToUnmark the person to unmark attendance for
      * @return a list of updated attendance scores
      */
-    private List<Integer> getNewAttendanceScores(Person personToMark) {
-        List<Integer> oldAttendanceScores = personToMark.getAttendanceScores();
+    private List<Integer> getNewAttendanceScores(Person personToUnmark) {
+        List<Integer> oldAttendanceScores = personToUnmark.getAttendanceScores();
         List<Integer> newAttendanceScores = new ArrayList<>();
         int weekIndex = weekNumber.getZeroBased() - 3;
 
         for (int i = 0; i < oldAttendanceScores.size(); i++) {
             if (i == weekIndex) {
-                newAttendanceScores.add(1);
+                newAttendanceScores.add(0);
             } else {
                 newAttendanceScores.add(oldAttendanceScores.get(i));
             }
@@ -93,20 +93,20 @@ public class MarkAllAttendanceCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToMark}
      * with the updated participation scores. Utilizes the overload Person constructor.
      */
-    private static Person createMarkedPerson(Person personToMark, List<Integer> updatedAttendanceScores) {
-        assert personToMark != null;
+    private static Person createUnmarkedPerson(Person personToUnmark, List<Integer> updatedAttendanceScores) {
+        assert personToUnmark != null;
 
-        Name name = personToMark.getName();
-        MatricNumber matricNumber = personToMark.getMatricNumber();
-        Email email = personToMark.getEmail();
-        TelegramHandle telegramHandle = personToMark.getTelegramHandle();
-        Set<Tag> tags = personToMark.getTags();
-        List<Assignment> assignments = personToMark.getAssignments();
+        Name name = personToUnmark.getName();
+        MatricNumber matricNumber = personToUnmark.getMatricNumber();
+        Email email = personToUnmark.getEmail();
+        TelegramHandle telegramHandle = personToUnmark.getTelegramHandle();
+        Set<Tag> tags = personToUnmark.getTags();
+        List<Assignment> assignments = personToUnmark.getAssignments();
 
-        List<Integer> participationScores = personToMark.getParticipationScores();
+        List<Integer> participationScores = personToUnmark.getParticipationScores();
 
         return new Person(name, matricNumber, email, telegramHandle,
-                 tags, assignments, participationScores, updatedAttendanceScores);
+                tags, assignments, participationScores, updatedAttendanceScores);
     }
 
     @Override
@@ -117,12 +117,12 @@ public class MarkAllAttendanceCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof MarkAllAttendanceCommand)) {
+        if (!(other instanceof UnmarkAllAttendanceCommand)) {
             return false;
         }
 
         // state check
-        MarkAllAttendanceCommand e = (MarkAllAttendanceCommand) other;
+        UnmarkAllAttendanceCommand e = (UnmarkAllAttendanceCommand) other;
         return weekNumber.equals(e.weekNumber);
     }
 
