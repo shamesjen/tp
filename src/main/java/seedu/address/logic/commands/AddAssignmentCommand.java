@@ -73,7 +73,7 @@ public class AddAssignmentCommand extends Command {
      * @param assignments Assignments to add.
      * @return List of assignments for the person.
      */
-    public static List<Assignment> generateAssignmentList(Person person, List<Assignment> assignments ) {
+    public static List<Assignment> generateAssignmentList(Person person, List<Assignment> assignments) {
         List<Assignment> oldAssignments = person.getAssignments();
         List<Assignment> newAssignments = new ArrayList<>(oldAssignments);
         for (Assignment assignment : assignments) {

@@ -19,7 +19,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
-public class MarkAllParticipationCommandTest {
+public class UnmarkAllParticipationCommandTest {
 
     private Model model;
 
@@ -31,7 +31,7 @@ public class MarkAllParticipationCommandTest {
     @Test
     public void execute_allFilteredPersons_markedSuccessfully() {
         Index weekNumber = Index.fromOneBased(4);
-        MarkAllParticipationCommand markAllParticipationCommand = new MarkAllParticipationCommand(weekNumber);
+        UnmarkAllParticipationCommand unmarkAllParticipationCommand = new UnmarkAllParticipationCommand(weekNumber);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         List<Person> updatedPersons = model.getFilteredPersonList().stream()
@@ -39,7 +39,7 @@ public class MarkAllParticipationCommandTest {
                     List<Integer> oldParticipationScores = person.getParticipationScores();
                     List<Integer> newParticipationScores = IntStream.range(0, oldParticipationScores.size())
                             .mapToObj(index -> index == weekNumber.getZeroBased() - 3
-                                ? oldParticipationScores.get(index) + 1 : oldParticipationScores.get(index))
+                                    ? oldParticipationScores.get(index) + 1 : oldParticipationScores.get(index))
                             .collect(Collectors.toList());
                     return new PersonBuilder(person)
                             .withParticipationScores(newParticipationScores)
@@ -49,17 +49,18 @@ public class MarkAllParticipationCommandTest {
 
         updatedPersons.forEach(person -> expectedModel.setPerson(person, person));
 
-        String expectedMessage = String.format(MarkAllParticipationCommand.MESSAGE_MARK_ALL_PARTICIPATION_SUCCESS,
+        String expectedMessage = String.format(UnmarkAllParticipationCommand.MESSAGE_UNMARK_ALL_PARTICIPATION_SUCCESS,
                 weekNumber.getZeroBased());
-        assertCommandSuccess(markAllParticipationCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(unmarkAllParticipationCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidWeekNumber_throwsCommandException() {
         Index invalidWeekNumber = Index.fromZeroBased(15);
-        MarkAllParticipationCommand markAllParticipationCommand = new MarkAllParticipationCommand(invalidWeekNumber);
+        UnmarkAllParticipationCommand unmarkAllParticipationCommand = new UnmarkAllParticipationCommand(
+                invalidWeekNumber);
 
-        assertCommandFailure(markAllParticipationCommand, model, Messages.MESSAGE_INVALID_WEEK);
+        assertCommandFailure(unmarkAllParticipationCommand, model, Messages.MESSAGE_INVALID_WEEK);
     }
 
 }

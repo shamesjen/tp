@@ -47,7 +47,8 @@ public class MarkAllAttendanceCommandTest {
 
         updatedPersons.forEach(person -> expectedModel.setPerson(person, person));
 
-        String expectedMessage = MarkAllAttendanceCommand.MESSAGE_MARK_ALL_SUCCESS;
+        String expectedMessage = String.format(MarkAllAttendanceCommand.MESSAGE_MARK_ALL_ATTENDANCE_SUCCESS,
+                weekNumber.getZeroBased());
         assertCommandSuccess(markAllAttendanceCommand, model, expectedMessage, expectedModel);
     }
 
