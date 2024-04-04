@@ -13,7 +13,7 @@ nerdTrackerPlus is a **desktop app** specifically designed for **CS2109S tutors*
 ## Table of Contents
 
 - Table of Contents
-  {:toc}
+{:toc}
 
 ---
 
