@@ -34,6 +34,8 @@ public class UnmarkAttendanceCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 " + "5";
 
     public static final String MESSAGE_UNMARK_ATTENDANCE_SUCCESS = "Unmarked Attendance for: %1$s in Week %2$d";
+
+    public static final String MESSAGE_ATTENDANCE_ALREADY_ZERO = "Attendance for %1$s in Week %2$d is already 0";
     private static final int FIRST_WEEK = 3;
     private static final int LAST_WEEK = 13;
     private final Index targetIndex;
@@ -64,7 +66,8 @@ public class UnmarkAttendanceCommand extends Command {
 
         Person personToUnmark = lastShownList.get(targetIndex.getZeroBased());
         if (personToUnmark.getAttendanceScores().get(weekNumber.getZeroBased() - 3) == 0) {
-            throw new CommandException(Messages.MESSAGE_ATTENDANCE_ALREADY_ZERO);
+            throw new CommandException(String.format(MESSAGE_ATTENDANCE_ALREADY_ZERO,
+                    personToUnmark.getName(), weekNumber.getZeroBased()));
         }
         List<Integer> newAttendanceScores = getnewAttendanceScores(personToUnmark);
 

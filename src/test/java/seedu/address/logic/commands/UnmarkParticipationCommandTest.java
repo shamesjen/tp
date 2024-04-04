@@ -95,4 +95,15 @@ public class UnmarkParticipationCommandTest {
 
         assertCommandFailure(unmarkParticipationCommandSecond, model, Messages.MESSAGE_INVALID_WEEK);
     }
+
+    @Test
+    public void execute_participationAlreadyZero_failure() {
+        Person personToUnmark = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        UnmarkParticipationCommand unmarkParticipationCommand = new UnmarkParticipationCommand(
+                INDEX_FIRST_PERSON, INDEX_FIRST_WEEK);
+
+        assertCommandFailure(unmarkParticipationCommand, model,
+                String.format(UnmarkParticipationCommand.MESSAGE_PARTICIPATION_ALREADY_ZERO,
+                        personToUnmark.getName(), INDEX_FIRST_WEEK.getZeroBased()));
+    }
 }

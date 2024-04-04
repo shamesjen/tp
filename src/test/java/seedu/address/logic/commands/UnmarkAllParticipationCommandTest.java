@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_WEEK;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.List;
@@ -13,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -29,8 +32,9 @@ public class UnmarkAllParticipationCommandTest {
     }
 
     @Test
-    public void execute_allFilteredPersons_markedSuccessfully() {
+    public void execute_allFilteredPersons_unmarkedSuccessfully() throws CommandException {
         Index weekNumber = Index.fromOneBased(4);
+        CommandResult markAllParticipationCommandResult = new MarkAllParticipationCommand(weekNumber).execute(model);
         UnmarkAllParticipationCommand unmarkAllParticipationCommand = new UnmarkAllParticipationCommand(weekNumber);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -63,4 +67,14 @@ public class UnmarkAllParticipationCommandTest {
         assertCommandFailure(unmarkAllParticipationCommand, model, Messages.MESSAGE_INVALID_WEEK);
     }
 
+    @Test
+    public void execute_participationAlreadyZero_failure() {
+        Person personToUnmark = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        UnmarkAllParticipationCommand unmarkAllParticipationCommand = new UnmarkAllParticipationCommand(
+                INDEX_FIRST_WEEK);
+
+        assertCommandFailure(unmarkAllParticipationCommand, model,
+                String.format(UnmarkAllParticipationCommand.MESSAGE_PARTICIPATION_ALREADY_ZERO,
+                        personToUnmark.getName(), INDEX_FIRST_WEEK.getZeroBased()));
+    }
 }
