@@ -6,13 +6,13 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.HashSet;
-import javafx.util.Pair;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.util.Pair;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -20,6 +20,8 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
+
+
 
 public class RemoveTagFromAllCommandTest {
 
@@ -48,8 +50,8 @@ public class RemoveTagFromAllCommandTest {
         RemoveTagFromAllCommand removeTagCommand = new RemoveTagFromAllCommand(tags);
 
         String expectedMessage = String.format(RemoveTagFromAllCommand.MESSAGE_REMOVE_TAG_SUCCESS,
-        RemoveTagFromAllCommand.formatRemovedTags(removedTagList));
-        
+                RemoveTagFromAllCommand.formatRemovedTags(removedTagList));
+
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         for (Person person : model.getFilteredPersonList()) {
             Person editedPerson = new PersonBuilder(person).withTags(TAG_STUB_1).build();
@@ -60,5 +62,5 @@ public class RemoveTagFromAllCommandTest {
 
     }
 
-    
+
 }

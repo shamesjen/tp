@@ -36,7 +36,7 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedAssignment> VALID_ASSIGNMENTS = BENSON.getAssignments().stream()
             .map(assignment -> new JsonAdaptedAssignment(assignment.getName(), assignment.getScore()))
             .collect(Collectors.toList());
-    
+
     private static final List<Integer> VALID_PARTICIPATION_SCORES = BENSON.getParticipationScores();
     private static final List<Integer> VALID_ATTENDNACE_SCORES = BENSON.getAttendanceScores();
 
