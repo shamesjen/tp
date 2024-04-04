@@ -623,6 +623,7 @@ Furthermore, certain edits can cause the nerdTrackerPlus to behave in unexpected
 | [Filter student](#9-filtering-by-tags--filter)                                  | `filter [all/any] NUMBER_OF_TAGS TAG(S)…​`                                       | `filter all 2 G19Group1 G19Group2`                           |
 
 ### Managing participation, attendance and assignments
+
 | Action                                                                                     | Format                      | Example                            |
 |:-------------------------------------------------------------------------------------------|:----------------------------|:-----------------------------------|
 | [Mark individual participation](#10-marking-individual-participation-scores--markp)        | `markp INDEX WEEK_NUMBER`   | `markp 1 3`                        |
