@@ -14,7 +14,7 @@ public class Assignment {
 
     public final String assignmentName;
 
-    private int assignmentScore;
+    private final int assignmentScore;
 
     /**
      * Constructs a {@code Assignment}.
@@ -29,18 +29,31 @@ public class Assignment {
     }
 
     /**
+     * Constructs a {@code Assignment}.
+     *
+     * @param assignmentName A valid assignment name.
+     * @param assignmentScore A valid assignment score.
+     */
+    public Assignment(String assignmentName, int assignmentScore) {
+        requireNonNull(assignmentName);
+        checkArgument(isValidAssignmentName(assignmentName), MESSAGE_CONSTRAINTS);
+        this.assignmentName = assignmentName;
+        this.assignmentScore = assignmentScore;
+    }
+
+    /**
      * Returns true if a given string is a valid assignment name.
      */
     public static boolean isValidAssignmentName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
-    public void setAssignmentScore(int score) {
-        this.assignmentScore = score;
+    public int getScore() {
+        return this.assignmentScore;
     }
 
-    public int getAssignmentScore() {
-        return this.assignmentScore;
+    public String getName() {
+        return this.assignmentName;
     }
 
     @Override

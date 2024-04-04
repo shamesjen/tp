@@ -1,7 +1,7 @@
 package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Assignment;
@@ -12,25 +12,26 @@ import seedu.address.model.person.Assignment;
 class JsonAdaptedAssignment {
 
     private final String assignmentName;
+    private final int score;
 
     /**
      * Constructs a {@code JsonAdaptedAssignment} with the given {@code assignmentName}.
      */
     @JsonCreator
-    public JsonAdaptedAssignment(String assignmentName) {
+    public JsonAdaptedAssignment(@JsonProperty("assignmentName") String assignmentName,
+        @JsonProperty("Score") int score) {
         this.assignmentName = assignmentName;
+        this.score = score;
     }
 
-    /**
-     * Converts a given {@code Assignment} into this class for Jackson use.
-     */
-    public JsonAdaptedAssignment(Assignment source) {
-        assignmentName = source.assignmentName;
-    }
-
-    @JsonValue
-    public String getassignmentName() {
+    @JsonProperty("assignmentName")
+    public String getName() {
         return assignmentName;
+    }
+
+    @JsonProperty("Score")
+    public int getScore() {
+        return score;
     }
 
     /**
