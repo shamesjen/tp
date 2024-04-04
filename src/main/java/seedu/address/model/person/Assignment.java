@@ -48,11 +48,11 @@ public class Assignment {
         return test.matches(VALIDATION_REGEX);
     }
 
-    public int getAssignmentScore() {
+    public int getScore() {
         return this.assignmentScore;
     }
 
-    public String getAssignmentName() {
+    public String getName() {
         return this.assignmentName;
     }
 

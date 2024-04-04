@@ -61,9 +61,9 @@ public class MarkAssignmentCommand extends Command {
         boolean assignmentFound = false;
 
         for (Assignment assignment : assignments) {
-            if (assignment.getAssignmentName().equals(assignmentName)) {
+            if (assignment.getName().equals(assignmentName)) {
                 assignmentFound = true;
-                Assignment newAssignment = new Assignment(assignment.getAssignmentName(), assignmentScore);
+                Assignment newAssignment = new Assignment(assignment.getName(), assignmentScore);
                 newAssignments.set(newAssignments.indexOf(assignment), newAssignment);
             }
         }

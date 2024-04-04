@@ -43,6 +43,11 @@ public class AddAssignmentCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
         for (Person person : lastShownList) {
+            for (Assignment assignment : assignments) {
+                if (!Assignment.isValidAssignmentName(assignment.assignmentName)) {
+                    throw new CommandException(Assignment.MESSAGE_CONSTRAINTS);
+                }
+            }
             List<Assignment> newAssignments = generateAssignmentList(person, assignments);
             if (newAssignments.size() > person.getAssignments().size()) {
                 hasAssignment = false;

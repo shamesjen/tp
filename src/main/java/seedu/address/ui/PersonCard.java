@@ -93,8 +93,8 @@ public class PersonCard extends UiPart<Region> {
             person.getAssignments().stream()
                 .sorted(Comparator.comparing(assignment -> assignment.assignmentName))
                 .forEach(assignment -> {
-                    Label label = new Label(assignment.assignmentName + ": " + assignment.getAssignmentScore() + ", ");
-                    if (assignment.getAssignmentScore() == 0) {
+                    Label label = new Label(assignment.assignmentName + ": " + assignment.getScore() + ", ");
+                    if (assignment.getScore() == 0) {
                         label.setStyle("-fx-background-color: orange");
                     } else {
                         label.setStyle("-fx-background-color: green");

@@ -74,8 +74,8 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         assignments.addAll(source.getAssignments().stream()
-                .map(assignment -> new JsonAdaptedAssignment(assignment.getAssignmentName(),
-                    assignment.getAssignmentScore()))
+                .map(assignment -> new JsonAdaptedAssignment(assignment.getName(),
+                    assignment.getScore()))
                 .collect(Collectors.toList()));
 
         participationScores.addAll(source.getParticipationScores());

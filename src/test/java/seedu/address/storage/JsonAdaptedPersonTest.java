@@ -29,12 +29,14 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_PHONE = BENSON.getMatricNumber().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_ADDRESS = BENSON.getTelegramHandle().toString();
+    private static final Integer VALID_SCORE = 4;
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
     private static final List<JsonAdaptedAssignment> VALID_ASSIGNMENTS = BENSON.getAssignments().stream()
-            .map(JsonAdaptedAssignment::new)
+            .map(assignment -> new JsonAdaptedAssignment(assignment.getName(), assignment.getScore()))
             .collect(Collectors.toList());
+    
     private static final List<Integer> VALID_PARTICIPATION_SCORES = BENSON.getParticipationScores();
     private static final List<Integer> VALID_ATTENDNACE_SCORES = BENSON.getAttendanceScores();
 
@@ -130,7 +132,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidAssignments_throwsIllegalValueException() {
         List<JsonAdaptedAssignment> invalidAssignments = new ArrayList<>(VALID_ASSIGNMENTS);
-        invalidAssignments.add(new JsonAdaptedAssignment(INVALID_ASSIGNMENT));
+        invalidAssignments.add(new JsonAdaptedAssignment(INVALID_ASSIGNMENT, VALID_SCORE));
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                         VALID_ADDRESS, VALID_TAGS, invalidAssignments,
