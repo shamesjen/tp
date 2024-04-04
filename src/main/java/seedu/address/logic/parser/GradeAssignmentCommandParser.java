@@ -17,7 +17,7 @@ import seedu.address.model.person.Assignment;
 /**
  * Parses input arguments and creates a new MarkAssignmentCommand object
  */
-public class GradeAssignmentCommandParser {
+public class GradeAssignmentCommandParser implements Parser<GradeAssignmentCommand> {
 
     public static final String MESSAGE_INVALID_ASSIGNMENT_INDEX = "Invalid assignment index provided.";
 
