@@ -570,7 +570,7 @@ Undoes the previous command that changed data.
 **TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
 
 
-### 222. Redoing a previously undone command : `redo`
+### 22. Redoing a previously undone command : `redo`
 
 Redoes the previously undone command.
 
