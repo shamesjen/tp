@@ -35,6 +35,9 @@ public class UnmarkParticipationCommand extends Command {
 
     public static final String MESSAGE_UNMARK_PARTICIPATION_SUCCESS = "Unmarked Participation for: %1$s in Week %2$d "
             + "\nCurrent Participation Score: %3$s";
+
+    public static final String MESSAGE_PARTICIPATION_ALREADY_ZERO = "Participation for %1$s in Week %2$d is already 0";
+
     private static final int FIRST_WEEK = 3;
     private static final int LAST_WEEK = 13;
     private final Index targetIndex;
@@ -65,7 +68,8 @@ public class UnmarkParticipationCommand extends Command {
 
         Person personToUnmark = lastShownList.get(targetIndex.getZeroBased());
         if (personToUnmark.getParticipationScores().get(weekNumber.getZeroBased() - 3) == 0) {
-            throw new CommandException(Messages.MESSAGE_PARTICIPATION_ALREADY_ZERO);
+            throw new CommandException(String.format(MESSAGE_PARTICIPATION_ALREADY_ZERO,
+                    personToUnmark.getName(), weekNumber.getZeroBased()));
         }
         List<Integer> newParticipationScores = getNewParticipationScores(personToUnmark);
 

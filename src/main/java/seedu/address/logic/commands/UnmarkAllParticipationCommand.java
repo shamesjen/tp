@@ -34,6 +34,7 @@ public class UnmarkAllParticipationCommand extends Command {
 
     public static final String MESSAGE_ARGUMENTS = "Week Number: %2$d";
     public static final String MESSAGE_UNMARK_ALL_PARTICIPATION_SUCCESS = "Unmarked all participation for week %1$d";
+    public static final String MESSAGE_PARTICIPATION_ALREADY_ZERO = "Participation for %1$s in Week %2$d is already 0";
     private static final int FIRST_WEEK = 3;
     private static final int LAST_WEEK = 13;
     private final Index weekNumber;
@@ -54,6 +55,12 @@ public class UnmarkAllParticipationCommand extends Command {
 
         if (weekNumber.getZeroBased() < FIRST_WEEK | weekNumber.getZeroBased() > LAST_WEEK) {
             throw new CommandException(Messages.MESSAGE_INVALID_WEEK);
+        }
+        for (Person personToUnmark : lastShownList) {
+            if (personToUnmark.getParticipationScores().get(weekNumber.getZeroBased() - 3) == 0) {
+                throw new CommandException(String.format(MESSAGE_PARTICIPATION_ALREADY_ZERO,
+                        personToUnmark.getName(), weekNumber.getZeroBased()));
+            }
         }
         for (Person personToUnmark : lastShownList) {
             List<Integer> newParticipationScores = getNewParticipationScores(personToUnmark);

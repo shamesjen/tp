@@ -69,4 +69,15 @@ public class UnmarkAttendanceCommandTest {
 
         assertCommandFailure(unmarkAttendanceCommandSecond, model, Messages.MESSAGE_INVALID_WEEK);
     }
+
+    @Test
+    public void execute_attendanceAlreadyZero_failure() {
+        Person personToUnmark = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        UnmarkAttendanceCommand unmarkAttendanceCommand = new UnmarkAttendanceCommand(
+                INDEX_FIRST_PERSON, INDEX_FIRST_WEEK);
+
+        assertCommandFailure(unmarkAttendanceCommand, model,
+                String.format(UnmarkAttendanceCommand.MESSAGE_ATTENDANCE_ALREADY_ZERO,
+                        personToUnmark.getName(), INDEX_FIRST_WEEK.getZeroBased()));
+    }
 }
