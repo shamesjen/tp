@@ -23,7 +23,7 @@ public class AddAssignmentCommand extends Command {
         + ": Creates assignment(s) on all students.\n"
         + "Parameters: ASSIGNMENT (must be a positive integer)\n"
         + "[" + PREFIX_ASSIGNMENT + "ASSIGNMENT]...\n"
-        + "Example: " + COMMAND_WORD + " " + PREFIX_ASSIGNMENT + "Homework 1";
+        + "Example: " + COMMAND_WORD + " " + PREFIX_ASSIGNMENT + "Homework1";
 
     public static final String MESSAGE_SUCCESS = "New assignment added: %1$s";
 
