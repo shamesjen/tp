@@ -8,24 +8,14 @@ Introducing nerdTrackerPlus, your ultimate companion in managing student details
 
 nerdTrackerPlus is a **desktop app** specifically designed for **CS2109S tutors**. It helps you manage student details and progress for your tutorials. nerdTrackerPlus is optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, nerdTrackerPlus can get your contact management tasks done faster than traditional GUI apps.
 
-### Table of Contents
-- [Quick Start](#quick-start)
-- [Features](#features)
-  - [1. Viewing Help](#1-viewing-help--help) : `help`
-  - [2. Adding a person](#2-adding-a-person--add) : `add`
-  - [3. Listing all persons](#3-listing-all-persons--list) : `list`
-  - [4. Editing a person](#4-editing-a-person--edit) : `edit`
-  - [5. Locating persons by name](#5-locating-persons-by-name--find) : `find`
-  - [6. Delete a person](#6-deleting-a-person--delete) : `delete`
-  - [7. Remove a tag](#7-remove-a-tag--remove-tag) : `Remove Tag`
-  - [8. Clearing all entries](#8-clearing-all-entries--clear) : `clear`
-  - [9. Filtering by tags](#9-filtering-by-tags--filter) : `filter`
-  - [10. Marking participation scores](#10-marking-participation-scores--mark) : `mark`
-  - [11. Undo](#11-undoing-a-previous-command--undo) : `undo`
-  - [12. Redo](#12-redoing-a-previously-undone-command--redo) : `redo`
-  - [13. Exiting the program](#11-exiting-the-program--exit) : `exit`
+---
 
---------------------------------------------------------------------------------------------------------------------
+## Table of Contents
+
+- Table of Contents
+  {:toc}
+
+---
 
 ## Quick start
 
@@ -44,7 +34,7 @@ nerdTrackerPlus is a **desktop app** specifically designed for **CS2109S tutors*
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe m/A1234567A e/e1234567@u.nus.edu tl/johnthedoe` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -54,7 +44,7 @@ nerdTrackerPlus is a **desktop app** specifically designed for **CS2109S tutors*
 
 1. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Features
 
@@ -86,225 +76,507 @@ Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
+<h4>Format:</h4> 
+
+`help`
 
 
-### 2. Adding a person : `add`
+### 2. Adding a student : `add`
 
-Adds a person to the address book.
+Adds a student to nerdTrackerPlus.
 
-Format: `add n/NAME m/MATRIC_NUMBER e/EMAIL tl/telegramHandle [t/TAG]…​`
+</h4>Format:</h4>
+
+`add n/NAME m/MATRIC_NUMBER e/EMAIL tl/TELEGRAM_HANDLE [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A student can have any number of tags (including 0)
 </div>
 
-Examples:
+<h4>Fields:</h4>
+
+|       Field       | Prefix | Required | Requirements                                                                                                      |
+|:-----------------:|:------:|:--------:|:------------------------------------------------------------------------------------------------------------------|
+|      `NAME`       |  `n/`  |   YES    | Name of the student. It should only contain alphanumeric characters and spaces.                                   |
+|  `MATRIC_NUMBER`  |  `m/`  |   YES    | Matriculation number of the student. It should start and end with a capital letter and have 7 digits in between.  |
+|      `EMAIL`      |  `e/`  |   YES    | Email of the student. Email should match the format: `<local>@<domain>.<label>`.                                  |
+| `TELEGRAM_HANDLE` | `tl/`  |   YES    | Telegram username of the student. It should only contain alphanumeric characters and spaces.                      |
+|       `TAG`       |  `t/`  |    NO    | Tag(s) for the student. It should only contain alphanumeric characters and spaces.                                |
+
+<h4>Notes:</h4>
+* A student is uniquely identified by their `NAME`. This field is case-sensitive.
+* You may add multiple tags to a student by specifying the `t/` prefix multiple times.
+
+<h4>Example:</h4>
+
 * `add n/John Doe m/A1234567Z e/johnd@u.nus.edu tl/johndoe01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@u.nus.edu tl/betsyyyc m/A7654321Y t/criminal`
 
-### 3. Listing all persons : `list`
+**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
 
-Shows a list of all persons in the address book.
 
-Format: `list`
+### 3. Listing all students : `list`
 
-### 4. Editing a person : `edit`
+Shows a list of all students in nerdTrackerPlus.
 
-Edits an existing person in the address book.
+</h4>Format:</h4>
 
-Format: `edit INDEX [n/NAME] [m/MATRIC_NUMBER] [e/EMAIL] [tl/TELEGRAM_HANDLE] [t/TAG]…​`
+`list`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+<h4>Example:</h4>
+
+* `list`
+
+**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+
+
+### 4. Editing a student : `edit`
+
+Edits an existing student in nerdTrackerPlus.
+
+<h4>Format:</h4>
+
+`edit INDEX [n/NAME] [m/MATRIC_NUMBER] [e/EMAIL] [tl/TELEGRAM_HANDLE] [t/TAG]…​`
+
+<h4>Fields:</h4>
+
+|       Field       | Prefix | Required | Requirements                                                                                                              |
+|:-----------------:|:------:|:--------:|:--------------------------------------------------------------------------------------------------------------------------|
+|      `INDEX`      |  NIL   |   YES    | `INDEX` **must be a positive integer** 1, 2, 3 …​ <br>`INDEX` cannot be greater than the number of students in the list.  |
+|      `NAME`       |  `n/`  |    NO    | Name of the student. It should only contain alphanumeric characters and spaces.                                           |
+|  `MATRIC_NUMBER`  |  `m/`  |    NO    | Matriculation number of the student. It should start and end with a capital letter and have 7 digits in between.          |
+|      `EMAIL`      |  `e/`  |    NO    | Email of the student. Email should match the format: `<local>@<domain>.<label>`.                                          |
+| `TELEGRAM_HANDLE` | `tl/`  |    NO    | Telegram username of the student. It should only contain alphanumeric characters and spaces.                              |
+|       `TAG`       |  `t/`  |    NO    | Tag(s) for the student. It should only contain alphanumeric characters and spaces.                                        |
+
+<h4>Notes:</h4>
+
+* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
+* You can remove all the student’s tags by typing `t/` without specifying any tags after it.
 
-Examples:
-*  `edit 1 m/A1111111Z e/johndoe@gmail.com` Edits the matric number and email address of the 1st person to be `A1111111Z` and `johndoe@gmail.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+<h4>Example:</h4>
 
-### 5. Locating persons by name : `find`
+*  `edit 1 m/A1111111Z e/johndoe@gmail.com` Edits the matriculation number and email address of the first student to be `A1111111Z` and `johndoe@gmail.com` respectively.
 
-Finds persons whose names contain any of the given keywords.
+**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+
+### 5. Locating students by name : `find`
+
+Finds students whose names contain any of the given keywords.
+
+</h4>Format:</h4>
+
+`find KEYWORD [MORE_KEYWORDS]`
+
+<h4>Fields:</h4>
+
+|      Field       | Prefix | Required | Requirements |
+|:----------------:|:------:|:--------:|:-------------|
+|    `KEYWORD`     |  NIL   |   YES    | NIL          |
+| `MORE_KEYWORDS`  |  NIL   |    NO    | NIL          |
+
+<h4>Notes:</h4>
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* students matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+<h4>Example:</h4>
 
-### 6. Deleting a person : `delete`
+* `find alex david` returns `Alex Yeoh`, `David Li`
 
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### 7. Remove a tag : `Remove Tag`
-
-Deletes the specified person from the address book.
-
-Format: `Remove Tag INDEX [t/TAG]…`
-
-* Removes tags of the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* The tag must exist on the person
-
-Examples:
-* `list` followed by `Remove Tag 2 t/friend` Removes the friend tag from the 2nd person in the address book.
+**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
 
 
-### 8. Clearing all entries : `clear`
+### 6. Deleting a student : `delete`
 
-Clears all entries from the address book.
+Deletes the specified student from nerdTrackerPlus.
 
-Format: `clear`
+<h4>Format</h4>
 
-### 9. Filtering by tags : `filter`
-
-Filters all entries with specified tags.
-
-Format: `filter [all/any] NUMBEROFTAGS TAGNAME [TAGNAME]`
-
-* If `filter all` is used and more than 1 tag is used to filter, only entries that match all tags will be shown.
-* If `filter any` is used and more than 1 tag is used to filter, all entries that match any one of the tags will be shown.
-* Tags are case in-sensitive.
-* The number of tags cannot be `0`.
-
-### 10. Marking participation scores : `mark`
-
-Marks the participation scores of particular students for a particular week.
+`delete INDEX`
 
 <h4>Fields:</h4>
 
-|    Field     |  Prefix  |  Required  | Requirements                                                                                                             |
-|:------------:|:--------:|:----------:|:-------------------------------------------------------------------------------------------------------------------------|
-|    `INDEX`     |   NONE   |    YES     | INDEX **must be a positive integer** 1, 2, 3 …​ <br><br> INDEX cannot be greater than the number of students in the list.|
-|  `WEEKNUMBER`  |   NONE   |    YES     | WEEKNUMBER **must be a valid week from the range [1, 13].                                                                |                                                                                                              
-
-<h4>Format:</h4>
-```
-mark INDEX WEEKNUMBER
-```
+|      Field      | Prefix | Required | Requirements                                                                                                             |
+|:---------------:|:------:|:--------:|:-------------------------------------------------------------------------------------------------------------------------|
+|     `INDEX`     |  NIL   |   YES    | `INDEX` **must be a positive integer** 1, 2, 3 …​ <br>`INDEX` cannot be greater than the number of students in the list. |
 
 <h4>Notes:</h4>
-* Marks the participation score of the student at the specified `INDEX` in the specified `WEEK`.
-* The index refers to the index number shown in the displayed person list.
 
-<h4>Example Usage:</h4>
+* Deletes the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student list.
 
-Command: `mark 1 1`
+<h4>Example:</h4>
+
+* `list` followed by `delete 2` deletes the 2nd student in the address book.
 
 **TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
 
-### 11. Removing tags from user : `RemoveTag`
 
-Removes tag(s) from a single user by index
+### 7. Remove tag from a student : `removetag`
 
-|    Field     |  Prefix  |  Required  | Requirements                                                                                                             |
-|:------------:|:--------:|:----------:|:-------------------------------------------------------------------------------------------------------------------------|
-|    `INDEX`     |   NONE   |    YES     | INDEX **must be a positive integer** 1, 2, 3 …​ <br><br> INDEX cannot be greater than the number of students in the list.|
-|  `[TAG]...`  |   t/   |    YES     | TAG **must be a valid tag that exists on the user.                                                                |                                                                    
+Deletes the specified tag from a student in nerdTrackerPlus.
 
 <h4>Format:</h4>
-```
-RemoveTag INDEX t/TAG...
-```
 
-<h4>Notes:</h4>
-* Removes tags from the student at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+`removetag INDEX [t/TAG]…`
 
-<h4>Example Usage:</h4>
+<h4>Fields:</h4>
 
-Command: `RemoveTag 1 t/friends t/group4`
+|  Field  | Prefix | Required | Requirements                                                                                                             |
+|:-------:|:------:|:--------:|:-------------------------------------------------------------------------------------------------------------------------|
+| `INDEX` |  NIL   |   YES    | `INDEX` **must be a positive integer** 1, 2, 3 …​ <br>`INDEX` cannot be greater than the number of students in the list. |
+|  `TAG`  |  `t/`  |   YES    | Tag on a student. It should only contain alphanumeric characters and spaces. Tag must exist on the student.              |
+
+
+* Removes tags of the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student list.
+
+<h4>Example:</h4>
+
+* `list` followed by `removetag 2 t/friend` Removes the friend tag from the 2nd student in the address book.
 
 **TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
 
-### 12. Removing all instances of tags from all users : `RemoveTagAll`
 
-Removes tag(s) from a single user by index
+### 8. Remove tag(s) from all students : `removetagall`
 
-|    Field     |  Prefix  |  Required  | Requirements                                                                                                             |
-|:------------:|:--------:|:----------:|:-------------------------------------------------------------------------------------------------------------------------|
-|  `[TAG]...`  |   t/   |    YES     | TAG **must be a valid tag that exists on the user.                                                                |                                                                    
+Deletes the specified tag(s) from all students that have the tag(s).
 
 <h4>Format:</h4>
-```
-RemoveTagAll t/TAG...
-```
+
+`removetagall t/TAG(S)…​`
+
+<h4>Fields:</h4>
+
+|  Field   | Prefix | Required | Requirements                                                                                                       |
+|:--------:|:------:|:--------:|:-------------------------------------------------------------------------------------------------------------------|
+| `TAG(S)` |  `t/`  |   YES    | Tag on a student. It should only contain alphanumeric characters and spaces. Tag must exist on at least 1 student. |
 
 <h4>Notes:</h4>
-* Removes tags from all students that have it.
 
-<h4>Example Usage:</h4>
+* More than 1 tag can be specified to be removed.
 
-Command: `RemoveTagAll t/friends t/group4`
+<h4>Example:</h4>
+`removetagall t/G19Group1 t/family`
 
 **TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
 
-### 13. Adding a custom assignment : `adda`
 
-Adds assignment(s) to all users if they do not already exist.
+### 9. Filtering by tags : `filter`
 
-|       Field       | Prefix |  Required  | Requirements                                      |
-|:-----------------:|:------:|:----------:|:--------------------------------------------------|
-| `[ASSIGNMENT]...` |   a/   |    YES     | Assignment **must have a valid alphanumeric name. |                                                                    
+Filters all students with the specified tags.
 
-<h4>Format:</h4>
-```
-adda a/ASSIGNMENT...
-```
+<h4>Format</h4>
+
+`filter [all/any] NUMBER_OF_TAGS TAG(S)…​`
+
+<h4>Fields:</h4>
+
+|   Field   | Prefix | Required | Requirements                                                |
+|:---------:|:------:|:--------:|:------------------------------------------------------------|
+| `all/any` |  NIL   |    NO    | Must be lower case.                                         |
+| `TAG(S)`  |  NIL   |   YES    | Tag should only contain alphanumeric characters and spaces. |
 
 <h4>Notes:</h4>
-* Adds assignment to all users who dont already have it.
 
-<h4>Example Usage:</h4>
+* If `filter all` is used and more than 1 tag is used to filter, only students that have all the tags will be shown.
+* If `filter any` is used and more than 1 tag is used to filter, students that match any one of the tags will be shown.
+* Tags are case in-sensitive.
 
-Command: `adda a/assignment1 t/assignment2`
+<h4>Example:</h4>
+* `filter all 2 G19Group1 G19Group2`
 
-### 14. Undoing a previous command : `undo`
+**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+
+
+### 10. Marking individual participation scores : `markp`
+
+Marks the participation score of a specific student.
+
+<h4>Format:</h4>
+
+`markp INDEX WEEK_NUMBER`
+
+<h4>Fields:</h4>
+
+|     Field     |  Prefix  |  Required  | Requirements                                                                                                              |
+|:-------------:|:--------:|:----------:|:--------------------------------------------------------------------------------------------------------------------------|
+|    `INDEX`    |   NONE   |    YES     | INDEX **must be a positive integer** 1, 2, 3 …​ <br><br> INDEX cannot be greater than the number of students in the list. |
+| `WEEK_NUMBER` |   NONE   |    YES     | WEEK_NUMBER **must be a valid week from the range [3, 13].                                                                |
+
+<h4>Notes:</h4>
+
+* Marks the participation score of the student at the specified `INDEX` in the specified `WEEK_NUMBER`
+* The `INDEX` refers to the index number shown in the displayed student list.
+
+<h4>Example:</h4>
+
+* `markp 1 3`
+
+**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+
+
+### 11. Un-marking individual participation scores : `unmarkp`
+
+Un-marks the participation score of a specific student.
+
+<h4>Format:</h4>
+
+`unmarkp INDEX WEEK_NUMBER`
+
+<h4>Fields:</h4>
+
+|     Field     |  Prefix  |  Required  | Requirements                                                                                                              |
+|:-------------:|:--------:|:----------:|:--------------------------------------------------------------------------------------------------------------------------|
+|    `INDEX`    |   NONE   |    YES     | INDEX **must be a positive integer** 1, 2, 3 …​ <br><br> INDEX cannot be greater than the number of students in the list. |
+| `WEEK_NUMBER` |   NONE   |    YES     | WEEK_NUMBER **must be a valid week from the range [3, 13].                                                                |
+
+<h4>Notes:</h4>
+
+* Un-marks the participation score of the student at the specified `INDEX` in the specified `WEEK_NUMBER`
+* The `INDEX` refers to the index number shown in the displayed student list.
+
+<h4>Example:</h4>
+
+* `unmarkp 1 3`
+
+**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+
+### 12. Marking individual attendance scores : `marka`
+
+Marks the attendance of a specific student.
+
+<h4>Format:</h4>
+
+`marka INDEX WEEK_NUMBER`
+
+<h4>Fields:</h4>
+
+|     Field     |  Prefix  |  Required  | Requirements                                                                                                              |
+|:-------------:|:--------:|:----------:|:--------------------------------------------------------------------------------------------------------------------------|
+|    `INDEX`    |   NONE   |    YES     | INDEX **must be a positive integer** 1, 2, 3 …​ <br><br> INDEX cannot be greater than the number of students in the list. |
+| `WEEK_NUMBER` |   NONE   |    YES     | WEEK_NUMBER **must be a valid week from the range [3, 13].                                                                |
+
+<h4>Notes:</h4>
+
+* Marks the attendance of the student at the specified `INDEX` in the specified `WEEK_NUMBER`
+* The `INDEX` refers to the index number shown in the displayed student list.
+
+<h4>Example:</h4>
+
+* `marka 1 3`
+
+**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+
+
+### 13. Un-marking individual attendance scores : `unmarka`
+
+Un-marks the attendance of a specific student.
+
+<h4>Format:</h4>
+
+`unmarka INDEX WEEK_NUMBER`
+
+<h4>Fields:</h4>
+
+|     Field     |  Prefix  |  Required  | Requirements                                                                                                              |
+|:-------------:|:--------:|:----------:|:--------------------------------------------------------------------------------------------------------------------------|
+|    `INDEX`    |   NONE   |    YES     | INDEX **must be a positive integer** 1, 2, 3 …​ <br><br> INDEX cannot be greater than the number of students in the list. |
+| `WEEK_NUMBER` |   NONE   |    YES     | WEEK_NUMBER **must be a valid week from the range [3, 13].                                                                |
+
+<h4>Notes:</h4>
+
+* Un-marks the attendance of the student at the specified `INDEX` in the specified `WEEK_NUMBER`
+* The `INDEX` refers to the index number shown in the displayed student list.
+
+<h4>Example:</h4>
+
+* `unmarka 1 3`
+
+**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+
+
+### 14. Marking all participation scores : `markallp`
+
+Marks the participation scores of all students in the filtered list for a given week.
+
+<h4>Format:</h4>
+
+`markallp WEEK_NUMBER`
+
+<h4>Fields:</h4>
+
+|     Field     |  Prefix  |  Required  | Requirements                                                                                                              |
+|:-------------:|:--------:|:----------:|:--------------------------------------------------------------------------------------------------------------------------|
+| `WEEK_NUMBER` |   NONE   |    YES     | WEEK_NUMBER **must be a valid week from the range [3, 13].                                                                |
+
+<h4>Example:</h4>
+
+* `markallp 3`
+
+**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+
+
+### 15. Un-marking all participation scores : `unmarkallp`
+
+Un-marks the participation scores of all students in the filtered list for a given week.
+
+<h4>Format:</h4>
+
+`umarkallp WEEK_NUMBER`
+
+<h4>Fields:</h4>
+
+|     Field     |  Prefix  |  Required  | Requirements                                                                                                              |
+|:-------------:|:--------:|:----------:|:--------------------------------------------------------------------------------------------------------------------------|
+| `WEEK_NUMBER` |   NONE   |    YES     | WEEK_NUMBER **must be a valid week from the range [3, 13].                                                                |
+
+<h4>Example:</h4>
+
+* `umarkallp 3`
+
+**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+
+
+### 16. Marking all attendance scores : `markalla`
+
+Marks the attendance of all students in the filtered list for a given week.
+
+<h4>Format:</h4>
+
+`markalla WEEK_NUMBER`
+
+<h4>Fields:</h4>
+
+|     Field     |  Prefix  |  Required  | Requirements                                                                                                              |
+|:-------------:|:--------:|:----------:|:--------------------------------------------------------------------------------------------------------------------------|
+| `WEEK_NUMBER` |   NONE   |    YES     | WEEK_NUMBER **must be a valid week from the range [3, 13].                                                                |
+
+<h4>Example:</h4>
+
+* `markalla 3`
+
+**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+
+
+### 17. Un-marking all attendance scores : `unmarkalla`
+
+Un-marks the attendance of all students in the filtered list for a given week.
+
+<h4>Format:</h4>
+
+`unmarkalla WEEK_NUMBER`
+
+<h4>Fields:</h4>
+
+|     Field     |  Prefix  |  Required  | Requirements                                                                                                              |
+|:-------------:|:--------:|:----------:|:--------------------------------------------------------------------------------------------------------------------------|
+| `WEEK_NUMBER` |   NONE   |    YES     | WEEK_NUMBER **must be a valid week from the range [3, 13].                                                                |
+
+<h4>Example:</h4>
+
+* `unmarkalla 3`
+
+**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+
+
+### 18. Adding a custom assignment : `adda`
+
+Adds assignment(s) to all users in the filtered list if they do not already exist.
+
+<h4>Format:</h4>
+
+`adda a/ASSIGNMENT…​`
+
+<h4>Fields:</h4>
+
+|      Field      | Prefix |  Required  | Requirements                                                           |
+|:---------------:|:------:|:----------:|:-----------------------------------------------------------------------|
+| `ASSIGNMENT...` |   a/   |    YES     | Assignment(s) should only contain alphanumeric characters and spaces.  |
+
+<h4>Example:</h4>
+
+* `adda a/assignment1 a/assignment2`
+
+**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+
+
+### 19. Undoing a previous command : `undo`
 
 Undoes the previous command that changed data.
 
-Format: `undo`
+<h4>Format:</h4>
 
-* Only undoes a command if it changed data.
+`undo`
+
+<h4>Notes:</h4>
+
+* Only undoes a command if it has changed data in nerdTrackerPlus since launch.
 * Will not undo if no commands were issued beforehand.
 
-### 15. Redoing a previously undone command : `redo`
+<h4>Example:</h4>
+
+* `marka 1 3` to mark the attendance of student 1 in week 3, followed by `undo`
+
+**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+
+
+### 20. Redoing a previously undone command : `redo`
 
 Redoes the previously undone command.
 
-Format: `redo`
+<h4>Format:</h4>
+
+`redo`
+
+<h4>Notes:</h4>
 
 * Will only redo the command that was undone immediately prior.
 * Will not redo if no commands were undone beforehand.
 
-### 16. Exiting the program : `exit`
+<h4>Example:</h4>
+
+* `marka 1 3` to mark the attendance of student 1 in week 3, followed by `undo`, then `redo`
+
+**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+
+
+### 21. Clearing all entries : `clear`
+
+Clears all entries from the address book.
+
+<h4>Format:</h4>
+
+`clear`
+
+<h4>Example:</h4>
+
+* `clear`
+
+**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+
+
+### 22. Exiting the program : `exit`
 
 Exits the program.
 
-Format: `exit`
+<h4>Format:</h4>
+
+`exit`
+
+<h4>Example:</h4>
+
+* `exit`
+
+**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
 
 
 ### Saving the data
@@ -317,42 +589,58 @@ nerdTrackerPlus data are saved automatically as a JSON file `[JAR file location]
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, nerdTrackerPlus will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the nerdTrackerPlus to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause the nerdTrackerPlus to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous nerdTrackerPlus home folder.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME m/MATRIC_NUMBER e/EMAIL tl/TELEGRAM_HANDLE [t/TAG]…​` <br> e.g., `add n/James Ho m/A1234567Z e/jamesho@u.nus.edy tl/jameshohoho t/friend t/colleague`
-**Edit** | `edit INDEX [n/NAME] [m/MATRIC_NUMBER] [e/EMAIL] [tl/TELEGRAM_HANDLE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@u.nus.edu`
-**Mark** | `mark INDEX WEEKNUMBER` <br> e.g., `mark 1 5`
-**Remove Tag** | `Remove Tag INDEX [t/TAG]…` <br> e.g., `Remove Tag 1 t/friends`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Filter** | `filter [all/any] NUMBEROFTAGS TAGNAME [TAGNAME]` <br> e.g., `filter [all/any] 2 friends colleagues`
-**List** | `list`
-**Clear** | `clear`
-**Undo** | `undo`
-**Redo** | `redo`
-**Help** | `help`
-**Exit** | `exit`
+### Managing students
+
+| Action                                                                          | Format                                                                           | Example                                                      |
+|:--------------------------------------------------------------------------------|:---------------------------------------------------------------------------------|:-------------------------------------------------------------|
+| [Add student](#2-adding-a-student--add)                                         | `add n/NAME m/MATRIC_NUMBER e/EMAIL tl/TELEGRAM_HANDLE [t/TAG]…​`                | `add n/John Doe m/A1234567Z e/johnd@u.nus.edu tl/johndoe01`  |
+| [List students](#3-listing-all-students--list)                                  | `list`                                                                           | `list`                                                       |
+| [Edit student](#4-editing-a-student--edit)                                      | `edit INDEX [n/NAME] [m/MATRIC_NUMBER] [e/EMAIL] [tl/TELEGRAM_HANDLE] [t/TAG]…​` | `edit 1 m/A1111111Z e/johndoe@gmail.com`                     |
+| [Find student](#5-locating-students-by-name--find)                              | `find KEYWORD [MORE_KEYWORDS]`                                                   | `find alex david`                                            |
+| [Delete student](#6-deleting-a-student--delete)                                 | `delete INDEX`                                                                   | `delete 2`                                                   |
+| [Remove tag from student](#7-remove-tag-from-a-student--removetag)              | `removetag INDEX [t/TAG]…`                                                       | `removetag 2 t/friend`                                       |
+| [Remove tag from all students](#8-remove-tags-from-all-students--removetagall)  | ` removetagall t/TAG(S)…​`                                                       | `removetagall t/G19Group1 t/family`                          |
+| [Filter student](#9-filtering-by-tags--filter)                                  | `filter [all/any] NUMBER_OF_TAGS TAG(S)…​`                                       | `filter all 2 G19Group1 G19Group2`                           |
+
+### Managing participation, attendance and assignments
+| Action                                                                                     | Format                      | Example                            |
+|:-------------------------------------------------------------------------------------------|:----------------------------|:-----------------------------------|
+| [Mark individual participation](#10-marking-individual-participation-scores--markp)        | `markp INDEX WEEK_NUMBER`   | `markp 1 3`                        |
+| [Unmark individual participation](#11-un-marking-individual-participation-scores--unmarkp) | `unmarkp INDEX WEEK_NUMBER` | `unmarkp 1 3`                      |
+| [Mark individual attendance](#12-marking-individual-attendance-scores--marka)              | `marka INDEX WEEK_NUMBER`   | `marka 1 3`                        |
+| [Unmark individual attendance](#13-un-marking-individual-attendance-scores--unmarka)       | `unmarka INDEX WEEK_NUMBER` | `unmarka 1 3`                      |
+| [Mark all participation](#14-marking-all-participation-scores--markallp)                   | `markallp WEEK_NUMBER`      | `markallp 3`                       |
+| [Unmark all participation](#15-un-marking-all-participation-scores--unmarkallp)            | `umarkallp WEEK_NUMBER`     | `umarkallp 3`                      |
+| [Mark all attendance](#16-marking-all-attendance-scores--markalla)                         | `markalla WEEK_NUMBER`      | `markalla 3`                       |
+| [Unmark all attendance](#17-un-marking-all-attendance-scores--unmarkalla)                  | `unmarkalla WEEK_NUMBER`    | `unmarkalla 3`                     |
+| [Add assignment](#18-adding-a-custom-assignment--adda)                                     | `adda a/ASSIGNMENT…​`       | `adda a/assignment1 a/assignment2` |
+
+### General
+
+| Action                                                | Format   | Example |
+|:------------------------------------------------------|:---------|:--------|
+| [View Help](#1-viewing-help--help)                    | `help`   | `help`  |
+| [Undo](#19-undoing-a-previous-command--undo)          | `undo`   | `undo`  |
+| [Redo](#20-redoing-a-previously-undone-command--redo) | `redo`   | `redo`  |
+| [Clear](#21-clearing-all-entries--clear)              | `clear`  | `clear` |
+| [Exit](#22-exiting-the-program--exit)                 | `exit`   | `exit`  |
