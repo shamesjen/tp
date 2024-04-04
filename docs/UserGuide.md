@@ -508,8 +508,49 @@ Adds assignment(s) to all users in the filtered list if they do not already exis
 
 **TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
 
+### 19. Removing a custom assignment : `removea`
 
-### 19. Undoing a previous command : `undo`
+Removes assignment(s) from all users in the filtered list if they have them.
+
+<h4>Format:</h4>
+
+`removea a/ASSIGNMENT…​`
+
+<h4>Fields:</h4>
+
+|      Field      | Prefix |  Required  | Requirements                                                           |
+|:---------------:|:------:|:----------:|:-----------------------------------------------------------------------|
+| `ASSIGNMENT...` |   a/   |    YES     | Assignment(s) should only contain alphanumeric characters and spaces.  |
+
+<h4>Example:</h4>
+
+* `adda a/assignment1 a/assignment2`
+
+**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+
+### 20. Grading a custom assignment : `grade`
+
+Grades and gives a score to an assignment for the INDEXED user.
+
+<h4>Format:</h4>
+
+`grade INDEX SCORE a/ASSIGNMENT`
+
+<h4>Fields:</h4>
+
+|    Field     | Prefix |  Required  | Requirements                                                           |
+|:------------:|:------:|:----------:|:-----------------------------------------------------------------------|
+| `ASSIGNMENT` |   a/   |    YES     | Assignment(s) should only contain alphanumeric characters and spaces.  |
+|   `INDEX`    |   NIL  |    YES     | INDEX **must be a positive integer** 1, 2, 3 …​ <br><br> INDEX cannot be greater than the number of students in the list. |
+ 
+
+<h4>Example:</h4>
+
+* `grade 1 10 a/assignment1 `
+
+**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+
+### 21. Undoing a previous command : `undo`
 
 Undoes the previous command that changed data.
 
@@ -529,7 +570,7 @@ Undoes the previous command that changed data.
 **TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
 
 
-### 20. Redoing a previously undone command : `redo`
+### 222. Redoing a previously undone command : `redo`
 
 Redoes the previously undone command.
 
@@ -549,7 +590,7 @@ Redoes the previously undone command.
 **TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
 
 
-### 21. Clearing all entries : `clear`
+### 23. Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
@@ -564,7 +605,7 @@ Clears all entries from the address book.
 **TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
 
 
-### 22. Exiting the program : `exit`
+### 24. Exiting the program : `exit`
 
 Exits the program.
 
