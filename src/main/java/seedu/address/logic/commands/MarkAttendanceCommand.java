@@ -63,7 +63,7 @@ public class MarkAttendanceCommand extends Command {
         }
 
         Person personToMark = lastShownList.get(targetIndex.getZeroBased());
-        List<Integer> newAttendanceScores = getnewAttendanceScores(personToMark);
+        List<Integer> newAttendanceScores = getNewAttendanceScores(personToMark);
 
         Person updatedPerson = createMarkedPerson(personToMark, newAttendanceScores);
 
@@ -84,7 +84,7 @@ public class MarkAttendanceCommand extends Command {
      * @param personToMark the person to mark attendance for
      * @return a list of updated attendance scores
      */
-    private List<Integer> getnewAttendanceScores(Person personToMark) {
+    private List<Integer> getNewAttendanceScores(Person personToMark) {
         List<Integer> oldAttendanceScores = personToMark.getAttendanceScores();
         List<Integer> newAttendanceScores = new ArrayList<>();
         int weekIndex = weekNumber.getZeroBased() - 3;
