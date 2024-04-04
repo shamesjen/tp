@@ -17,12 +17,12 @@ import seedu.address.model.person.Person;
 /**
  * Marks an assignment as done for one student.
  */
-public class MarkAssignmentCommand extends Command {
+public class GradeAssignmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "markA";
+    public static final String COMMAND_WORD = "grade";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks an assignment as done for one students.\n"
+            + ": Grades an assignment as done for one students.\n"
             + "Parameters: ASSIGNMENT (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1" + " " + "10 " + PREFIX_ASSIGNMENT + "Assignment1";
 
@@ -41,7 +41,7 @@ public class MarkAssignmentCommand extends Command {
      * @param assignmentName of the assignment to be marked
      * @param assignmentScore of the assignment to be marked
      */
-    public MarkAssignmentCommand(Index targetIndex, String assignmentName, int assignmentScore) {
+    public GradeAssignmentCommand(Index targetIndex, String assignmentName, int assignmentScore) {
         this.targetIndex = targetIndex;
         this.assignmentName = assignmentName;
         this.assignmentScore = assignmentScore;
@@ -87,10 +87,10 @@ public class MarkAssignmentCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this
-                || (other instanceof MarkAssignmentCommand
-                && targetIndex.equals(((MarkAssignmentCommand) other).targetIndex)
-                && assignmentName.equals(((MarkAssignmentCommand) other).assignmentName)
-                && assignmentScore == ((MarkAssignmentCommand) other).assignmentScore);
+                || (other instanceof GradeAssignmentCommand
+                && targetIndex.equals(((GradeAssignmentCommand) other).targetIndex)
+                && assignmentName.equals(((GradeAssignmentCommand) other).assignmentName)
+                && assignmentScore == ((GradeAssignmentCommand) other).assignmentScore);
     }
 
     @Override

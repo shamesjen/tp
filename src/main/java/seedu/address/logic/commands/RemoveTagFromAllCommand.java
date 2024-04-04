@@ -107,7 +107,7 @@ public class RemoveTagFromAllCommand extends Command {
     /**
      * Formats the removed tags into a string.
      */
-    private String formatRemovedTags(List<Pair<Person, List<Tag>>> removedTagList) {
+    public static String formatRemovedTags(List<Pair<Person, List<Tag>>> removedTagList) {
         StringBuilder sb = new StringBuilder();
         for (Pair<Person, List<Tag>> pair : removedTagList) {
             Person person = pair.getKey();
