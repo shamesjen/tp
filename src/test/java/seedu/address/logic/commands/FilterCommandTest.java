@@ -27,9 +27,9 @@ public class FilterCommandTest {
     @Test
     public void equals() {
         PersonContainsTagPredicate firstPredicate =
-                new PersonContainsTagPredicate(Collections.singletonList("first"));
+                new PersonContainsTagPredicate(Collections.singletonList("first"), false);
         PersonContainsTagPredicate secondPredicate =
-                new PersonContainsTagPredicate(Collections.singletonList("second"));
+                new PersonContainsTagPredicate(Collections.singletonList("second"), false);
 
         FilterCommand filterFirstCommand = new FilterCommand(firstPredicate);
         FilterCommand filterSecondCommand = new FilterCommand(secondPredicate);
@@ -64,7 +64,7 @@ public class FilterCommandTest {
     @Test
     public void toStringMethod() {
         // Adjust according to the actual toString method of FilterCommand
-        PersonContainsTagPredicate predicate = new PersonContainsTagPredicate(Arrays.asList("keyword"));
+        PersonContainsTagPredicate predicate = new PersonContainsTagPredicate(Arrays.asList("keyword"), false);
         FilterCommand filterCommand = new FilterCommand(predicate);
         String expected = FilterCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         System.out.println(expected);
@@ -75,6 +75,6 @@ public class FilterCommandTest {
      * Parses {@code userInput} into a {@code PersonContainsTagPredicate}.
      */
     private PersonContainsTagPredicate preparePredicate(String userInput) {
-        return new PersonContainsTagPredicate(Arrays.asList(userInput.split("\\s+")));
+        return new PersonContainsTagPredicate(Arrays.asList(userInput.split("\\s+")), false);
     }
 }

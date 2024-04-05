@@ -24,14 +24,21 @@ public class FilterCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFilterCommand() {
-        // no leading and trailing whitespaces
-        FilterCommand expectedFilterCommand =
-                new FilterCommand(new PersonContainsTagPredicate(Arrays.asList(VALID_TAG_FRIEND, VALID_TAG_COLLEAGUE)));
-        assertParseSuccess(parser, VALID_TAG_FRIEND + " " + VALID_TAG_COLLEAGUE, expectedFilterCommand);
+    public void parse_missingAllOrAnyKeyword_throwsParseException() {
+        assertParseFailure(parser, VALID_TAG_FRIEND,
+                "The argument must start with 'all' or 'any'.");
+    }
 
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n " + VALID_TAG_FRIEND + " \n \t "
-                + VALID_TAG_COLLEAGUE + " \t", expectedFilterCommand);
+    @Test
+    public void parse_validArgsAny_returnsFilterCommand() {
+        // no leading and trailing whitespaces with 'any' keyword
+        FilterCommand expectedFilterCommandAny =
+                new FilterCommand(new PersonContainsTagPredicate(Arrays.asList(VALID_TAG_FRIEND, VALID_TAG_COLLEAGUE),
+                    false));
+        assertParseSuccess(parser, "any " + VALID_TAG_FRIEND + " " + VALID_TAG_COLLEAGUE, expectedFilterCommandAny);
+
+        // multiple whitespaces between keywords with 'any' keyword
+        assertParseSuccess(parser, "any \n " + VALID_TAG_FRIEND + " \n \t "
+                + VALID_TAG_COLLEAGUE + " \t", expectedFilterCommandAny);
     }
 }

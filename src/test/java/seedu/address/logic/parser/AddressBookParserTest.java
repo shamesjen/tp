@@ -100,8 +100,8 @@ public class AddressBookParserTest {
         final String keyword2 = "colleague";
         List<String> tagKeywords = Arrays.asList(keyword1, keyword2);
         FilterCommand command = (FilterCommand) parser.parseCommand(
-                FilterCommand.COMMAND_WORD + " " + tagKeywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FilterCommand(new PersonContainsTagPredicate(tagKeywords)), command);
+                FilterCommand.COMMAND_WORD + " any " + tagKeywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FilterCommand(new PersonContainsTagPredicate(tagKeywords, false)), command);
     }
 
     @Test
