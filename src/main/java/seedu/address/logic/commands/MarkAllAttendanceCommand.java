@@ -29,7 +29,7 @@ public class MarkAllAttendanceCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the attendance of all filtered students \n"
-            + "Parameters: WEEK (must be a positive integer)\n"
+            + "Parameters: WEEK (must be a positive integer between 3 and 13)\n"
             + "Example: " + COMMAND_WORD + " 3 ";
 
     public static final String MESSAGE_ARGUMENTS = "Week Number: %2$d";

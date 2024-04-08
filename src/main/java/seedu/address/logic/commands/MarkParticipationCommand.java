@@ -30,7 +30,7 @@ public class MarkParticipationCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the participation of the person identified "
             + "by the index number used in the last person listing.\n"
-            + "Parameters: INDEX (must be a positive integer), WEEK (must be a positive integer)\n"
+            + "Parameters: INDEX (must be a positive integer), WEEK (must be a positive integer between 3 and 13)\n"
             + "Example: " + COMMAND_WORD + " 1 " + "5";
 
     public static final String MESSAGE_MARK_PARTICIPATION_SUCCESS = "Marked Participation for: %1$s in Week %2$d "
