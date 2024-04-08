@@ -2,11 +2,11 @@
 layout: page
 title: User Guide
 ---
-Are you a CS2109S TA (Teaching Assistant) conducting multiple tutorials a week? Are you having troubles with keeping track of student details and their progress?
+Are you a CS2109S TA (Teaching Assistant) conducting multiple tutorials a week? Are you having troubles with keeping track of student attendance and participation scores during tutorials?
 
 Introducing nerdTrackerPlus, your ultimate companion in managing student details and tracking their progress effortlessly!
 
-nerdTrackerPlus is a **desktop app** specifically designed for **CS2109S tutors**. It helps you manage student details and progress for your tutorials. nerdTrackerPlus is optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, nerdTrackerPlus can get your contact management tasks done faster than traditional GUI apps.
+nerdTrackerPlus is a **desktop app** specifically designed for **CS2109S tutors**. It helps you manage student details and progress for your tutorials. nerdTrackerPlus is optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, nerdTrackerPlus can get your student management tasks done faster than traditional GUI apps.
 
 ---
 
@@ -32,13 +32,13 @@ nerdTrackerPlus is a **desktop app** specifically designed for **CS2109S tutors*
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all students.
 
-   * `add n/John Doe m/A1234567A e/e1234567@u.nus.edu tl/johnthedoe` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe m/A1234567A e/e1234567@u.nus.edu tl/johnthedoe` : Adds a student named `John Doe` to nerdTrackerPlus.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd student shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all students.
 
    * `exit` : Exits the app.
 
@@ -64,6 +64,9 @@ nerdTrackerPlus is a **desktop app** specifically designed for **CS2109S tutors*
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
+* For commands that require `INDEX`, it must be specified before parameters. <br>
+  e.g. `edit n/Adam 1` is incorrect while `edit 1 n/Adam` is correct.
+
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
@@ -74,9 +77,9 @@ nerdTrackerPlus is a **desktop app** specifically designed for **CS2109S tutors*
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+![help message](images/ug/helpMessage.png)
 
-<h4>Format:</h4> 
+<h4>Format:</h4>
 
 `help`
 
@@ -85,7 +88,7 @@ Shows a message explaining how to access the help page.
 
 Adds a student to nerdTrackerPlus.
 
-</h4>Format:</h4>
+<h4>Format:</h4>
 
 `add n/NAME m/MATRIC_NUMBER e/EMAIL tl/TELEGRAM_HANDLE [t/TAG]…​`
 
@@ -95,30 +98,31 @@ A student can have any number of tags (including 0)
 
 <h4>Fields:</h4>
 
-|       Field       | Prefix | Required | Requirements                                                                                                      |
-|:-----------------:|:------:|:--------:|:------------------------------------------------------------------------------------------------------------------|
-|      `NAME`       |  `n/`  |   YES    | Name of the student. It should only contain alphanumeric characters and spaces.                                   |
-|  `MATRIC_NUMBER`  |  `m/`  |   YES    | Matriculation number of the student. It should start and end with a capital letter and have 7 digits in between.  |
-|      `EMAIL`      |  `e/`  |   YES    | Email of the student. Email should match the format: `<local>@<domain>.<label>`.                                  |
-| `TELEGRAM_HANDLE` | `tl/`  |   YES    | Telegram username of the student. It should only contain alphanumeric characters and spaces.                      |
-|       `TAG`       |  `t/`  |    NO    | Tag(s) for the student. It should only contain alphanumeric characters and spaces.                                |
+|       Field       | Prefix |                    Required                     | Requirements                                                                                                      |
+|:-----------------:|:------:|:-----------------------------------------------:|:------------------------------------------------------------------------------------------------------------------|
+|      `NAME`       |  `n/`  | <img width=30px src="assets/ug/green_tick.svg"> | Name of the student. It should only contain alphanumeric characters and spaces.                                   |
+|  `MATRIC_NUMBER`  |  `m/`  | <img width=30px src="assets/ug/green_tick.svg"> | Matriculation number of the student. It should start and end with a capital letter and have 7 digits in between.  |
+|      `EMAIL`      |  `e/`  | <img width=30px src="assets/ug/green_tick.svg"> | Email of the student. Email should match the format: `<local>@<domain>.<label>`.                                  |
+| `TELEGRAM_HANDLE` | `tl/`  | <img width=30px src="assets/ug/green_tick.svg"> | Telegram username of the student. It should only contain alphanumeric characters and spaces.                      |
+|       `TAG`       |  `t/`  | <img width=25px src="assets/ug/red_cross.png">  | Tag(s) for the student. It should only contain alphanumeric characters and spaces. Tags specified must be unique. |
 
 <h4>Notes:</h4>
 * A student is uniquely identified by their `NAME`. This field is case-sensitive.
 * You may add multiple tags to a student by specifying the `t/` prefix multiple times.
+* If 2 identical tags are specified (e.g. t/tag1 t/tag1), only 1 tag will be added.
 
 <h4>Example:</h4>
 
-* `add n/John Doe m/A1234567Z e/johnd@u.nus.edu tl/johndoe01`
+* `add n/John Doe m/A1234567Z e/johnd@u.nus.edu tl/johndoe01 t/cs2109s` <br>
 
-**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+![addStudent](images/ug/addStudentExample.png)
 
 
 ### 3. Listing all students : `list`
 
 Shows a list of all students in nerdTrackerPlus.
 
-</h4>Format:</h4>
+<h4>Format:</h4>
 
 `list`
 
@@ -126,7 +130,7 @@ Shows a list of all students in nerdTrackerPlus.
 
 * `list`
 
-**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+![listStudent](images/ug/listExample.png)
 
 
 ### 4. Editing a student : `edit`
@@ -139,18 +143,19 @@ Edits an existing student in nerdTrackerPlus.
 
 <h4>Fields:</h4>
 
-|       Field       | Prefix | Required | Requirements                                                                                                              |
-|:-----------------:|:------:|:--------:|:--------------------------------------------------------------------------------------------------------------------------|
-|      `INDEX`      |  NIL   |   YES    | `INDEX` **must be a positive integer** 1, 2, 3 …​ <br>`INDEX` cannot be greater than the number of students in the list.  |
-|      `NAME`       |  `n/`  |    NO    | Name of the student. It should only contain alphanumeric characters and spaces.                                           |
-|  `MATRIC_NUMBER`  |  `m/`  |    NO    | Matriculation number of the student. It should start and end with a capital letter and have 7 digits in between.          |
-|      `EMAIL`      |  `e/`  |    NO    | Email of the student. Email should match the format: `<local>@<domain>.<label>`.                                          |
-| `TELEGRAM_HANDLE` | `tl/`  |    NO    | Telegram username of the student. It should only contain alphanumeric characters and spaces.                              |
-|       `TAG`       |  `t/`  |    NO    | Tag(s) for the student. It should only contain alphanumeric characters and spaces.                                        |
+|       Field       | Prefix |                    Required                     | Requirements                                                                                                              |
+|:-----------------:|:------:|:-----------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------|
+|      `INDEX`      |  NIL   | <img width=30px src="assets/ug/green_tick.svg"> | `INDEX` **must be a positive integer** 1, 2, 3 …​ <br>`INDEX` cannot be greater than the number of students in the list.  |
+|      `NAME`       |  `n/`  | <img width=25px src="assets/ug/red_cross.png">  | Name of the student. It should only contain alphanumeric characters and spaces.                                           |
+|  `MATRIC_NUMBER`  |  `m/`  | <img width=25px src="assets/ug/red_cross.png">  | Matriculation number of the student. It should start and end with a capital letter and have 7 digits in between.          |
+|      `EMAIL`      |  `e/`  | <img width=25px src="assets/ug/red_cross.png">  | Email of the student. Email should match the format: `<local>@<domain>.<label>`.                                          |
+| `TELEGRAM_HANDLE` | `tl/`  | <img width=25px src="assets/ug/red_cross.png">  | Telegram username of the student. It should only contain alphanumeric characters and spaces.                              |
+|       `TAG`       |  `t/`  | <img width=25px src="assets/ug/red_cross.png">  | Tag(s) for the student. It should only contain alphanumeric characters and spaces.                                        |
 
 <h4>Notes:</h4>
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list.
+* `INDEX` must be specified before the other parameters.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
@@ -158,25 +163,25 @@ Edits an existing student in nerdTrackerPlus.
 
 <h4>Example:</h4>
 
-*  `edit 1 m/A1111111Z e/johndoe@gmail.com` Edits the matriculation number and email address of the first student to be `A1111111Z` and `johndoe@gmail.com` respectively.
+*  `edit 1 n/Alex Lim tl/alexlim01` Edits the name and telegram handle of the first student to be `Alex Lim` and `alexlim01` respectively.
 
-**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+![editStudent](images/ug/editStudentExample.png)
 
 
 ### 5. Locating students by name : `find`
 
 Finds students whose names contain any of the given keywords.
 
-</h4>Format:</h4>
+<h4>Format:</h4>
 
 `find KEYWORD [MORE_KEYWORDS]`
 
 <h4>Fields:</h4>
 
-|      Field       | Prefix | Required | Requirements |
-|:----------------:|:------:|:--------:|:-------------|
-|    `KEYWORD`     |  NIL   |   YES    | NIL          |
-| `MORE_KEYWORDS`  |  NIL   |    NO    | NIL          |
+|      Field       |                     Prefix                     |                     Required                     | Requirements |
+|:----------------:|:----------------------------------------------:|:------------------------------------------------:|:-------------|
+|    `KEYWORD`     | <img width=25px src="assets/ug/red_cross.png"> | <img width=30px src="assets/ug/green_tick.svg">  | NIL          |
+| `MORE_KEYWORDS`  | <img width=25px src="assets/ug/red_cross.png"> |  <img width=25px src="assets/ug/red_cross.png">  | NIL          |
 
 <h4>Notes:</h4>
 
@@ -189,9 +194,9 @@ Finds students whose names contain any of the given keywords.
 
 <h4>Example:</h4>
 
-* `find alex david` returns `Alex Yeoh`, `David Li`
+* `find alex charlotte` returns `Alex Yeoh`, `Charlotte Oliveiro`
 
-**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+![findStudent](images/ug/findStudentsExample.png)
 
 
 ### 6. Deleting a student : `delete`
@@ -204,9 +209,9 @@ Deletes the specified student from nerdTrackerPlus.
 
 <h4>Fields:</h4>
 
-|      Field      | Prefix | Required | Requirements                                                                                                             |
-|:---------------:|:------:|:--------:|:-------------------------------------------------------------------------------------------------------------------------|
-|     `INDEX`     |  NIL   |   YES    | `INDEX` **must be a positive integer** 1, 2, 3 …​ <br>`INDEX` cannot be greater than the number of students in the list. |
+|      Field      |                     Prefix                      |                     Required                     | Requirements                                                                                                             |
+|:---------------:|:-----------------------------------------------:|:------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------|
+|     `INDEX`     | <img width=25px src="assets/ug/red_cross.png">  | <img width=30px src="assets/ug/green_tick.svg">  | `INDEX` **must be a positive integer** 1, 2, 3 …​ <br>`INDEX` cannot be greater than the number of students in the list. |
 
 <h4>Notes:</h4>
 
@@ -215,9 +220,9 @@ Deletes the specified student from nerdTrackerPlus.
 
 <h4>Example:</h4>
 
-* `list` followed by `delete 2` deletes the 2nd student in the address book.
+* `list` followed by `delete 1` deletes the 1st student, Alex Yeoh, in nerdTrackerPlus.
 
-**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+![deleteStudent](images/ug/deleteStudentExample.png)
 
 
 ### 7. Remove tag from a student : `removetag`
@@ -230,21 +235,20 @@ Deletes the specified tag from a student in nerdTrackerPlus.
 
 <h4>Fields:</h4>
 
-|  Field  | Prefix | Required | Requirements                                                                                                             |
-|:-------:|:------:|:--------:|:-------------------------------------------------------------------------------------------------------------------------|
-| `INDEX` |  NIL   |   YES    | `INDEX` **must be a positive integer** 1, 2, 3 …​ <br>`INDEX` cannot be greater than the number of students in the list. |
-|  `TAG`  |  `t/`  |   YES    | Tag on a student. It should only contain alphanumeric characters and spaces. Tag must exist on the student.              |
-
+|  Field  |                     Prefix                     |                    Required                     | Requirements                                                                                                             |
+|:-------:|:----------------------------------------------:|:-----------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------|
+| `INDEX` | <img width=25px src="assets/ug/red_cross.png"> | <img width=30px src="assets/ug/green_tick.svg"> | `INDEX` **must be a positive integer** 1, 2, 3 …​ <br>`INDEX` cannot be greater than the number of students in the list. |
+|  `TAG`  |                      `t/`                      | <img width=30px src="assets/ug/green_tick.svg"> | Tag on a student. It should only contain alphanumeric characters and spaces. Tag must exist on the student.              |
 
 * Removes tags of the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
+* `TAG` is case-sensitive.
 
 <h4>Example:</h4>
 
-* `list` followed by `removetag 2 t/friend` Removes the friend tag from the 2nd student in the address book.
+* `list` followed by `removetag 1 t/G19Group1` removes the G19Group1 tag from the 1st student in nerdTrackerPlus.
 
-**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
-
+![removeTag](images/ug/removeTagExample.png)
 
 ### 8. Remove tag(s) from all students : `removetagall`
 
@@ -256,18 +260,18 @@ Deletes the specified tag(s) from all students that have the tag(s).
 
 <h4>Fields:</h4>
 
-|  Field   | Prefix | Required | Requirements                                                                                                       |
-|:--------:|:------:|:--------:|:-------------------------------------------------------------------------------------------------------------------|
-| `TAG(S)` |  `t/`  |   YES    | Tag on a student. It should only contain alphanumeric characters and spaces. Tag must exist on at least 1 student. |
+|  Field   | Prefix |                    Required                     | Requirements                                                                                                      |
+|:--------:|:------:|:-----------------------------------------------:|:------------------------------------------------------------------------------------------------------------------|
+| `TAG(S)` |  `t/`  | <img width=30px src="assets/ug/green_tick.svg"> | Tag on a student. It should only contain alphanumeric characters. Tag must exist on at least 1 student.           |
 
 <h4>Notes:</h4>
 
 * More than 1 tag can be specified to be removed.
 
 <h4>Example:</h4>
-`removetagall t/G19Group1 t/family`
+`removetagall t/G19Group1` removes the G19Group1 tag from the first 3 students in the list.
 
-**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+![removeTagAll](images/ug/removeTagAllExample.png)
 
 
 ### 9. Filtering by tags : `filter`
@@ -280,10 +284,10 @@ Filters all students with the specified tags.
 
 <h4>Fields:</h4>
 
-|   Field   | Prefix | Required | Requirements                                                |
-|:---------:|:------:|:--------:|:------------------------------------------------------------|
-| `all/any` |  NIL   |    NO    | Must be lower case.                                         |
-| `TAG(S)`  |  NIL   |   YES    | Tag should only contain alphanumeric characters and spaces. |
+|   Field   |                     Prefix                     |                     Required                     | Requirements                                                |
+|:---------:|:----------------------------------------------:|:------------------------------------------------:|:------------------------------------------------------------|
+| `all/any` | <img width=25px src="assets/ug/red_cross.png"> |  <img width=25px src="assets/ug/red_cross.png">  | Must be lower case.                                         |
+| `TAG(S)`  | <img width=25px src="assets/ug/red_cross.png"> | <img width=30px src="assets/ug/green_tick.svg">  | Tag should only contain alphanumeric characters and spaces. |
 
 <h4>Notes:</h4>
 
@@ -307,10 +311,10 @@ Marks the participation score of a specific student.
 
 <h4>Fields:</h4>
 
-|     Field     |  Prefix  |  Required  | Requirements                                                                                                              |
-|:-------------:|:--------:|:----------:|:--------------------------------------------------------------------------------------------------------------------------|
-|    `INDEX`    |   NONE   |    YES     | INDEX **must be a positive integer** 1, 2, 3 …​ <br><br> INDEX cannot be greater than the number of students in the list. |
-| `WEEK_NUMBER` |   NONE   |    YES     | WEEK_NUMBER **must be a valid week from the range [3, 13].                                                                |
+|     Field     |                     Prefix                     |                      Required                      | Requirements                                                                                                          |
+|:-------------:|:----------------------------------------------:|:--------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------|
+|    `INDEX`    | <img width=25px src="assets/ug/red_cross.png"> |  <img width=30px src="assets/ug/green_tick.svg">   | INDEX **must be a positive integer** 1, 2, 3 …​ <br> INDEX cannot be greater than the number of students in the list. |
+| `WEEK_NUMBER` | <img width=25px src="assets/ug/red_cross.png"> |  <img width=30px src="assets/ug/green_tick.svg">   | WEEK_NUMBER **must be a valid week from the range [3, 13]**.                                                          |
 
 <h4>Notes:</h4>
 
@@ -319,9 +323,9 @@ Marks the participation score of a specific student.
 
 <h4>Example:</h4>
 
-* `markp 1 3`
+* `markp 1 3` marks the participation score of Alex Yeoh in week 3.
 
-**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+![markParticipationIndividual](images/ug/markParticipationIndividualExample.png)
 
 
 ### 11. Un-marking individual participation scores : `unmarkp`
@@ -334,10 +338,10 @@ Un-marks the participation score of a specific student.
 
 <h4>Fields:</h4>
 
-|     Field     |  Prefix  |  Required  | Requirements                                                                                                              |
-|:-------------:|:--------:|:----------:|:--------------------------------------------------------------------------------------------------------------------------|
-|    `INDEX`    |   NONE   |    YES     | INDEX **must be a positive integer** 1, 2, 3 …​ <br><br> INDEX cannot be greater than the number of students in the list. |
-| `WEEK_NUMBER` |   NONE   |    YES     | WEEK_NUMBER **must be a valid week from the range [3, 13].                                                                |
+|     Field     |                     Prefix                     |                    Required                     | Requirements                                                                                                          |
+|:-------------:|:----------------------------------------------:|:-----------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------|
+|    `INDEX`    | <img width=25px src="assets/ug/red_cross.png"> | <img width=30px src="assets/ug/green_tick.svg"> | INDEX **must be a positive integer** 1, 2, 3 …​ <br> INDEX cannot be greater than the number of students in the list. |
+| `WEEK_NUMBER` | <img width=25px src="assets/ug/red_cross.png"> | <img width=30px src="assets/ug/green_tick.svg"> | WEEK_NUMBER **must be a valid week from the range [3, 13]**.                                                          |
 
 <h4>Notes:</h4>
 
@@ -346,9 +350,9 @@ Un-marks the participation score of a specific student.
 
 <h4>Example:</h4>
 
-* `unmarkp 1 3`
+* `markp 1 3` followed by `unmarkp 1 3`
 
-**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+![unmarkParticipationIndividual](images/ug/unmarkParticipationIndividualExample.png)
 
 ### 12. Marking individual attendance scores : `marka`
 
@@ -360,10 +364,10 @@ Marks the attendance of a specific student.
 
 <h4>Fields:</h4>
 
-|     Field     |  Prefix  |  Required  | Requirements                                                                                                              |
-|:-------------:|:--------:|:----------:|:--------------------------------------------------------------------------------------------------------------------------|
-|    `INDEX`    |   NONE   |    YES     | INDEX **must be a positive integer** 1, 2, 3 …​ <br><br> INDEX cannot be greater than the number of students in the list. |
-| `WEEK_NUMBER` |   NONE   |    YES     | WEEK_NUMBER **must be a valid week from the range [3, 13].                                                                |
+|     Field     |                     Prefix                      |                    Required                     | Requirements                                                                                                          |
+|:-------------:|:-----------------------------------------------:|:-----------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------|
+|    `INDEX`    | <img width=25px src="assets/ug/red_cross.png">  | <img width=30px src="assets/ug/green_tick.svg"> | INDEX **must be a positive integer** 1, 2, 3 …​ <br> INDEX cannot be greater than the number of students in the list. |
+| `WEEK_NUMBER` | <img width=25px src="assets/ug/red_cross.png">  | <img width=30px src="assets/ug/green_tick.svg"> | WEEK_NUMBER **must be a valid week from the range [3, 13]**.                                                          |
 
 <h4>Notes:</h4>
 
@@ -372,9 +376,9 @@ Marks the attendance of a specific student.
 
 <h4>Example:</h4>
 
-* `marka 1 3`
+* `marka 1 3` marks the attendance of Alex Yeoh in week 3.
 
-**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+![markAttendanceIndividual](images/ug/markAttendanceIndividualExample.png)
 
 
 ### 13. Un-marking individual attendance scores : `unmarka`
@@ -387,10 +391,10 @@ Un-marks the attendance of a specific student.
 
 <h4>Fields:</h4>
 
-|     Field     |  Prefix  |  Required  | Requirements                                                                                                              |
-|:-------------:|:--------:|:----------:|:--------------------------------------------------------------------------------------------------------------------------|
-|    `INDEX`    |   NONE   |    YES     | INDEX **must be a positive integer** 1, 2, 3 …​ <br><br> INDEX cannot be greater than the number of students in the list. |
-| `WEEK_NUMBER` |   NONE   |    YES     | WEEK_NUMBER **must be a valid week from the range [3, 13].                                                                |
+|     Field     |                     Prefix                      |                    Required                     | Requirements                                                                                                          |
+|:-------------:|:-----------------------------------------------:|:-----------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------|
+|    `INDEX`    | <img width=25px src="assets/ug/red_cross.png">  | <img width=30px src="assets/ug/green_tick.svg"> | INDEX **must be a positive integer** 1, 2, 3 …​ <br> INDEX cannot be greater than the number of students in the list. |
+| `WEEK_NUMBER` | <img width=25px src="assets/ug/red_cross.png">  | <img width=30px src="assets/ug/green_tick.svg"> | WEEK_NUMBER **must be a valid week from the range [3, 13]**.                                                          |
 
 <h4>Notes:</h4>
 
@@ -399,9 +403,9 @@ Un-marks the attendance of a specific student.
 
 <h4>Example:</h4>
 
-* `unmarka 1 3`
+* `marka 1 3` followed by `unmarka 1 3` unmarks the attendace of Alex Yeoh in week 3.
 
-**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+![unmarkAttendanceIndividual](images/ug/unmarkAttendanceIndividualExample.png)
 
 
 ### 14. Marking all participation scores : `markallp`
@@ -414,15 +418,15 @@ Marks the participation scores of all students in the filtered list for a given 
 
 <h4>Fields:</h4>
 
-|     Field     |  Prefix  |  Required  | Requirements                                                                                                              |
-|:-------------:|:--------:|:----------:|:--------------------------------------------------------------------------------------------------------------------------|
-| `WEEK_NUMBER` |   NONE   |    YES     | WEEK_NUMBER **must be a valid week from the range [3, 13].                                                                |
+|     Field     |                     Prefix                     |                    Required                     | Requirements                                                 |
+|:-------------:|:----------------------------------------------:|:-----------------------------------------------:|:-------------------------------------------------------------|
+| `WEEK_NUMBER` | <img width=25px src="assets/ug/red_cross.png"> | <img width=30px src="assets/ug/green_tick.svg"> | WEEK_NUMBER **must be a valid week from the range [3, 13]**. |
 
 <h4>Example:</h4>
 
-* `markallp 3`
+* `list` followed by `markallp 3` marks all students in the list for week 3.
 
-**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+![markParticipationAll](images/ug/markParticipationAllExample.png)
 
 
 ### 15. Un-marking all participation scores : `unmarkallp`
@@ -431,19 +435,19 @@ Un-marks the participation scores of all students in the filtered list for a giv
 
 <h4>Format:</h4>
 
-`umarkallp WEEK_NUMBER`
+`unmarkallp WEEK_NUMBER`
 
 <h4>Fields:</h4>
 
-|     Field     |  Prefix  |  Required  | Requirements                                                                                                              |
-|:-------------:|:--------:|:----------:|:--------------------------------------------------------------------------------------------------------------------------|
-| `WEEK_NUMBER` |   NONE   |    YES     | WEEK_NUMBER **must be a valid week from the range [3, 13].                                                                |
+|     Field     |                     Prefix                     |                    Required                     | Requirements                                                 |
+|:-------------:|:----------------------------------------------:|:-----------------------------------------------:|:-------------------------------------------------------------|
+| `WEEK_NUMBER` | <img width=25px src="assets/ug/red_cross.png"> | <img width=30px src="assets/ug/green_tick.svg"> | WEEK_NUMBER **must be a valid week from the range [3, 13]**. |
 
 <h4>Example:</h4>
 
-* `umarkallp 3`
+* `markallp 3` followed by `unmarkallp 3` unmarks the participation score of all students in week 3.
 
-**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+![unmarkParticipationAll](images/ug/unmarkParticipationAllExample.png)
 
 
 ### 16. Marking all attendance scores : `markalla`
@@ -456,15 +460,15 @@ Marks the attendance of all students in the filtered list for a given week.
 
 <h4>Fields:</h4>
 
-|     Field     |  Prefix  |  Required  | Requirements                                                                                                              |
-|:-------------:|:--------:|:----------:|:--------------------------------------------------------------------------------------------------------------------------|
-| `WEEK_NUMBER` |   NONE   |    YES     | WEEK_NUMBER **must be a valid week from the range [3, 13].                                                                |
+|     Field     |                     Prefix                      |                    Required                     | Requirements                                                 |
+|:-------------:|:-----------------------------------------------:|:-----------------------------------------------:|:-------------------------------------------------------------|
+| `WEEK_NUMBER` | <img width=25px src="assets/ug/red_cross.png">  | <img width=30px src="assets/ug/green_tick.svg"> | WEEK_NUMBER **must be a valid week from the range [3, 13]**. |
 
 <h4>Example:</h4>
 
-* `markalla 3`
+* `list` followed by `markalla 3` marks the attendance all students in week 3.
 
-**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+![markAttendanceAll](images/ug/markAttendanceAllExample.png)
 
 
 ### 17. Un-marking all attendance scores : `unmarkalla`
@@ -477,15 +481,15 @@ Un-marks the attendance of all students in the filtered list for a given week.
 
 <h4>Fields:</h4>
 
-|     Field     |  Prefix  |  Required  | Requirements                                                                                                              |
-|:-------------:|:--------:|:----------:|:--------------------------------------------------------------------------------------------------------------------------|
-| `WEEK_NUMBER` |   NONE   |    YES     | WEEK_NUMBER **must be a valid week from the range [3, 13].                                                                |
+|     Field     |                     Prefix                      |                     Required                     | Requirements                                                 |
+|:-------------:|:-----------------------------------------------:|:------------------------------------------------:|:-------------------------------------------------------------|
+| `WEEK_NUMBER` | <img width=25px src="assets/ug/red_cross.png">  | <img width=30px src="assets/ug/green_tick.svg">  | WEEK_NUMBER **must be a valid week from the range [3, 13]**. |
 
 <h4>Example:</h4>
 
-* `unmarkalla 3`
+* `markalla 3` followed by `unmarkalla 3` un-marks the attendance of all students in week 3.
 
-**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+![unmarkAttendanceAll](images/ug/unmarkAttendanceAllExample.png)
 
 
 ### 18. Adding a custom assignment : `adda`
@@ -498,15 +502,20 @@ Adds assignment(s) to all users in the filtered list if they do not already exis
 
 <h4>Fields:</h4>
 
-|      Field      | Prefix |  Required  | Requirements                                                           |
-|:---------------:|:------:|:----------:|:-----------------------------------------------------------------------|
-| `ASSIGNMENT...` |   a/   |    YES     | Assignment(s) should only contain alphanumeric characters and spaces.  |
+|      Field      | Prefix |                     Required                     | Requirements                                                          |
+|:---------------:|:------:|:------------------------------------------------:|:----------------------------------------------------------------------|
+| `ASSIGNMENT...` |   a/   | <img width=30px src="assets/ug/green_tick.svg">  | Assignment(s) should only contain alphanumeric characters.            |
+
+<h4>Notes:</h4>
+
+* Each assignment is case-sensitive e.g. `a/assignment1` and `a/Assignment1` are 2 different assignments.
 
 <h4>Example:</h4>
 
 * `adda a/assignment1 a/assignment2`
 
-**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+![addAssignment](images/ug/addAssignmentExample.png)
+
 
 ### 19. Removing a custom assignment : `removea`
 
@@ -518,19 +527,24 @@ Removes assignment(s) from all users in the filtered list if they have them.
 
 <h4>Fields:</h4>
 
-|      Field      | Prefix |  Required  | Requirements                                                           |
-|:---------------:|:------:|:----------:|:-----------------------------------------------------------------------|
-| `ASSIGNMENT...` |   a/   |    YES     | Assignment(s) should only contain alphanumeric characters and spaces.  |
+|     Field      | Prefix |                     Required                     | Requirements                                                                                                        |
+|:--------------:|:------:|:------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------|
+| `ASSIGNMENT…​` |   a/   | <img width=30px src="assets/ug/green_tick.svg">  | Assignment(s) should only contain alphanumeric characters. At least 1 assignment specified must exists on students. |
+
+<h4>Notes:</h4>
+
+* Each assignment is case-sensitive e.g. `a/assignment1` and `a/Assignment1` are 2 different assignments.
 
 <h4>Example:</h4>
 
-* `adda a/assignment1 a/assignment2`
+* `adda a/assignment1 a/assignment2` followed by `removea a/assignment1 a/assignment2`
 
-**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+![removeAssignment](images/ug/removeAssignmentExample.png)
+
 
 ### 20. Grading a custom assignment : `grade`
 
-Grades and gives a score to an assignment for the INDEXED user.
+Grades and assigns a score to an assignment for a given student.
 
 <h4>Format:</h4>
 
@@ -538,11 +552,11 @@ Grades and gives a score to an assignment for the INDEXED user.
 
 <h4>Fields:</h4>
 
-|    Field     | Prefix |  Required  | Requirements                                                           |
-|:------------:|:------:|:----------:|:-----------------------------------------------------------------------|
-| `ASSIGNMENT` |   a/   |    YES     | Assignment(s) should only contain alphanumeric characters and spaces.  |
-|   `INDEX`    |   NIL  |    YES     | INDEX **must be a positive integer** 1, 2, 3 …​ <br><br> INDEX cannot be greater than the number of students in the list. |
- 
+|    Field     |                     Prefix                      |                     Required                     | Requirements                                                                                                          |
+|:------------:|:-----------------------------------------------:|:------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------|
+|   `INDEX`    | <img width=25px src="assets/ug/red_cross.png">  | <img width=30px src="assets/ug/green_tick.svg">  | INDEX **must be a positive integer** 1, 2, 3 …​ <br> INDEX cannot be greater than the number of students in the list. |
+|   `SCORE`    | <img width=25px src="assets/ug/red_cross.png">  | <img width=30px src="assets/ug/green_tick.svg">  | SCORE **must be a non-negative integer** 0, 1, 2 …​                                                                   |
+| `ASSIGNMENT` |                       a/                        | <img width=30px src="assets/ug/green_tick.svg">  | Assignment should only contain alphanumeric characters. Assignment must exist on the specified student.               |
 
 <h4>Example:</h4>
 
@@ -567,7 +581,7 @@ Undoes the previous command that changed data.
 
 * `marka 1 3` to mark the attendance of student 1 in week 3, followed by `undo`
 
-**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+![undo](images/ug/undoExample.png)
 
 
 ### 22. Redoing a previously undone command : `redo`
@@ -587,12 +601,12 @@ Redoes the previously undone command.
 
 * `marka 1 3` to mark the attendance of student 1 in week 3, followed by `undo`, then `redo`
 
-**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+![redo](images/ug/redoExample.png)
 
 
 ### 23. Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from nerdTrackerPlus.
 
 <h4>Format:</h4>
 
@@ -602,7 +616,7 @@ Clears all entries from the address book.
 
 * `clear`
 
-**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+![clear](images/ug/clearExample.png)
 
 
 ### 24. Exiting the program : `exit`
@@ -616,8 +630,6 @@ Exits the program.
 <h4>Example:</h4>
 
 * `exit`
-
-**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
 
 
 ### Saving the data
@@ -642,6 +654,8 @@ Furthermore, certain edits can cause the nerdTrackerPlus to behave in unexpected
 
 ---
 
+## Glossary
+
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
@@ -660,29 +674,31 @@ Furthermore, certain edits can cause the nerdTrackerPlus to behave in unexpected
 | [Find student](#5-locating-students-by-name--find)                              | `find KEYWORD [MORE_KEYWORDS]`                                                   | `find alex david`                                            |
 | [Delete student](#6-deleting-a-student--delete)                                 | `delete INDEX`                                                                   | `delete 2`                                                   |
 | [Remove tag from student](#7-remove-tag-from-a-student--removetag)              | `removetag INDEX [t/TAG]…`                                                       | `removetag 2 t/friend`                                       |
-| [Remove tag from all students](#8-remove-tags-from-all-students--removetagall)  | ` removetagall t/TAG(S)…​`                                                       | `removetagall t/G19Group1 t/family`                          |
+| [Remove tag from all students](#8-remove-tags-from-all-students--removetagall)  | `removetagall t/TAG(S)…​`                                                        | `removetagall t/G19Group1 t/family`                          |
 | [Filter student](#9-filtering-by-tags--filter)                                  | `filter [all/any] NUMBER_OF_TAGS TAG(S)…​`                                       | `filter all 2 G19Group1 G19Group2`                           |
 
 ### Managing participation, attendance and assignments
 
-| Action                                                                                     | Format                      | Example                            |
-|:-------------------------------------------------------------------------------------------|:----------------------------|:-----------------------------------|
-| [Mark individual participation](#10-marking-individual-participation-scores--markp)        | `markp INDEX WEEK_NUMBER`   | `markp 1 3`                        |
-| [Unmark individual participation](#11-un-marking-individual-participation-scores--unmarkp) | `unmarkp INDEX WEEK_NUMBER` | `unmarkp 1 3`                      |
-| [Mark individual attendance](#12-marking-individual-attendance-scores--marka)              | `marka INDEX WEEK_NUMBER`   | `marka 1 3`                        |
-| [Unmark individual attendance](#13-un-marking-individual-attendance-scores--unmarka)       | `unmarka INDEX WEEK_NUMBER` | `unmarka 1 3`                      |
-| [Mark all participation](#14-marking-all-participation-scores--markallp)                   | `markallp WEEK_NUMBER`      | `markallp 3`                       |
-| [Unmark all participation](#15-un-marking-all-participation-scores--unmarkallp)            | `umarkallp WEEK_NUMBER`     | `umarkallp 3`                      |
-| [Mark all attendance](#16-marking-all-attendance-scores--markalla)                         | `markalla WEEK_NUMBER`      | `markalla 3`                       |
-| [Unmark all attendance](#17-un-marking-all-attendance-scores--unmarkalla)                  | `unmarkalla WEEK_NUMBER`    | `unmarkalla 3`                     |
-| [Add assignment](#18-adding-a-custom-assignment--adda)                                     | `adda a/ASSIGNMENT…​`       | `adda a/assignment1 a/assignment2` |
+| Action                                                                                     | Format                             | Example                               |
+|:-------------------------------------------------------------------------------------------|:-----------------------------------|:--------------------------------------|
+| [Mark individual participation](#10-marking-individual-participation-scores--markp)        | `markp INDEX WEEK_NUMBER`          | `markp 1 3`                           |
+| [Unmark individual participation](#11-un-marking-individual-participation-scores--unmarkp) | `unmarkp INDEX WEEK_NUMBER`        | `unmarkp 1 3`                         |
+| [Mark individual attendance](#12-marking-individual-attendance-scores--marka)              | `marka INDEX WEEK_NUMBER`          | `marka 1 3`                           |
+| [Unmark individual attendance](#13-un-marking-individual-attendance-scores--unmarka)       | `unmarka INDEX WEEK_NUMBER`        | `unmarka 1 3`                         |
+| [Mark all participation](#14-marking-all-participation-scores--markallp)                   | `markallp WEEK_NUMBER`             | `markallp 3`                          |
+| [Unmark all participation](#15-un-marking-all-participation-scores--unmarkallp)            | `umarkallp WEEK_NUMBER`            | `umarkallp 3`                         |
+| [Mark all attendance](#16-marking-all-attendance-scores--markalla)                         | `markalla WEEK_NUMBER`             | `markalla 3`                          |
+| [Unmark all attendance](#17-un-marking-all-attendance-scores--unmarkalla)                  | `unmarkalla WEEK_NUMBER`           | `unmarkalla 3`                        |
+| [Add assignment](#18-adding-a-custom-assignment--adda)                                     | `adda a/ASSIGNMENT…​`              | `adda a/assignment1 a/assignment2`    |
+| [Remove assignment](#19-removing-a-custom-assignment--removea)                             | `removea a/ASSIGNMENT…​`           | `removea a/assignment1 a/assignment2` |
+| [Grade assignment](#20-grading-a-custom-assignment--grade)                                 | `grade INDEX SCORE a/ASSIGNMENT`   | `grade 1 100 a/assignment1`           |
 
 ### General
 
 | Action                                                | Format   | Example |
 |:------------------------------------------------------|:---------|:--------|
 | [View Help](#1-viewing-help--help)                    | `help`   | `help`  |
-| [Undo](#19-undoing-a-previous-command--undo)          | `undo`   | `undo`  |
-| [Redo](#20-redoing-a-previously-undone-command--redo) | `redo`   | `redo`  |
-| [Clear](#21-clearing-all-entries--clear)              | `clear`  | `clear` |
-| [Exit](#22-exiting-the-program--exit)                 | `exit`   | `exit`  |
+| [Undo](#21-undoing-a-previous-command--undo)          | `undo`   | `undo`  |
+| [Redo](#22-redoing-a-previously-undone-command--redo) | `redo`   | `redo`  |
+| [Clear](#23-clearing-all-entries--clear)              | `clear`  | `clear` |
+| [Exit](#24-exiting-the-program--exit)                 | `exit`   | `exit`  |
