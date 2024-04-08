@@ -238,7 +238,7 @@ Deletes the specified tag from a student in nerdTrackerPlus.
 |  Field  |                     Prefix                     |                    Required                     | Requirements                                                                                                             |
 |:-------:|:----------------------------------------------:|:-----------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------|
 | `INDEX` | <img width=25px src="assets/ug/red_cross.png"> | <img width=30px src="assets/ug/green_tick.svg"> | `INDEX` **must be a positive integer** 1, 2, 3 …​ <br>`INDEX` cannot be greater than the number of students in the list. |
-|  `TAG`  |                      `t/`                      | <img width=30px src="assets/ug/green_tick.svg"> | Tag on a student. It should only contain alphanumeric characters and spaces. Tag must exist on the student.              |
+|  `TAG`  |                      `t/`                      | <img width=30px src="assets/ug/green_tick.svg"> | Tag on a student. It should only contain alphanumeric characters. Tag must exist on the student.                         |
 
 * Removes tags of the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
