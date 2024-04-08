@@ -42,6 +42,10 @@ public class ParserUtil {
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
+    /**
+     * Parses {@code grade} into an {@code Integer} and returns it. Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the specified grade is invalid (not non-zero unsigned integer).
+     */
     public static Integer parseGrade(String grade) throws ParseException {
         String trimmedGrade = grade.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedGrade)) {
