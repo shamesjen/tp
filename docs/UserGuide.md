@@ -280,23 +280,21 @@ Filters all students with the specified tags.
 
 <h4>Format</h4>
 
-`filter [all/any] NUMBER_OF_TAGS TAG(S)…​`
+`filter TAG(S)…​`
 
 <h4>Fields:</h4>
 
-|   Field   |                     Prefix                     |                     Required                     | Requirements                                                |
-|:---------:|:----------------------------------------------:|:------------------------------------------------:|:------------------------------------------------------------|
-| `all/any` | <img width=25px src="assets/ug/red_cross.png"> |  <img width=25px src="assets/ug/red_cross.png">  | Must be lower case.                                         |
-| `TAG(S)`  | <img width=25px src="assets/ug/red_cross.png"> | <img width=30px src="assets/ug/green_tick.svg">  | Tag should only contain alphanumeric characters and spaces. |
+|   Field   |                     Prefix                     |                     Required                     | Requirements                                     |
+|:---------:|:----------------------------------------------:|:------------------------------------------------:|:-------------------------------------------------|
+| `TAG(S)`  | <img width=25px src="assets/ug/red_cross.png"> | <img width=30px src="assets/ug/green_tick.svg">  | Tag should only contain alphanumeric characters. |
 
 <h4>Notes:</h4>
 
-* If `filter all` is used and more than 1 tag is used to filter, only students that have all the tags will be shown.
-* If `filter any` is used and more than 1 tag is used to filter, students that match any one of the tags will be shown.
+* If `filter` is used and more than 1 tag is used to filter, students that match any one of the tags will be shown.
 * Tags are case in-sensitive.
 
 <h4>Example:</h4>
-* `filter all 2 G19Group1 G19Group2`
+* `filter G19Group1 G19Group2`
 
 **TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
 
