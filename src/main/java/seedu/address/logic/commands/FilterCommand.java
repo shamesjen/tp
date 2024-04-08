@@ -9,7 +9,7 @@ import seedu.address.model.person.PersonContainsTagPredicate;
 
 /**
  * Filters and lists all persons in address book whose tags contain any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class FilterCommand extends Command {
 
