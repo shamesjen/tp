@@ -202,7 +202,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 ![UndoRedoState2](images/dg/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info"> 
+<div markdown="span" class="alert alert-info">
 
 :information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`. The command will also not be saved into `commandResultList`.
 
@@ -245,7 +245,7 @@ Step 5. The user then decides to execute the command `list`. Commands that do no
 
 ![UndoRedoState4](images/dg/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. This is determined by calling `VersionedAddressBook#shouldPurge()`, and if there are future state to be purged, `VersionedAddressBook#purge()` will be called. 
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. This is determined by calling `VersionedAddressBook#shouldPurge()`, and if there are future state to be purged, `VersionedAddressBook#purge()` will be called.
 
 Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
@@ -306,23 +306,23 @@ nerdTrackerPlus helps Computer Science TAs manage students contacts through a CL
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
-
-| Priority | As a …​                | I want to …​                                                  | So that I can…​                                                                               |
-|---------|------------------------|---------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
-| `* * *` | new user               | see usage instructions                                        | refer to instructions when I forget how to use the App                                        |
-| `* * *` | CS2109S teaching staff | add a new student                                             | keep track of their contact details                                                           |
-| `* * *` | CS2109S teaching staff | delete a student                                              | remove student entries that I no longer need                                                  |
-| `* * *` | CS2109S teaching staff | list students                                                 | view all students currently in my contacts                                                    |
-| `* * *` | CS2109S teaching staff | find a student by name                                        | locate details of students without having to go through the entire list                       |
-| `* * *` | CS2109S teaching staff | edit student details                                          | ensure that student details is always updated                                                 |
-| `* * *` | CS2109S teaching staff | filter students by tag                                        | make it easier to search for particular students                                              |
-| `* * *` | CS2109S teaching staff | add tags to students                                          | categorize student contacts for reference                                                     |
-| `* * *` | CS2109S teaching staff | delete tags                                                   | remove tags that are currently unused                                                         |
-| `* * *` | CS2109S teaching staff | delete tags from students                                     | remove tags from students that do not belong to that category                                 |
-| `* * *` | CS2109S teaching staff | mark the participation score for a student for specific weeks | so that I can keep track of their tutorial participation scores over the course of the module |
-| `* * *` | CS2109S teaching staff | undo a previously issued command                              | so that it is convenient to undo any mistakes made                                            |
-| `* * *` | CS2109S teaching staff | redo a previously undone command                              | so that I can restore the last changes that were undone                                       |
-| `* * *` | user                   | close and exit the app                                        |                                                                                               |
+ 
+| Priority   | As a …​                | I want to …​                                                  | So that I can…​                                                                               |
+|------------|------------------------|---------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| `* * *`    | new user               | see usage instructions                                        | refer to instructions when I forget how to use the App                                        |
+| `* * *`    | CS2109S teaching staff | add a new student                                             | keep track of their contact details                                                           |
+| `* * *`    | CS2109S teaching staff | delete a student                                              | remove student entries that I no longer need                                                  |
+| `* * *`    | CS2109S teaching staff | list students                                                 | view all students currently in my contacts                                                    |
+| `* * *`    | CS2109S teaching staff | find a student by name                                        | locate details of students without having to go through the entire list                       |
+| `* * *`    | CS2109S teaching staff | edit student details                                          | ensure that student details is always updated                                                 |
+| `* * *`    | CS2109S teaching staff | filter students by tag                                        | make it easier to search for particular students                                              |
+| `* * *`    | CS2109S teaching staff | add tags to students                                          | categorize student contacts for reference                                                     |
+| `* * *`    | CS2109S teaching staff | delete tags                                                   | remove tags that are currently unused                                                         |
+| `* * *`    | CS2109S teaching staff | delete tags from students                                     | remove tags from students that do not belong to that category                                 |
+| `* * *`    | CS2109S teaching staff | mark the participation score for a student for specific weeks | so that I can keep track of their tutorial participation scores over the course of the module |
+| `* * *`    | CS2109S teaching staff | undo a previously issued command                              | so that it is convenient to undo any mistakes made                                            |
+| `* * *`    | CS2109S teaching staff | redo a previously undone command                              | so that I can restore the last changes that were undone                                       |
+| `* * *`    | user                   | close and exit the app                                        |                                                                                               |
 
 
 *{More to be added}*
@@ -495,7 +495,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. There is no command to redo.
   * 1a1. nerdTrackerPlus shows an error message.
-  
+
   Use case ends.
 
 ---

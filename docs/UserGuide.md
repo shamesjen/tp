@@ -79,7 +79,7 @@ Shows a message explaining how to access the help page.
 
 ![help message](images/ug/helpMessage.png)
 
-<h4>Format:</h4> 
+<h4>Format:</h4>
 
 `help`
 
