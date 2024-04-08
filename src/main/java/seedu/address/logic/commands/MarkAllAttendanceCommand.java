@@ -62,10 +62,10 @@ public class MarkAllAttendanceCommand extends Command {
         if (model.shouldPurgeAddressBook()) {
             model.purgeAddressBook();
         }
-        CommandResult markCommandResult = new CommandResult(String.format(MESSAGE_MARK_ALL_ATTENDANCE_SUCCESS,
-                weekNumber.getZeroBased()));
-        model.commitAddressBook(markCommandResult);
-        return markCommandResult;
+        CommandResult markAllAttendanceCommandResult =
+                new CommandResult(String.format(MESSAGE_MARK_ALL_ATTENDANCE_SUCCESS, weekNumber.getZeroBased()));
+        model.commitAddressBook(markAllAttendanceCommandResult);
+        return markAllAttendanceCommandResult;
     }
 
     /**

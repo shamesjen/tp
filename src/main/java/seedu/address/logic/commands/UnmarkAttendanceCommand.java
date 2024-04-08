@@ -34,7 +34,6 @@ public class UnmarkAttendanceCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 " + "5";
 
     public static final String MESSAGE_UNMARK_ATTENDANCE_SUCCESS = "Unmarked Attendance for: %1$s in Week %2$d";
-
     public static final String MESSAGE_ATTENDANCE_ALREADY_ZERO = "Attendance for %1$s in Week %2$d is already 0";
     private static final int FIRST_WEEK = 3;
     private static final int LAST_WEEK = 13;
