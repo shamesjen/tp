@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
+import static seedu.address.logic.parser.ParserUtil.parseGrade;
+import static seedu.address.logic.parser.ParserUtil.parseIndex;
 
 import java.util.stream.Stream;
 
@@ -35,9 +37,11 @@ public class GradeAssignmentCommandParser implements Parser<GradeAssignmentComma
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     GradeAssignmentCommand.MESSAGE_USAGE));
         }
-        Index[] indexes = ParserUtil.parseIndexes(argMultimap.getPreamble());
+        String[] indexes = argMultimap.getPreamble().trim().split("\\s+");
+        Index index = parseIndex(indexes[0]);
+        int grade = parseGrade(indexes[1]);
         Assignment assignment = ParserUtil.parseAssignment(argMultimap.getValue(PREFIX_ASSIGNMENT).get());
-        return new GradeAssignmentCommand(indexes[0], assignment.assignmentName, indexes[1].getZeroBased());
+        return new GradeAssignmentCommand(index, assignment.assignmentName, grade);
     }
 
     /**
