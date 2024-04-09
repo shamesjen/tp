@@ -55,7 +55,12 @@ public class RemoveAssignmentCommand extends Command {
                 throw new CommandException(MESSAGE_ASSIGNMENT_DOES_NOT_EXIST_FAILURE_STRING);
             }
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, assignments));
+        if (model.shouldPurgeAddressBook()) {
+            model.purgeAddressBook();
+        }
+        CommandResult removeAssignmentCommandResult = new CommandResult(String.format(MESSAGE_SUCCESS, assignments));
+        model.commitAddressBook(removeAssignmentCommandResult);
+        return removeAssignmentCommandResult;
     }
 
     /**

@@ -70,10 +70,10 @@ public class UnmarkAllAttendanceCommand extends Command {
         if (model.shouldPurgeAddressBook()) {
             model.purgeAddressBook();
         }
-        CommandResult unmarkCommandResult = new CommandResult(String.format(MESSAGE_UNMARK_ALL_ATTENDANCE_SUCCESS,
-                weekNumber.getZeroBased()));
-        model.commitAddressBook(unmarkCommandResult);
-        return unmarkCommandResult;
+        CommandResult unmarkAllAttendanceCommandResult =
+                new CommandResult(String.format(MESSAGE_UNMARK_ALL_ATTENDANCE_SUCCESS, weekNumber.getZeroBased()));
+        model.commitAddressBook(unmarkAllAttendanceCommandResult);
+        return unmarkAllAttendanceCommandResult;
     }
 
     /**

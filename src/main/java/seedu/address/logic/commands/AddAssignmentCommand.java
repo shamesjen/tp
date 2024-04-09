@@ -66,10 +66,10 @@ public class AddAssignmentCommand extends Command {
             model.purgeAddressBook();
         }
 
-        CommandResult addAssignmenCommandResult = new CommandResult(
+        CommandResult addAssignmentCommandResult = new CommandResult(
             String.format(MESSAGE_SUCCESS, assignments.toString()));
-        model.commitAddressBook(addAssignmenCommandResult);
-        return addAssignmenCommandResult;
+        model.commitAddressBook(addAssignmentCommandResult);
+        return addAssignmentCommandResult;
     }
 
     /**
