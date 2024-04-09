@@ -6,7 +6,7 @@ Are you a CS2109S TA (Teaching Assistant) conducting multiple tutorials a week? 
 
 Introducing nerdTrackerPlus, your ultimate companion in managing student details and tracking their progress effortlessly!
 
-nerdTrackerPlus is a **desktop app** specifically designed for **CS2109S tutors**. It helps you manage student details and progress for your tutorials. nerdTrackerPlus is optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, nerdTrackerPlus can get your student management tasks done faster than traditional GUI apps.
+nerdTrackerPlus is a **desktop app** specifically designed for **CS2109S tutors**. It helps you manage student details and progress for your tutorials. nerdTrackerPlus is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, nerdTrackerPlus can get your student management tasks done faster than traditional GUI apps.
 
 ---
 
@@ -443,6 +443,10 @@ Un-marks the participation scores of all students in the filtered list for a giv
 |:-------------:|:----------------------------------------------:|:-----------------------------------------------:|:-------------------------------------------------------------|
 | `WEEK_NUMBER` | <img width=25px src="assets/ug/red_cross.png"> | <img width=30px src="assets/ug/green_tick.svg"> | WEEK_NUMBER **must be a valid week from the range [3, 13]**. |
 
+<h4>Notes:</h4>
+
+* If 1 or more students has participation score `0`, the `unmarkallp` command will not proceed, and will not un-mark all other students' participation scores even if they have scores greater than `0`.
+
 <h4>Example:</h4>
 
 * `markallp 3` followed by `unmarkallp 3` unmarks the participation score of all students in week 3.
@@ -484,6 +488,10 @@ Un-marks the attendance of all students in the filtered list for a given week.
 |     Field     |                     Prefix                      |                     Required                     | Requirements                                                 |
 |:-------------:|:-----------------------------------------------:|:------------------------------------------------:|:-------------------------------------------------------------|
 | `WEEK_NUMBER` | <img width=25px src="assets/ug/red_cross.png">  | <img width=30px src="assets/ug/green_tick.svg">  | WEEK_NUMBER **must be a valid week from the range [3, 13]**. |
+
+<h4>Notes:</h4>
+
+* If 1 or more students has attendance score `0`, the `unmarkalla` command will not proceed, and will not un-mark all other students' attendance scores even if they have scores greater than `0`.
 
 <h4>Example:</h4>
 
