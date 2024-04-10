@@ -8,6 +8,8 @@ Introducing nerdTrackerPlus, your ultimate companion in managing student details
 
 nerdTrackerPlus is a **desktop app** specifically designed for **CS2109S tutors**. It helps you manage student details and progress for your tutorials. nerdTrackerPlus is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, nerdTrackerPlus can get your student management tasks done faster than traditional GUI apps.
 
+nerdTrackerPlus contains several key features to address these issues such as `markp` and `marka` commands to help you keep track of participation scores and attendance, as well as `adda` to add custom assignments to students!
+
 ---
 
 ## Table of Contents
@@ -58,7 +60,7 @@ nerdTrackerPlus is a **desktop app** specifically designed for **CS2109S tutors*
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+* Items with `…`​ after them can be used multiple times including zero times (unless otherwise stated).<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
@@ -73,7 +75,9 @@ nerdTrackerPlus is a **desktop app** specifically designed for **CS2109S tutors*
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### 1. Viewing help : `help`
+### General commands
+
+#### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -83,8 +87,93 @@ Shows a message explaining how to access the help page.
 
 `help`
 
+#### Undoing a previous command : `undo`
 
-### 2. Adding a student : `add`
+Undoes the previous command that changed data.
+
+<h4>Format:</h4>
+
+`undo`
+
+<h4>Notes:</h4>
+
+* Only undoes a command if it has changed data in nerdTrackerPlus since launch.
+* Will not undo if no commands were issued beforehand.
+
+<h4>Example:</h4>
+
+* `marka 1 3` to mark the attendance of student 1 in week 3, followed by `undo`
+
+![undo](images/ug/undoExample.png)
+
+<h4>Potential errors:</h4>
+
+| Error encountered                                               | How to resolve                                                                     |
+|:----------------------------------------------------------------|:-----------------------------------------------------------------------------------|
+| Unknown command                                                 | Ensure that the command word provided is correct.                                  |
+| Unable to undo since there were no previously issued commands.  | Ensure that at least 1 command was previously used before using the undo command.  |
+
+
+#### Redoing a previously undone command : `redo`
+
+Redoes the previously undone command.
+
+<h4>Format:</h4>
+
+`redo`
+
+<h4>Notes:</h4>
+
+* Redo command must be issued immediately after an undo command.
+* Will only redo the command that was undone immediately prior.
+* Will not redo if no commands were undone beforehand.
+* Maximum number of redo commands issued cannot be greater than the number of undo command issued. <br> e.g. If only 2 undo commands were issued, only a maximum of 2 redo commands can be used.
+
+<h4>Example:</h4>
+
+* `marka 1 3` to mark the attendance of student 1 in week 3, followed by `undo`, then `redo`
+
+![redo](images/ug/redoExample.png)
+
+<h4>Potential errors:</h4>
+
+| Error encountered                                              | How to resolve                                                                      |
+|:---------------------------------------------------------------|:------------------------------------------------------------------------------------|
+| Unknown command                                                | Ensure that the command word provided is correct.                                   |
+| Unable to redo since there were no previously issued commands. | Ensure that at least 1 command was previously undone before using the redo command. |
+
+
+#### Clearing all entries : `clear`
+
+Clears all entries from nerdTrackerPlus.
+
+<h4>Format:</h4>
+
+`clear`
+
+<h4>Example:</h4>
+
+* `clear`
+
+![clear](images/ug/clearExample.png)
+
+
+#### Exiting the program : `exit`
+
+Exits the program.
+
+<h4>Format:</h4>
+
+`exit`
+
+<h4>Example:</h4>
+
+* `exit`
+
+
+### Managing students
+
+#### Adding a student : `add`
 
 Adds a student to nerdTrackerPlus.
 
@@ -103,7 +192,7 @@ A student can have any number of tags (including 0)
 |      `NAME`       |  `n/`  | <img width=30px src="assets/ug/green_tick.svg"> | Name of the student. It should only contain alphanumeric characters and spaces.                                   |
 |  `MATRIC_NUMBER`  |  `m/`  | <img width=30px src="assets/ug/green_tick.svg"> | Matriculation number of the student. It should start and end with a capital letter and have 7 digits in between.  |
 |      `EMAIL`      |  `e/`  | <img width=30px src="assets/ug/green_tick.svg"> | Email of the student. Email should match the format: `<local>@<domain>.<label>`.                                  |
-| `TELEGRAM_HANDLE` | `tl/`  | <img width=30px src="assets/ug/green_tick.svg"> | Telegram username of the student. It should only contain alphanumeric characters and spaces.                      |
+| `TELEGRAM_HANDLE` | `tl/`  | <img width=30px src="assets/ug/green_tick.svg"> | Telegram username of the student. It should only contain alphanumeric characters.                                 |
 |       `TAG`       |  `t/`  | <img width=25px src="assets/ug/red_cross.png">  | Tag(s) for the student. It should only contain alphanumeric characters and spaces. Tags specified must be unique. |
 
 <h4>Notes:</h4>
@@ -117,8 +206,22 @@ A student can have any number of tags (including 0)
 
 ![addStudent](images/ug/addStudentExample.png)
 
+<h4>Potential errors:</h4>
 
-### 3. Listing all students : `list`
+| Error encountered                                                                            | How to resolve                                                                                 |
+|:---------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------|
+| Unknown command                                                                              | Ensure that the command word provided is correct.                                              |
+| Invalid command format                                                                       | Ensure that all required fields are provided.                                                  |
+| Names should only contain alphanumeric characters and spaces, and it should not be blank     | Ensure that the name does not include any special characters.                                  |
+| Emails should be of the format local-part@domain and adhere to the following constraints:... | Ensure that the email follows the correct format specified                                     |
+| Matric numbers should begin and end with capital letters, and comprise 7 digits in between.  | Ensure that the matric number is in the correct format.                                        |
+| Telegram Handle should be alphanumeric without whitespaces                                   | Ensure that the telegram handle does not contain any whitespaces or special characters.        |
+| Tags names should be alphanumeric                                                            | Ensure that the tags does not contain any special characters or whitespaces.                   |
+| This person already exists in the address book                                               | Ensure that the name of the new student to be added does not already exist in nerdTrackerPlus. |
+| Multiple values specified for the following single-valued field(s)                           | Ensure that there are no duplicates for single valued fields.                                  |
+
+
+#### Listing all students : `list`
 
 Shows a list of all students in nerdTrackerPlus.
 
@@ -133,7 +236,7 @@ Shows a list of all students in nerdTrackerPlus.
 ![listStudent](images/ug/listExample.png)
 
 
-### 4. Editing a student : `edit`
+#### Editing a student : `edit`
 
 Edits an existing student in nerdTrackerPlus.
 
@@ -143,19 +246,19 @@ Edits an existing student in nerdTrackerPlus.
 
 <h4>Fields:</h4>
 
-|       Field       | Prefix |                    Required                     | Requirements                                                                                                              |
-|:-----------------:|:------:|:-----------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------|
-|      `INDEX`      |  NIL   | <img width=30px src="assets/ug/green_tick.svg"> | `INDEX` **must be a positive integer** 1, 2, 3 …​ <br>`INDEX` cannot be greater than the number of students in the list.  |
-|      `NAME`       |  `n/`  | <img width=25px src="assets/ug/red_cross.png">  | Name of the student. It should only contain alphanumeric characters and spaces.                                           |
-|  `MATRIC_NUMBER`  |  `m/`  | <img width=25px src="assets/ug/red_cross.png">  | Matriculation number of the student. It should start and end with a capital letter and have 7 digits in between.          |
-|      `EMAIL`      |  `e/`  | <img width=25px src="assets/ug/red_cross.png">  | Email of the student. Email should match the format: `<local>@<domain>.<label>`.                                          |
-| `TELEGRAM_HANDLE` | `tl/`  | <img width=25px src="assets/ug/red_cross.png">  | Telegram username of the student. It should only contain alphanumeric characters and spaces.                              |
-|       `TAG`       |  `t/`  | <img width=25px src="assets/ug/red_cross.png">  | Tag(s) for the student. It should only contain alphanumeric characters and spaces.                                        |
+|       Field       |                     Prefix                      |                    Required                     | Requirements                                                                                                             |
+|:-----------------:|:-----------------------------------------------:|:-----------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------|
+|      `INDEX`      | <img width=25px src="assets/ug/red_cross.png">  | <img width=30px src="assets/ug/green_tick.svg"> | `INDEX` **must be a positive integer** 1, 2, 3 …​ <br>`INDEX` cannot be greater than the number of students in the list. |
+|      `NAME`       |                      `n/`                       | <img width=25px src="assets/ug/red_cross.png">  | Name of the student. It should only contain alphanumeric characters and spaces.                                          |
+|  `MATRIC_NUMBER`  |                      `m/`                       | <img width=25px src="assets/ug/red_cross.png">  | Matriculation number of the student. It should start and end with a capital letter and have 7 digits in between.         |
+|      `EMAIL`      |                      `e/`                       | <img width=25px src="assets/ug/red_cross.png">  | Email of the student. Email should match the format: `<local>@<domain>.<label>`.                                         |
+| `TELEGRAM_HANDLE` |                      `tl/`                      | <img width=25px src="assets/ug/red_cross.png">  | Telegram username of the student. It should only contain alphanumeric characters.                                        |
+|       `TAG`       |                      `t/`                       | <img width=25px src="assets/ug/red_cross.png">  | Tag(s) for the student. It should only contain alphanumeric characters and spaces.                                       |
 
 <h4>Notes:</h4>
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list.
-* `INDEX` must be specified before the other parameters.
+* `INDEX` **must** be specified before the other parameters.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
@@ -167,8 +270,24 @@ Edits an existing student in nerdTrackerPlus.
 
 ![editStudent](images/ug/editStudentExample.png)
 
+<h4>Potential errors:</h4>
 
-### 5. Locating students by name : `find`
+| Error encountered                                                                            | How to resolve                                                                                 |
+|:---------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------|
+| Unknown command                                                                              | Ensure that the command word provided is correct.                                              |
+| Invalid command format                                                                       | Ensure that all required fields are provided.                                                  |
+| At least one field to edit must be provided.                                                 | Ensure that at least 1 field to edit is specified.                                             |
+| The person index provided is invalid                                                         | Ensure that the index provided is not greater than the number of students in the list.         |
+| Names should only contain alphanumeric characters and spaces, and it should not be blank     | Ensure that the name does not include any special characters.                                  |
+| Emails should be of the format local-part@domain and adhere to the following constraints:... | Ensure that the email follows the correct format specified                                     |
+| Matric numbers should begin and end with capital letters, and comprise 7 digits in between.  | Ensure that the matric number is in the correct format.                                        |
+| Telegram Handle should be alphanumeric without whitespaces                                   | Ensure that the telegram handle does not contain any whitespaces or special characters.        |
+| Tags names should be alphanumeric                                                            | Ensure that the tags does not contain any special characters or whitespaces.                   |
+| This person already exists in the address book                                               | Ensure that the name of the new student to be added does not already exist in nerdTrackerPlus. |
+| Multiple values specified for the following single-valued field(s)                           | Ensure that there are no duplicates for single valued fields.                                  |
+
+
+#### Locating students by name : `find`
 
 Finds students whose names contain any of the given keywords.
 
@@ -194,12 +313,18 @@ Finds students whose names contain any of the given keywords.
 
 <h4>Example:</h4>
 
-* `find alex charlotte` returns `Alex Yeoh`, `Charlotte Oliveiro`
+* `find alex charlotte` returns `Alex Yeoh` and `Charlotte Oliveiro`
 
 ![findStudent](images/ug/findStudentsExample.png)
 
+<h4>Potential error:</h4>
 
-### 6. Deleting a student : `delete`
+| Error encountered | How to resolve                                    |
+|:------------------|:--------------------------------------------------|
+| Unknown command   | Ensure that the command word provided is correct. |
+
+
+#### Deleting a student : `delete`
 
 Deletes the specified student from nerdTrackerPlus.
 
@@ -224,21 +349,29 @@ Deletes the specified student from nerdTrackerPlus.
 
 ![deleteStudent](images/ug/deleteStudentExample.png)
 
+<h4>Potential errors:</h4>
 
-### 7. Remove tag from a student : `removetag`
+| Error encountered                     | How to resolve                                                                          |
+|:--------------------------------------|:----------------------------------------------------------------------------------------|
+| Unknown command                       | Ensure that the command word provided is correct.                                       |
+| Invalid command format                | Ensure that all required fields are provided.                                           |
+| The person index provided is invalid  | Ensure that the index provided is not greater than the number of students in the list.  |
+
+
+#### Remove tag from a student : `removetag`
 
 Deletes the specified tag from a student in nerdTrackerPlus.
 
 <h4>Format:</h4>
 
-`removetag INDEX [t/TAG]…`
+`removetag INDEX t/TAG…`
 
 <h4>Fields:</h4>
 
-|  Field  |                     Prefix                     |                    Required                     | Requirements                                                                                                             |
-|:-------:|:----------------------------------------------:|:-----------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------|
-| `INDEX` | <img width=25px src="assets/ug/red_cross.png"> | <img width=30px src="assets/ug/green_tick.svg"> | `INDEX` **must be a positive integer** 1, 2, 3 …​ <br>`INDEX` cannot be greater than the number of students in the list. |
-|  `TAG`  |                      `t/`                      | <img width=30px src="assets/ug/green_tick.svg"> | Tag on a student. It should only contain alphanumeric characters. Tag must exist on the student.                         |
+|  Field  |                     Prefix                     |                    Required                     | Requirements                                                                                                                              |
+|:-------:|:----------------------------------------------:|:-----------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------|
+| `INDEX` | <img width=25px src="assets/ug/red_cross.png"> | <img width=30px src="assets/ug/green_tick.svg"> | `INDEX` **must be a positive integer** 1, 2, 3 …​ <br>`INDEX` cannot be greater than the number of students in the list.                  |
+|  `TAG`  |                      `t/`                      | <img width=30px src="assets/ug/green_tick.svg"> | It should only contain alphanumeric characters. Tag must exist on the student. At least 1 or more tags must be specified.                 |
 
 * Removes tags of the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
@@ -250,7 +383,19 @@ Deletes the specified tag from a student in nerdTrackerPlus.
 
 ![removeTag](images/ug/removeTagExample.png)
 
-### 8. Remove tag(s) from all students : `removetagall`
+<h4>Potential errors:</h4>
+
+| Error encountered                        | How to resolve                                                                         |
+|:-----------------------------------------|:---------------------------------------------------------------------------------------|
+| Unknown command                          | Ensure that the command word provided is correct.                                      |
+| Invalid command format                   | Ensure that all required fields are provided.                                          |
+| Index is not a non-zero unsigned integer | Ensure that the index provided is a positive integer.                                  |
+| The person index provided is invalid     | Ensure that the index provided is not greater than the number of students in the list. |
+| This person does not have that tag       | Ensure that the person specified at the index contains the tag.                        |
+| Tags names should be alphanumeric        | Ensure that the tags does not contain any special characters or whitespaces.           |
+
+
+####  Remove tag(s) from all students : `removetagall`
 
 Deletes the specified tag(s) from all students that have the tag(s).
 
@@ -273,33 +418,50 @@ Deletes the specified tag(s) from all students that have the tag(s).
 
 ![removeTagAll](images/ug/removeTagAllExample.png)
 
+<h4>Potential errors:</h4>
 
-### 9. Filtering by tags : `filter`
+| Error encountered                  | How to resolve                                                               |
+|:-----------------------------------|:-----------------------------------------------------------------------------|
+| Unknown command                    | Ensure that the command word provided is correct.                            |
+| Invalid command format             | Ensure that all required fields are provided.                                |
+| No persons have any of the tag(s)  | Ensure that at least 1 person has the tag specified.                         |
+| Tags names should be alphanumeric  | Ensure that the tags does not contain any special characters or whitespaces. |
+
+
+#### Filtering by tags : `filter`
 
 Filters all students with the specified tags.
 
 <h4>Format</h4>
 
-`filter TAG(S)…​`
+`filter TAG…​`
 
 <h4>Fields:</h4>
 
-|   Field   |                     Prefix                     |                     Required                     | Requirements                                     |
-|:---------:|:----------------------------------------------:|:------------------------------------------------:|:-------------------------------------------------|
-| `TAG(S)`  | <img width=25px src="assets/ug/red_cross.png"> | <img width=30px src="assets/ug/green_tick.svg">  | Tag should only contain alphanumeric characters. |
+| Field  |                     Prefix                     |                     Required                     | Requirements                                     |
+|:------:|:----------------------------------------------:|:------------------------------------------------:|:-------------------------------------------------|
+| `TAG`  | <img width=25px src="assets/ug/red_cross.png"> | <img width=30px src="assets/ug/green_tick.svg">  | Tag should only contain alphanumeric characters. |
 
 <h4>Notes:</h4>
 
 * If `filter` is used and more than 1 tag is used to filter, students that match any one of the tags will be shown.
-* Tags are case in-sensitive.
+* Tags are case-sensitive.
 
 <h4>Example:</h4>
-* `filter G19Group1 G19Group2`
+* `filter family`
 
-**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
+![filterStudent](images/ug/filterStudentExample.png)
 
+<h4>Potential errors:</h4>
 
-### 10. Marking individual participation scores : `markp`
+| Error encountered                  | How to resolve                                                               |
+|:-----------------------------------|:-----------------------------------------------------------------------------|
+| Unknown command                    | Ensure that the command word provided is correct.                            |
+| Invalid command format             | Ensure that all required fields are provided.                                |
+
+### Managing participation, attendance and assignments
+
+#### Marking individual participation scores : `markp`
 
 Marks the participation score of a specific student.
 
@@ -325,8 +487,17 @@ Marks the participation score of a specific student.
 
 ![markParticipationIndividual](images/ug/markParticipationIndividualExample.png)
 
+<h4>Potential errors:</h4>
 
-### 11. Un-marking individual participation scores : `unmarkp`
+| Error encountered                     | How to resolve                                                                          |
+|:--------------------------------------|:----------------------------------------------------------------------------------------|
+| Unknown command                       | Ensure that the command word provided is correct.                                       |
+| Invalid command format                | Ensure that all required fields are provided.                                           |
+| The person index provided is invalid  | Ensure that the index provided is not greater than the number of students in the list.  |
+| The week provided is invalid          | Ensure that the week number is in the range [3, 13] inclusive.                          |
+
+
+#### Un-marking individual participation scores : `unmarkp`
 
 Un-marks the participation score of a specific student.
 
@@ -352,7 +523,18 @@ Un-marks the participation score of a specific student.
 
 ![unmarkParticipationIndividual](images/ug/unmarkParticipationIndividualExample.png)
 
-### 12. Marking individual attendance scores : `marka`
+<h4>Potential errors:</h4>
+
+| Error encountered                                                     | How to resolve                                                                                |
+|:----------------------------------------------------------------------|:----------------------------------------------------------------------------------------------|
+| Unknown command                                                       | Ensure that the command word provided is correct.                                             |
+| Invalid command format                                                | Ensure that all required fields are provided.                                                 |
+| The person index provided is invalid                                  | Ensure that the index provided is not greater than the number of students in the list.        |
+| The week provided is invalid                                          | Ensure that the week number is in the range [3, 13] inclusive.                                |
+| Participation for `STUDENT_NAME` in Week `WEEK_NUMBER` is already 0   | Ensure that all students in the currently filtered list have at least 1 participation score.  |
+
+
+#### Marking individual attendance scores : `marka`
 
 Marks the attendance of a specific student.
 
@@ -378,8 +560,17 @@ Marks the attendance of a specific student.
 
 ![markAttendanceIndividual](images/ug/markAttendanceIndividualExample.png)
 
+<h4>Potential errors:</h4>
 
-### 13. Un-marking individual attendance scores : `unmarka`
+| Error encountered                     | How to resolve                                                                          |
+|:--------------------------------------|:----------------------------------------------------------------------------------------|
+| Unknown command                       | Ensure that the command word provided is correct.                                       |
+| Invalid command format                | Ensure that all required fields are provided.                                           |
+| The person index provided is invalid  | Ensure that the index provided is not greater than the number of students in the list.  |
+| The week provided is invalid          | Ensure that the week number is in the range [3, 13] inclusive.                          |
+
+
+#### Un-marking individual attendance scores : `unmarka`
 
 Un-marks the attendance of a specific student.
 
@@ -401,12 +592,21 @@ Un-marks the attendance of a specific student.
 
 <h4>Example:</h4>
 
-* `marka 1 3` followed by `unmarka 1 3` unmarks the attendace of Alex Yeoh in week 3.
+* `marka 1 3` followed by `unmarka 1 3` unmarks the attendance of Alex Yeoh in week 3.
 
 ![unmarkAttendanceIndividual](images/ug/unmarkAttendanceIndividualExample.png)
 
+<h4>Potential errors:</h4>
 
-### 14. Marking all participation scores : `markallp`
+| Error encountered                     | How to resolve                                                                          |
+|:--------------------------------------|:----------------------------------------------------------------------------------------|
+| Unknown command                       | Ensure that the command word provided is correct.                                       |
+| Invalid command format                | Ensure that all required fields are provided.                                           |
+| The person index provided is invalid  | Ensure that the index provided is not greater than the number of students in the list.  |
+| The week provided is invalid          | Ensure that the week number is in the range [3, 13] inclusive.                          |
+
+
+#### Marking all participation scores : `markallp`
 
 Marks the participation scores of all students in the filtered list for a given week.
 
@@ -426,8 +626,16 @@ Marks the participation scores of all students in the filtered list for a given 
 
 ![markParticipationAll](images/ug/markParticipationAllExample.png)
 
+<h4>Potential errors:</h4>
 
-### 15. Un-marking all participation scores : `unmarkallp`
+| Error encountered                     | How to resolve                                                                          |
+|:--------------------------------------|:----------------------------------------------------------------------------------------|
+| Unknown command                       | Ensure that the command word provided is correct.                                       |
+| Invalid command format                | Ensure that all required fields are provided.                                           |
+| The week provided is invalid          | Ensure that the week number is in the range [3, 13] inclusive.                          |
+
+
+#### Un-marking all participation scores : `unmarkallp`
 
 Un-marks the participation scores of all students in the filtered list for a given week.
 
@@ -451,8 +659,17 @@ Un-marks the participation scores of all students in the filtered list for a giv
 
 ![unmarkParticipationAll](images/ug/unmarkParticipationAllExample.png)
 
+<h4>Potential errors:</h4>
 
-### 16. Marking all attendance scores : `markalla`
+| Error encountered                                                    | How to resolve                                                                               |
+|:---------------------------------------------------------------------|:---------------------------------------------------------------------------------------------|
+| Unknown command                                                      | Ensure that the command word provided is correct.                                            |
+| Invalid command format                                               | Ensure that all required fields are provided.                                                |
+| The week provided is invalid                                         | Ensure that the week number is in the range [3, 13] inclusive.                               |
+| Participation for `STUDENT_NAME` in Week `WEEK_NUMBER` is already 0  | Ensure that all students in the currently filtered list have at least 1 participation score. |
+
+
+#### Marking all attendance scores : `markalla`
 
 Marks the attendance of all students in the filtered list for a given week.
 
@@ -472,8 +689,16 @@ Marks the attendance of all students in the filtered list for a given week.
 
 ![markAttendanceAll](images/ug/markAttendanceAllExample.png)
 
+<h4>Potential errors:</h4>
 
-### 17. Un-marking all attendance scores : `unmarkalla`
+| Error encountered                     | How to resolve                                                                          |
+|:--------------------------------------|:----------------------------------------------------------------------------------------|
+| Unknown command                       | Ensure that the command word provided is correct.                                       |
+| Invalid command format                | Ensure that all required fields are provided.                                           |
+| The week provided is invalid          | Ensure that the week number is in the range [3, 13] inclusive.                          |
+
+
+#### Un-marking all attendance scores : `unmarkalla`
 
 Un-marks the attendance of all students in the filtered list for a given week.
 
@@ -497,8 +722,16 @@ Un-marks the attendance of all students in the filtered list for a given week.
 
 ![unmarkAttendanceAll](images/ug/unmarkAttendanceAllExample.png)
 
+<h4>Potential errors:</h4>
 
-### 18. Adding a custom assignment : `adda`
+| Error encountered                     | How to resolve                                                                          |
+|:--------------------------------------|:----------------------------------------------------------------------------------------|
+| Unknown command                       | Ensure that the command word provided is correct.                                       |
+| Invalid command format                | Ensure that all required fields are provided.                                           |
+| The week provided is invalid          | Ensure that the week number is in the range [3, 13] inclusive.                          |
+
+
+#### Adding a custom assignment : `adda`
 
 Adds assignment(s) to all users in the filtered list if they do not already exist.
 
@@ -515,6 +748,7 @@ Adds assignment(s) to all users in the filtered list if they do not already exis
 <h4>Notes:</h4>
 
 * Each assignment is case-sensitive e.g. `a/assignment1` and `a/Assignment1` are 2 different assignments.
+* Duplicate assignments will be ignored e.g. If `a/assignment1` and `a/assignment1` are specified, only 1 assignment is added.
 
 <h4>Example:</h4>
 
@@ -522,21 +756,28 @@ Adds assignment(s) to all users in the filtered list if they do not already exis
 
 ![addAssignment](images/ug/addAssignmentExample.png)
 
+| Error encountered                                                                 | How to resolve                                                                                                    |
+|:----------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------|
+| Unknown command                                                                   | Ensure that the command word provided is correct.                                                                 |
+| Invalid command format                                                            | Ensure that all required fields are provided.                                                                     |
+| Assignment names should be alphanumeric                                           | Ensure that assignment names contain only alphanumeric characters.                                                |
+| No new assignments added. All students already have the assignment(s) specified.  | Ensure that the new assignment to be added does not currently exist on **ALL** the students in the filtered list. |
 
-### 19. Removing a custom assignment : `removea`
+
+#### Removing a custom assignment : `removea`
 
 Removes assignment(s) from all users in the filtered list if they have them.
 
 <h4>Format:</h4>
 
-`removea a/ASSIGNMENT…​`
+`removea a/ASSIGNMENT…`
 
 <h4>Fields:</h4>
 
-|     Field      | Prefix |                     Required                     | Requirements                                                                                                        |
-|:--------------:|:------:|:------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------|
-| `ASSIGNMENT…​` |   a/   | <img width=30px src="assets/ug/green_tick.svg">  | Assignment(s) should only contain alphanumeric characters. At least 1 assignment specified must exists on students. |
-
+|     Field     | Prefix |                     Required                     | Requirements                                                                                                       |
+|:-------------:|:------:|:------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------|
+| `ASSIGNMENT…` |   a/   | <img width=30px src="assets/ug/green_tick.svg">  | Assignment(s) should only contain alphanumeric characters. At least 1 assignment specified must exist on students. |
+    
 <h4>Notes:</h4>
 
 * Each assignment is case-sensitive e.g. `a/assignment1` and `a/Assignment1` are 2 different assignments.
@@ -547,8 +788,17 @@ Removes assignment(s) from all users in the filtered list if they have them.
 
 ![removeAssignment](images/ug/removeAssignmentExample.png)
 
+<h4>Potential errors:</h4>
 
-### 20. Grading a custom assignment : `grade`
+| Error encountered                                                      | How to resolve                                                     |
+|:-----------------------------------------------------------------------|:-------------------------------------------------------------------|
+| Unknown command                                                        | Ensure that the command word provided is correct.                  |
+| Invalid command format                                                 | Ensure that all required fields are provided.                      |
+| Assignment names should be alphanumeric                                | Ensure that assignment names contain only alphanumeric characters. |
+| No assignments removed. No students have the assignment(s) specified.  | Ensure that the assigment specified exist on at least 1 student.   |
+
+
+#### Grading a custom assignment : `grade`
 
 Grades and assigns a score to an assignment for a given student.
 
@@ -564,87 +814,34 @@ Grades and assigns a score to an assignment for a given student.
 |   `SCORE`    | <img width=25px src="assets/ug/red_cross.png">  | <img width=30px src="assets/ug/green_tick.svg">  | SCORE **must be a non-negative integer** 0, 1, 2 …​                                                                   |
 | `ASSIGNMENT` |                       a/                        | <img width=30px src="assets/ug/green_tick.svg">  | Assignment should only contain alphanumeric characters. Assignment must exist on the specified student.               |
 
-<h4>Example:</h4>
-
-* `grade 1 10 a/assignment1 `
-
-**TODO: INSERT SCREENSHOT OF EXPECTED OUTPUT**
-
-### 21. Undoing a previous command : `undo`
-
-Undoes the previous command that changed data.
-
-<h4>Format:</h4>
-
-`undo`
-
 <h4>Notes:</h4>
 
-* Only undoes a command if it has changed data in nerdTrackerPlus since launch.
-* Will not undo if no commands were issued beforehand.
-
+* The fields INDEX and SCORE **must** precede before the ASSIGNMENT. <br>e.g. `grade a/assignment1 1 100` is incorrect while `grade 1 100 a/assignment1` is correct.
 <h4>Example:</h4>
 
-* `marka 1 3` to mark the attendance of student 1 in week 3, followed by `undo`
+* `grade 1 100 a/assignment1`
 
-![undo](images/ug/undoExample.png)
+![gradeAssignment](images/ug/gradeAssignmentExample.png)
 
+<h4>Potential errors:</h4>
 
-### 22. Redoing a previously undone command : `redo`
-
-Redoes the previously undone command.
-
-<h4>Format:</h4>
-
-`redo`
-
-<h4>Notes:</h4>
-
-* Will only redo the command that was undone immediately prior.
-* Will not redo if no commands were undone beforehand.
-
-<h4>Example:</h4>
-
-* `marka 1 3` to mark the attendance of student 1 in week 3, followed by `undo`, then `redo`
-
-![redo](images/ug/redoExample.png)
+| Error encountered                              | How to resolve                                                                                            |
+|:-----------------------------------------------|:----------------------------------------------------------------------------------------------------------|
+| Unknown command                                | Ensure that the command word provided is correct.                                                         |
+| Invalid command format                         | Ensure that all required fields are provided.                                                             |
+| Invalid arguments provided for Grade Command.  | Ensure that the score provided is an integer between the range [0, MAX_INT], where MAX_INT is 2147483647. |
+| Index is not a non-zero unsigned integer.      | Ensure that the index provided is a positive integer.                                                     |
+| The person index provided is invalid           | Ensure that the index provided is not greater than the number of students in the list.                    |
+| The week provided is invalid                   | Ensure that the week number is in the range [3, 13] inclusive.                                            |
 
 
-### 23. Clearing all entries : `clear`
-
-Clears all entries from nerdTrackerPlus.
-
-<h4>Format:</h4>
-
-`clear`
-
-<h4>Example:</h4>
-
-* `clear`
-
-![clear](images/ug/clearExample.png)
-
-
-### 24. Exiting the program : `exit`
-
-Exits the program.
-
-<h4>Format:</h4>
-
-`exit`
-
-<h4>Example:</h4>
-
-* `exit`
-
-
-### Saving the data
+## Saving the data
 
 nerdTrackerPlus data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+## Editing the data file
 
-nerdTrackerPlus data are saved automatically as a JSON file `[JAR file location]/data/nerdTrackerPlus.json`. Advanced users are welcome to update data directly by editing that data file.
+nerdTrackerPlus data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, nerdTrackerPlus will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -662,6 +859,23 @@ Furthermore, certain edits can cause the nerdTrackerPlus to behave in unexpected
 
 ## Glossary
 
+### Participation
+
+A grading criteria to evaluate CS2109S students based on their active involvement during tutorials. It quantifies how frequently a student voluntarily contributes answers or engages in discussions.
+
+### Attendance
+
+A grading criteria to evaluate CS2109s students based on their presence during tutorials. It quantifies students' punctuality and regularity in attending tutorials.
+
+### Integers
+
+A whole number in the range -2147483647 to 2147483647 that does not contain any fractions or decimals.
+
+### MAX_INT / MIN_INT
+
+The maximum / minimum value that can be represented with an integer. <br>
+For signed integers, MAX_INT = 2147483647 while MIN_INT = -2147483647.
+
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
@@ -672,39 +886,39 @@ Furthermore, certain edits can cause the nerdTrackerPlus to behave in unexpected
 
 ### Managing students
 
-| Action                                                                          | Format                                                                           | Example                                                      |
-|:--------------------------------------------------------------------------------|:---------------------------------------------------------------------------------|:-------------------------------------------------------------|
-| [Add student](#2-adding-a-student--add)                                         | `add n/NAME m/MATRIC_NUMBER e/EMAIL tl/TELEGRAM_HANDLE [t/TAG]…​`                | `add n/John Doe m/A1234567Z e/johnd@u.nus.edu tl/johndoe01`  |
-| [List students](#3-listing-all-students--list)                                  | `list`                                                                           | `list`                                                       |
-| [Edit student](#4-editing-a-student--edit)                                      | `edit INDEX [n/NAME] [m/MATRIC_NUMBER] [e/EMAIL] [tl/TELEGRAM_HANDLE] [t/TAG]…​` | `edit 1 m/A1111111Z e/johndoe@gmail.com`                     |
-| [Find student](#5-locating-students-by-name--find)                              | `find KEYWORD [MORE_KEYWORDS]`                                                   | `find alex david`                                            |
-| [Delete student](#6-deleting-a-student--delete)                                 | `delete INDEX`                                                                   | `delete 2`                                                   |
-| [Remove tag from student](#7-remove-tag-from-a-student--removetag)              | `removetag INDEX [t/TAG]…`                                                       | `removetag 2 t/friend`                                       |
-| [Remove tag from all students](#8-remove-tags-from-all-students--removetagall)  | `removetagall t/TAG(S)…​`                                                        | `removetagall t/G19Group1 t/family`                          |
-| [Filter student](#9-filtering-by-tags--filter)                                  | `filter [all/any] NUMBER_OF_TAGS TAG(S)…​`                                       | `filter all 2 G19Group1 G19Group2`                           |
+| Action                                                                       | Format                                                                           | Example                                                     |
+|:-----------------------------------------------------------------------------|:---------------------------------------------------------------------------------|:------------------------------------------------------------|
+| [Add student](#adding-a-student--add)                                        | `add n/NAME m/MATRIC_NUMBER e/EMAIL tl/TELEGRAM_HANDLE [t/TAG]…​`                | `add n/John Doe m/A1234567Z e/johnd@u.nus.edu tl/johndoe01` |
+| [List students](#listing-all-students--list)                                 | `list`                                                                           | `list`                                                      |
+| [Edit student](#editing-a-student--edit)                                     | `edit INDEX [n/NAME] [m/MATRIC_NUMBER] [e/EMAIL] [tl/TELEGRAM_HANDLE] [t/TAG]…​` | `edit 1 m/A1111111Z e/johndoe@gmail.com`                    |
+| [Find student](#locating-students-by-name--find)                             | `find KEYWORD [MORE_KEYWORDS]`                                                   | `find alex david`                                           |
+| [Delete student](#deleting-a-student--delete)                                | `delete INDEX`                                                                   | `delete 2`                                                  |
+| [Remove tag from student](#remove-tag-from-a-student--removetag)             | `removetag INDEX [t/TAG]…`                                                       | `removetag 2 t/friend`                                      |
+| [Remove tag from all students](#remove-tags-from-all-students--removetagall) | `removetagall TAG…​`                                                             | `removetagall t/G19Group1 t/family`                         |
+| [Filter student](#filtering-by-tags--filter)                                 | `filter TAG…​`                                                                   | `filter G19Group1 G19Group2`                                |
 
 ### Managing participation, attendance and assignments
 
-| Action                                                                                     | Format                             | Example                               |
-|:-------------------------------------------------------------------------------------------|:-----------------------------------|:--------------------------------------|
-| [Mark individual participation](#10-marking-individual-participation-scores--markp)        | `markp INDEX WEEK_NUMBER`          | `markp 1 3`                           |
-| [Unmark individual participation](#11-un-marking-individual-participation-scores--unmarkp) | `unmarkp INDEX WEEK_NUMBER`        | `unmarkp 1 3`                         |
-| [Mark individual attendance](#12-marking-individual-attendance-scores--marka)              | `marka INDEX WEEK_NUMBER`          | `marka 1 3`                           |
-| [Unmark individual attendance](#13-un-marking-individual-attendance-scores--unmarka)       | `unmarka INDEX WEEK_NUMBER`        | `unmarka 1 3`                         |
-| [Mark all participation](#14-marking-all-participation-scores--markallp)                   | `markallp WEEK_NUMBER`             | `markallp 3`                          |
-| [Unmark all participation](#15-un-marking-all-participation-scores--unmarkallp)            | `umarkallp WEEK_NUMBER`            | `umarkallp 3`                         |
-| [Mark all attendance](#16-marking-all-attendance-scores--markalla)                         | `markalla WEEK_NUMBER`             | `markalla 3`                          |
-| [Unmark all attendance](#17-un-marking-all-attendance-scores--unmarkalla)                  | `unmarkalla WEEK_NUMBER`           | `unmarkalla 3`                        |
-| [Add assignment](#18-adding-a-custom-assignment--adda)                                     | `adda a/ASSIGNMENT…​`              | `adda a/assignment1 a/assignment2`    |
-| [Remove assignment](#19-removing-a-custom-assignment--removea)                             | `removea a/ASSIGNMENT…​`           | `removea a/assignment1 a/assignment2` |
-| [Grade assignment](#20-grading-a-custom-assignment--grade)                                 | `grade INDEX SCORE a/ASSIGNMENT`   | `grade 1 100 a/assignment1`           |
+| Action                                                                                  | Format                             | Example                               |
+|:----------------------------------------------------------------------------------------|:-----------------------------------|:--------------------------------------|
+| [Mark individual participation](#marking-individual-participation-scores--markp)        | `markp INDEX WEEK_NUMBER`          | `markp 1 3`                           |
+| [Unmark individual participation](#un-marking-individual-participation-scores--unmarkp) | `unmarkp INDEX WEEK_NUMBER`        | `unmarkp 1 3`                         |
+| [Mark individual attendance](#marking-individual-attendance-scores--marka)              | `marka INDEX WEEK_NUMBER`          | `marka 1 3`                           |
+| [Unmark individual attendance](#un-marking-individual-attendance-scores--unmarka)       | `unmarka INDEX WEEK_NUMBER`        | `unmarka 1 3`                         |
+| [Mark all participation](#marking-all-participation-scores--markallp)                   | `markallp WEEK_NUMBER`             | `markallp 3`                          |
+| [Unmark all participation](#un-marking-all-participation-scores--unmarkallp)            | `umarkallp WEEK_NUMBER`            | `umarkallp 3`                         |
+| [Mark all attendance](#marking-all-attendance-scores--markalla)                         | `markalla WEEK_NUMBER`             | `markalla 3`                          |
+| [Unmark all attendance](#un-marking-all-attendance-scores--unmarkalla)                  | `unmarkalla WEEK_NUMBER`           | `unmarkalla 3`                        |
+| [Add assignment](#adding-a-custom-assignment--adda)                                     | `adda a/ASSIGNMENT…​`              | `adda a/assignment1 a/assignment2`    |
+| [Remove assignment](#removing-a-custom-assignment--removea)                             | `removea a/ASSIGNMENT…​`           | `removea a/assignment1 a/assignment2` |
+| [Grade assignment](#grading-a-custom-assignment--grade)                                 | `grade INDEX SCORE a/ASSIGNMENT`   | `grade 1 100 a/assignment1`           |
 
 ### General
 
-| Action                                                | Format   | Example |
-|:------------------------------------------------------|:---------|:--------|
-| [View Help](#1-viewing-help--help)                    | `help`   | `help`  |
-| [Undo](#21-undoing-a-previous-command--undo)          | `undo`   | `undo`  |
-| [Redo](#22-redoing-a-previously-undone-command--redo) | `redo`   | `redo`  |
-| [Clear](#23-clearing-all-entries--clear)              | `clear`  | `clear` |
-| [Exit](#24-exiting-the-program--exit)                 | `exit`   | `exit`  |
+| Action                                             | Format   | Example |
+|:---------------------------------------------------|:---------|:--------|
+| [View Help](#viewing-help--help)                   | `help`   | `help`  |
+| [Undo](#undoing-a-previous-command--undo)          | `undo`   | `undo`  |
+| [Redo](#redoing-a-previously-undone-command--redo) | `redo`   | `redo`  |
+| [Clear](#clearing-all-entries--clear)              | `clear`  | `clear` |
+| [Exit](#exiting-the-program--exit)                 | `exit`   | `exit`  |
