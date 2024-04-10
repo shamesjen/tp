@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -89,7 +88,7 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withAssignments(String... assignments) {
-        List<Assignment> assignmentSet = Stream.of(assignments).map(Assignment::new).collect(Collectors.toList());
+        Set<Assignment> assignmentSet = Stream.of(assignments).map(Assignment::new).collect(Collectors.toSet());
         descriptor.setAssignments(assignmentSet);
         return this;
     }

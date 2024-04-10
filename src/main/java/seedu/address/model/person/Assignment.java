@@ -63,8 +63,19 @@ public class Assignment {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Assignment // instanceof handles nulls
-                && assignmentName.equals(((Assignment) other).assignmentName)); // state check
+        if (other == this) {
+            return true;
+        }
+        if (other == null || getClass() != other.getClass()) {
+            return false;
+        }
+        Assignment that = (Assignment) other;
+        return assignmentName.equals(that.assignmentName);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return assignmentName.hashCode();
     }
 }

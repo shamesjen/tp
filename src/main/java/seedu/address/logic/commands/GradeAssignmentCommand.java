@@ -4,8 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -59,15 +60,17 @@ public class GradeAssignmentCommand extends Command {
         }
 
         Person personToMark = lastShownList.get(targetIndex.getZeroBased());
-        List<Assignment> assignments = personToMark.getAssignments();
-        List<Assignment> newAssignments = new ArrayList<>(assignments);
+        Set<Assignment> assignments = personToMark.getAssignments();
+        Set<Assignment> newAssignments = new HashSet<>(assignments);
         boolean assignmentFound = false;
 
         for (Assignment assignment : assignments) {
             if (assignment.getName().equals(assignmentName)) {
                 assignmentFound = true;
                 Assignment newAssignment = new Assignment(assignment.getName(), assignmentScore);
-                newAssignments.set(newAssignments.indexOf(assignment), newAssignment);
+                newAssignments.remove(assignment);
+                newAssignments.add(newAssignment);
+
             }
         }
 

@@ -109,8 +109,7 @@ public class UnmarkAllAttendanceCommand extends Command {
         Email email = personToUnmark.getEmail();
         TelegramHandle telegramHandle = personToUnmark.getTelegramHandle();
         Set<Tag> tags = personToUnmark.getTags();
-        List<Assignment> assignments = personToUnmark.getAssignments();
-
+        Set<Assignment> assignments = personToUnmark.getAssignments();
         List<Integer> participationScores = personToUnmark.getParticipationScores();
 
         return new Person(name, matricNumber, email, telegramHandle,

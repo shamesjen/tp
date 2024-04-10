@@ -7,8 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -50,7 +49,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         TelegramHandle telegramHandle = ParserUtil.parseTelegramHandle(
                 argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        List<Assignment> assignmentList = new ArrayList<>();
+        Set<Assignment> assignmentList = new HashSet<>();
 
         Person person = new Person(name, matricNumber, email, telegramHandle, assignmentList, tagList);
 

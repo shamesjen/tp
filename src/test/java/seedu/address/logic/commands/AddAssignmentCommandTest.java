@@ -5,7 +5,9 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,15 +33,15 @@ public class AddAssignmentCommandTest {
 
     @Test
     public void execute_addAssignment_success() {
-        List<Assignment> assignments = new ArrayList<>();
+        Set<Assignment> assignments = new HashSet<>();
         assignments.add(ASSIGNMENT_STUB1);
         Person firstPerson = model.getFilteredPersonList().get(0);
-        Person originalPerson = new PersonBuilder(firstPerson).withAssignments(new ArrayList<>(assignments)).build();
+        Person originalPerson = new PersonBuilder(firstPerson).withAssignments(new HashSet<>(assignments)).build();
         model.setPerson(firstPerson, originalPerson);
         List<Assignment> newAssignments = new ArrayList<>();
         newAssignments.add(ASSIGNMENT_STUB1);
         newAssignments.add(ASSIGNMENT_STUB3);
-        Person editedPerson = new PersonBuilder(firstPerson).withAssignments(new ArrayList<>(newAssignments)).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withAssignments(new HashSet<>(newAssignments)).build();
         AddAssignmentCommand addAssignmentCommand = new AddAssignmentCommand(assignments);
 
         String expectedMessage = String.format(AddAssignmentCommand.MESSAGE_SUCCESS, assignments);
@@ -50,11 +52,11 @@ public class AddAssignmentCommandTest {
 
     @Test
     public void execute_assignmentExists_throwsCommandException() {
-        List<Assignment> assignments = new ArrayList<>();
+        Set<Assignment> assignments = new HashSet<>();
         assignments.add(ASSIGNMENT_STUB1);
         List<Person> lastShownList = model.getFilteredPersonList();
         for (Person person : lastShownList) {
-            List<Assignment> newAssignments = AddAssignmentCommand.generateAssignmentList(person, assignments);
+            Set<Assignment> newAssignments = AddAssignmentCommand.generateAssignmentList(person, assignments);
             if (newAssignments.size() > person.getAssignments().size()) {
             }
             Person newPerson = new Person(person.getName(), person.getMatricNumber(),

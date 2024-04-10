@@ -3,8 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -29,11 +30,11 @@ public class RemoveAssignmentCommand extends Command {
     public static final String MESSAGE_ASSIGNMENT_DOES_NOT_EXIST_FAILURE_STRING = "No assignments removed. "
         + "No students have the assignment(s) specified.";
 
-    private final List<Assignment> assignments;
+    private final Set<Assignment> assignments;
 
     private boolean hasAssignment = false;
 
-    public RemoveAssignmentCommand(List<Assignment> assignments) {
+    public RemoveAssignmentCommand(Set<Assignment> assignments) {
         this.assignments = assignments;
     }
 
@@ -42,7 +43,7 @@ public class RemoveAssignmentCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
         for (Person person : lastShownList) {
-            List<Assignment> newAssignments = generateAssignmentList(person, assignments);
+            Set<Assignment> newAssignments = generateAssignmentSet(person, assignments);
             if (newAssignments.size() < person.getAssignments().size()) {
                 hasAssignment = true;
             }
@@ -69,8 +70,8 @@ public class RemoveAssignmentCommand extends Command {
      * @param assignments List of assignments to remove.
      * @return List of assignments for the person.
      */
-    private List<Assignment> generateAssignmentList(Person person, List<Assignment> assignments) {
-        List<Assignment> newAssignments = new ArrayList<>(person.getAssignments());
+    private Set<Assignment> generateAssignmentSet(Person person, Set<Assignment> assignments) {
+        Set<Assignment> newAssignments = new HashSet<>(person.getAssignments());
         newAssignments.removeAll(assignments);
         return newAssignments;
     }
