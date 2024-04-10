@@ -33,6 +33,9 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
         List<String> assignments = argMultimap.getAllValues(PREFIX_ASSIGNMENT);
         Set<Assignment> assignmentSet = new HashSet<>();
         for (String assignment : assignments) {
+            if (!Assignment.isValidAssignmentName(assignment)) {
+                throw new ParseException(Assignment.MESSAGE_CONSTRAINTS);
+            }
             assignmentSet.add(new Assignment(assignment));
         }
         return new AddAssignmentCommand(assignmentSet);
