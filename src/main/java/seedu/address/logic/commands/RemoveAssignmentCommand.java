@@ -43,18 +43,18 @@ public class RemoveAssignmentCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
         for (Person person : lastShownList) {
-            Set<Assignment> newAssignments = generateAssignmentSet(person, assignments);
-            if (newAssignments.size() < person.getAssignments().size()) {
+            Set<Assignment> removedAssignments = generateAssignmentSet(person, assignments);
+            System.out.println(removedAssignments);
+            if (removedAssignments.size() < person.getAssignments().size()) {
                 hasAssignment = true;
             }
             Person newPerson = new Person(person.getName(), person.getMatricNumber(),
                 person.getEmail(), person.getTelegramHandle(), person.getTags(),
-                    newAssignments, person.getParticipationScores(), person.getAttendanceScores());
+                    removedAssignments, person.getParticipationScores(), person.getAttendanceScores());
             model.setPerson(person, newPerson);
-
-            if (!hasAssignment) {
-                throw new CommandException(MESSAGE_ASSIGNMENT_DOES_NOT_EXIST_FAILURE_STRING);
-            }
+        }
+        if (!hasAssignment) {
+            throw new CommandException(MESSAGE_ASSIGNMENT_DOES_NOT_EXIST_FAILURE_STRING);
         }
         if (model.shouldPurgeAddressBook()) {
             model.purgeAddressBook();
@@ -71,8 +71,15 @@ public class RemoveAssignmentCommand extends Command {
      * @return List of assignments for the person.
      */
     private Set<Assignment> generateAssignmentSet(Person person, Set<Assignment> assignments) {
-        Set<Assignment> newAssignments = new HashSet<>(person.getAssignments());
-        newAssignments.removeAll(assignments);
+        Set<Assignment> oldAssignments = person.getAssignments();
+        Set<Assignment> newAssignments = new HashSet<>(oldAssignments);
+        for (Assignment assignment : assignments) {
+            if (person.hasAssignment(assignment)) {
+                newAssignments.remove(assignment);
+            } else {
+                continue;
+            }
+        }
         return newAssignments;
     }
 
