@@ -22,7 +22,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Removes all instance of specific tags associated to any person in the address book.
  */
-public class    RemoveTagFromAllCommand extends Command {
+public class RemoveTagFromAllCommand extends Command {
 
     public static final String COMMAND_WORD = "removetagall";
 
