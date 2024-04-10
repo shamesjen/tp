@@ -114,7 +114,7 @@ public class MarkParticipationCommand extends Command {
         TelegramHandle telegramHandle = personToMark.getTelegramHandle();
         Set<Tag> tags = personToMark.getTags();
         List<Integer> attendanceScores = personToMark.getAttendanceScores();
-        List<Assignment> assignments = personToMark.getAssignments();
+        Set<Assignment> assignments = personToMark.getAssignments();
 
         return new Person(name, matricNumber, email, telegramHandle,
          tags, assignments, updatedParticipationScores, attendanceScores);

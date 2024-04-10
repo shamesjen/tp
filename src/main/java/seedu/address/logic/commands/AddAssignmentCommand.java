@@ -4,8 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -30,17 +31,26 @@ public class AddAssignmentCommand extends Command {
     public static final String MESSAGE_ASSIGNMENT_EXISTS_FAILURE_STRING = "No new assignments added. "
         + "All students already have the assignment(s) specified.";
 
-    private final List<Assignment> assignments;
+    public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "Duplicate assignments detected.";
+
+    private final Set<Assignment> assignments;
 
     private boolean hasAssignment = true;
 
-    public AddAssignmentCommand(List<Assignment> assignments) {
+    public AddAssignmentCommand(Set<Assignment> assignments) {
         this.assignments = assignments;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        //check for duplicate assignments
+        if (assignments.size() != assignments.stream().distinct().count()) {
+            throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
+        }
+        System.out.println(assignments.size());
+        System.out.println(assignments.stream().distinct().count());
+
         List<Person> lastShownList = model.getFilteredPersonList();
         for (Person person : lastShownList) {
             for (Assignment assignment : assignments) {
@@ -48,7 +58,7 @@ public class AddAssignmentCommand extends Command {
                     throw new CommandException(Assignment.MESSAGE_CONSTRAINTS);
                 }
             }
-            List<Assignment> newAssignments = generateAssignmentList(person, assignments);
+            Set<Assignment> newAssignments = generateAssignmentList(person, assignments);
             if (newAssignments.size() > person.getAssignments().size()) {
                 hasAssignment = false;
             }
@@ -78,9 +88,9 @@ public class AddAssignmentCommand extends Command {
      * @param assignments Assignments to add.
      * @return List of assignments for the person.
      */
-    public static List<Assignment> generateAssignmentList(Person person, List<Assignment> assignments) {
-        List<Assignment> oldAssignments = person.getAssignments();
-        List<Assignment> newAssignments = new ArrayList<>(oldAssignments);
+    public static Set<Assignment> generateAssignmentList(Person person, Set<Assignment> assignments) {
+        Set<Assignment> oldAssignments = person.getAssignments();
+        Set<Assignment> newAssignments = new HashSet<>(oldAssignments);
         for (Assignment assignment : assignments) {
             if (!person.hasAssignment(assignment)) {
                 newAssignments.add(assignment);

@@ -28,7 +28,7 @@ public class Person {
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
-    private final List<Assignment> assignments;
+    private final Set<Assignment> assignments;
     private final List<Integer> participationScores;
     private final List<Integer> attendanceScores;
 
@@ -36,7 +36,7 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, MatricNumber matricNumber, Email email, TelegramHandle telegramHandle,
-            List<Assignment> assignments, Set<Tag> tags) {
+            Set<Assignment> assignments, Set<Tag> tags) {
         requireAllNonNull(name, matricNumber, email, telegramHandle, tags);
         this.name = name;
         this.matricNumber = matricNumber;
@@ -57,7 +57,7 @@ public class Person {
      * The overloaded Person constructor. Every field must be present and not null.
      */
     public Person(Name name, MatricNumber matricNumber, Email email, TelegramHandle telegramHandle,
-            Set<Tag> tags, List<Assignment> assignments, List<Integer> participationScores,
+            Set<Tag> tags, Set<Assignment> assignments, List<Integer> participationScores,
              List<Integer> attendanceScores) {
         requireAllNonNull(name, matricNumber, email, telegramHandle, tags, participationScores, attendanceScores);
         this.name = name;
@@ -86,17 +86,13 @@ public class Person {
         return telegramHandle;
     }
 
-    public List<Assignment> getAssignments() {
+    public Set<Assignment> getAssignments() {
         return assignments;
     }
 
     public void addAssignment(Assignment assignment) {
         assignments.add(assignment);
     }
-
-    // public void removeAssignment(Assignment assignment) {
-    //     assignments.remove(assignment);
-    // }
 
     public boolean hasAssignment(Assignment assignment) {
         return assignments.contains(assignment);
@@ -119,22 +115,11 @@ public class Person {
     }
 
     /**
-     * Returns an immutable attendance score list, which throws (@code UnsupportedOperationException}
+     * Returns an immutable attendance score list, which throws (@code UnsupportedOperationException)
      * if modification is attempted.
      */
     public List<Integer> getAttendanceScores() {
         return Collections.unmodifiableList(attendanceScores);
-    }
-
-    /**
-     * Returns true if tag exists on the person.
-     */
-    public boolean hasTag(Tag tag) {
-        return tags.contains(tag);
-    }
-
-    public void removeTag(Tag tag) {
-        tags.remove(tag);
     }
 
     /**

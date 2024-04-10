@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -109,7 +108,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         TelegramHandle updatedTelegramHandleHandle = editPersonDescriptor.getTelegramHandle().orElse(
                 personToEdit.getTelegramHandle());
-        List<Assignment> updatedAssignments = personToEdit.getAssignments();
+        Set<Assignment> updatedAssignments = personToEdit.getAssignments();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedMatricNumber, updatedEmail,
@@ -150,7 +149,7 @@ public class EditCommand extends Command {
         private Email email;
         private TelegramHandle telegramHandle;
         private Set<Tag> tags;
-        private List<Assignment> assignments;
+        private Set<Assignment> assignments;
 
         public EditPersonDescriptor() {}
 
@@ -211,17 +210,17 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code assignments} is null.
          */
-        public Optional<List<Assignment>> getAssignments() {
-            return (assignments != null) ? Optional.of(Collections.unmodifiableList(assignments)) : Optional.empty();
+        public Optional<Set<Assignment>> getAssignments() {
+            return (assignments != null) ? Optional.of(new HashSet<>(assignments)) : Optional.empty();
         }
 
         /**
          * Sets {@code assignments} to this object's {@code assignments}.
          * A defensive copy of {@code assignments} is used internally.
          */
-        public void setAssignments(List<Assignment> assignments) {
+        public void setAssignments(Set<Assignment> assignments) {
             // how to make it be possibly null
-            this.assignments = (assignments != null) ? new ArrayList<>(assignments) : null;
+            this.assignments = (assignments != null) ? new HashSet<>(assignments) : null;
         }
 
         /**

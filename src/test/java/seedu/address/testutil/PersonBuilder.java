@@ -31,7 +31,7 @@ public class PersonBuilder {
     private Set<Tag> tags;
     private List<Integer> attendanceScores = new ArrayList<>();
     private List<Integer> participationScores = new ArrayList<>();
-    private List<Assignment> assignments;
+    private Set<Assignment> assignments;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -42,7 +42,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         telegramHandle = new TelegramHandle(DEFAULT_TELEGRAM_HANDLE);
         tags = new HashSet<>();
-        assignments = new ArrayList<>();
+        assignments = new HashSet<>();
 
         for (int i = 0; i < 11; i++) {
             participationScores.add(0);
@@ -122,7 +122,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code assignments} of the {@code Person} that we are building.
      */
-    public PersonBuilder withAssignments(List<Assignment> assignments) {
+    public PersonBuilder withAssignments(Set<Assignment> assignments) {
         this.assignments = assignments;
         return this;
     }

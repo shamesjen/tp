@@ -4,8 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddAssignmentCommand;
@@ -30,11 +31,11 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAssignmentCommand.MESSAGE_USAGE));
         }
         List<String> assignments = argMultimap.getAllValues(PREFIX_ASSIGNMENT);
-        List<Assignment> assignmentList = new ArrayList<>();
+        Set<Assignment> assignmentSet = new HashSet<>();
         for (String assignment : assignments) {
-            assignmentList.add(new Assignment(assignment));
+            assignmentSet.add(new Assignment(assignment));
         }
-        return new AddAssignmentCommand(assignmentList);
+        return new AddAssignmentCommand(assignmentSet);
     }
 
     /**

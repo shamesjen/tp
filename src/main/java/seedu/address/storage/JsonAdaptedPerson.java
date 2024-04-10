@@ -136,7 +136,7 @@ class JsonAdaptedPerson {
         final List<Integer> modelParticipationScores = new ArrayList<>(participationScores);
         final List<Integer> modelAttendanceScores = new ArrayList<>(attendanceScores);
 
-        final List<Assignment> modelAssignments = new ArrayList<>(personAssignments);
+        final Set<Assignment> modelAssignments = new HashSet<>(personAssignments);
 
         return new Person(modelName, modelMatricNumber, modelEmail, modelTelegramHandleHandle,
          modelTags, modelAssignments, modelParticipationScores, modelAttendanceScores);

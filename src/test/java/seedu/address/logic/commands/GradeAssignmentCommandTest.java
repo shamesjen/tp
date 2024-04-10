@@ -4,8 +4,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,12 +31,12 @@ public class GradeAssignmentCommandTest {
 
     @Test
     public void execute_gradeAssignment_success() {
-        List<Assignment> assignments = new ArrayList<>();
+        Set<Assignment> assignments = new HashSet<>();
         assignments.add(ASSIGNMENT_STUB1);
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person originalPerson = new PersonBuilder(firstPerson).withAssignments(new ArrayList<>(assignments)).build();
+        Person originalPerson = new PersonBuilder(firstPerson).withAssignments(new HashSet<>(assignments)).build();
         model.setPerson(firstPerson, originalPerson);
-        Person editedPerson = new PersonBuilder(firstPerson).withAssignments(new ArrayList<>()).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withAssignments(new HashSet<>()).build();
         GradeAssignmentCommand gradeAssignmentCommand =
             new GradeAssignmentCommand(INDEX_FIRST_PERSON, ASSIGNMENT_STUB1.assignmentName, GRADE_STUB);
         String expectedMessage = String.format(GradeAssignmentCommand.MESSAGE_SUCCESS, ASSIGNMENT_STUB1.assignmentName,

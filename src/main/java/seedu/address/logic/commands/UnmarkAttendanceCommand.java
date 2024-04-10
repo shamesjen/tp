@@ -117,7 +117,7 @@ public class UnmarkAttendanceCommand extends Command {
         TelegramHandle telegramHandle = personToUnmark.getTelegramHandle();
         Set<Tag> tags = personToUnmark.getTags();
         List<Integer> participationScores = personToUnmark.getParticipationScores();
-        List<Assignment> assignments = personToUnmark.getAssignments();
+        Set<Assignment> assignments = personToUnmark.getAssignments();
 
         return new Person(name, matricNumber, email, telegramHandle,
                 tags, assignments, participationScores, updatedAttendanceScores);
