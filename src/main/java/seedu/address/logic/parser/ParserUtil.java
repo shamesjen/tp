@@ -48,7 +48,7 @@ public class ParserUtil {
      */
     public static Integer parseGrade(String grade) throws ParseException {
         String trimmedGrade = grade.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedGrade)) {
+        if (!StringUtil.isUnsignedInteger(trimmedGrade)) {
             throw new ParseException(MESSAGE_INVALID_ARGUMENTS_GRADEASSIGNMENT);
         }
         return Integer.parseInt(trimmedGrade);
@@ -57,7 +57,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it as a zerobased index.
      * Leading and trailing whitespaces will be trimmed. Used mainly for the markall command.
-     * @throws ParseException
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseZeroIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();

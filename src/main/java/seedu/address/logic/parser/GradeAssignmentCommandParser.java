@@ -21,7 +21,9 @@ import seedu.address.model.person.Assignment;
  */
 public class GradeAssignmentCommandParser implements Parser<GradeAssignmentCommand> {
 
-    public static final String MESSAGE_INVALID_ASSIGNMENT_INDEX = "Invalid assignment index provided.";
+    public static final String MESSAGE_INVALID_PERSON_INDEX = "Invalid person index provided.";
+    public static final String MESSAGE_INVALID_GRADE = "Grade must be a positive integer.";
+    public static final String MESSAGE_MISSING_INDEX_OR_GRADE = "Missing Person index or grade.";
 
     /**
      * Parses the given {@code String} of arguments in the context of the MarkAssignmentCommand
@@ -38,6 +40,9 @@ public class GradeAssignmentCommandParser implements Parser<GradeAssignmentComma
                     GradeAssignmentCommand.MESSAGE_USAGE));
         }
         String[] indexes = argMultimap.getPreamble().trim().split("\\s+");
+        if (indexes.length != 2) {
+            throw new ParseException(MESSAGE_MISSING_INDEX_OR_GRADE);
+        }
         Index index = parseIndex(indexes[0]);
         int grade = parseGrade(indexes[1]);
         Assignment assignment = ParserUtil.parseAssignment(argMultimap.getValue(PREFIX_ASSIGNMENT).get());

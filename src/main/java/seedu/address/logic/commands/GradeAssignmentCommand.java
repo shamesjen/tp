@@ -22,13 +22,16 @@ public class GradeAssignmentCommand extends Command {
     public static final String COMMAND_WORD = "grade";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Grades an assignment as done for one students.\n"
-            + "Parameters: ASSIGNMENT (must be a positive integer)\n"
+            + ": Grades an assignment as done for one student.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "SCORE (must be postivie integer)\n"
             + "Example: " + COMMAND_WORD + " 1" + " " + "10 " + PREFIX_ASSIGNMENT + "Assignment1";
 
 
-    public static final String MESSAGE_SUCCESS =
+    public static final String MESSAGE_SUCCESS_GRADE =
         "Assignment %1$s marked as done with score: %2$d from this person : %3$s.";
+    public static final String MESSAGE_SUCCESS_UNGRADE =
+        "Assignment %1$s unmarked as with score %2$d from this person : %3$s.";
 
     public static final String MESSAGE_ASSIGNMENT_NOT_FOUND = "Assignment not found.";
 
@@ -79,8 +82,14 @@ public class GradeAssignmentCommand extends Command {
         if (model.shouldPurgeAddressBook()) {
             model.purgeAddressBook();
         }
-        CommandResult gradeCommandResult = new CommandResult(String.format(MESSAGE_SUCCESS, assignmentName,
+        CommandResult gradeCommandResult;
+        if (assignmentScore > 0) {
+            gradeCommandResult = new CommandResult(String.format(MESSAGE_SUCCESS_GRADE, assignmentName,
             assignmentScore, personToMark.getName()));
+        } else {
+            gradeCommandResult = new CommandResult(String.format(MESSAGE_SUCCESS_UNGRADE, assignmentName,
+            assignmentScore, personToMark.getName()));
+        }
         model.commitAddressBook(gradeCommandResult);
         return gradeCommandResult;
     }
