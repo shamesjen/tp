@@ -71,9 +71,9 @@ public class GradeAssignmentCommand extends Command {
         if (!assignmentFound) {
             throw new CommandException(MESSAGE_ASSIGNMENT_NOT_FOUND);
         }
-        Person newPerson = new Person(person.getName(), person.getMatricNumber(),
-                person.getEmail(), person.getTelegramHandle(), person.getTags(),
-                    newAssignments, person.getParticipationScores(), person.getAttendanceScores());
+        Person newPerson = new Person(personToMark.getName(), personToMark.getMatricNumber(),
+                personToMark.getEmail(), personToMark.getTelegramHandle(), personToMark.getTags(),
+                    newAssignments, personToMark.getParticipationScores(), personToMark.getAttendanceScores());
         model.setPerson(personToMark, newPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         if (model.shouldPurgeAddressBook()) {
