@@ -44,20 +44,8 @@ public class AddAssignmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        //check for duplicate assignments
-        if (assignments.size() != assignments.stream().distinct().count()) {
-            throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
-        }
-        System.out.println(assignments.size());
-        System.out.println(assignments.stream().distinct().count());
-
         List<Person> lastShownList = model.getFilteredPersonList();
         for (Person person : lastShownList) {
-            for (Assignment assignment : assignments) {
-                if (!Assignment.isValidAssignmentName(assignment.assignmentName)) {
-                    throw new CommandException(Assignment.MESSAGE_CONSTRAINTS);
-                }
-            }
             Set<Assignment> newAssignments = generateAssignmentList(person, assignments);
             if (newAssignments.size() > person.getAssignments().size()) {
                 hasAssignment = false;
