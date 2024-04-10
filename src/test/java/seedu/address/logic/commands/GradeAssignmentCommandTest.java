@@ -30,7 +30,7 @@ public class GradeAssignmentCommandTest {
     }
 
     @Test
-    public void execute_gradeAssignment_success() {
+    public void execute_gradeAssignment_successGrade() {
         List<Assignment> assignments = new ArrayList<>();
         assignments.add(ASSIGNMENT_STUB1);
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -39,7 +39,8 @@ public class GradeAssignmentCommandTest {
         Person editedPerson = new PersonBuilder(firstPerson).withAssignments(new ArrayList<>()).build();
         GradeAssignmentCommand gradeAssignmentCommand =
             new GradeAssignmentCommand(INDEX_FIRST_PERSON, ASSIGNMENT_STUB1.assignmentName, GRADE_STUB);
-        String expectedMessage = String.format(GradeAssignmentCommand.MESSAGE_SUCCESS, ASSIGNMENT_STUB1.assignmentName,
+        String expectedMessage = String.format(GradeAssignmentCommand.MESSAGE_SUCCESS_GRADE,
+            ASSIGNMENT_STUB1.assignmentName,
             GRADE_STUB, editedPerson.getName());
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
