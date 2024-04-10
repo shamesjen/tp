@@ -62,7 +62,8 @@ public class RemoveTagFromAllCommand extends Command {
                 }
             }
             Person removedTagPerson = new Person(person.getName(), person.getMatricNumber(),
-                person.getEmail(), person.getTelegramHandle(), person.getAssignments(), newSet);
+                person.getEmail(), person.getTelegramHandle(), newSet,
+                    person.getAssignments(), person.getParticipationScores(), person.getAttendanceScores());
             model.setPerson(person, removedTagPerson);
             if (tagList.size() > 0) {
                 removedTagList.add(new Pair<>(person, tagList));

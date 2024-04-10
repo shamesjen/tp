@@ -53,8 +53,8 @@ public class AddAssignmentCommand extends Command {
                 hasAssignment = false;
             }
             Person newPerson = new Person(person.getName(), person.getMatricNumber(),
-                person.getEmail(), person.getTelegramHandle(),
-                    newAssignments, person.getTags());
+                person.getEmail(), person.getTelegramHandle(), person.getTags(),
+                    newAssignments, person.getParticipationScores(), person.getAttendanceScores());
             model.setPerson(person, newPerson);
         }
         if (hasAssignment) {
