@@ -748,6 +748,7 @@ Adds assignment(s) to all users in the filtered list if they do not already exis
 <h4>Notes:</h4>
 
 * Each assignment is case-sensitive e.g. `a/assignment1` and `a/Assignment1` are 2 different assignments.
+* Duplicate assignments will be ignored e.g. If `a/assignment1` and `a/assignment1` are specified, only 1 assignment is added.
 
 <h4>Example:</h4>
 
