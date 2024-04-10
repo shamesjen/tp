@@ -22,8 +22,9 @@ public class GradeAssignmentCommand extends Command {
     public static final String COMMAND_WORD = "grade";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Grades an assignment as done for one students.\n"
-            + "Parameters: ASSIGNMENT (must be a positive integer)\n"
+            + ": Grades an assignment as done for one student.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "SCORE (must be postivie integer)\n"
             + "Example: " + COMMAND_WORD + " 1" + " " + "10 " + PREFIX_ASSIGNMENT + "Assignment1";
 
 
