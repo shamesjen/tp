@@ -48,7 +48,7 @@ public class ParserUtil {
      */
     public static Integer parseGrade(String grade) throws ParseException {
         String trimmedGrade = grade.trim();
-        if (!StringUtil.isUnsignedInteger(trimmedGrade)) {
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedGrade)) {
             throw new ParseException(MESSAGE_INVALID_ARGUMENTS_GRADEASSIGNMENT);
         }
         return Integer.parseInt(trimmedGrade);
