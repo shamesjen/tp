@@ -58,7 +58,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -515,7 +515,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Mainstream OS**: Windows, Linux, Unix, macOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **API**: Application Programming Interface, a set of rules, protocols, and tools that allows different software applications to communicate with each other.
 * **GUI**: Graphical User Interface, a type of user interface that allows users to interact with a computer system using graphical elements on the screen such as windows, icons, menus, and buttons.
@@ -574,3 +574,66 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix: Planned Enhancements**
+
+**Team Size**: 4 members <br>
+
+Given below are the planned future enhancements for our application.
+Once the current version is stable, we plan to implement the following features:
+
+### Feature 1 : Change UUID from Student Name to Student Matriculation Number
+**Description**: Currently, the UUID of each student is generated based on the student's name.
+This can be problematic if there are multiple students with the same name. <br>
+
+**Enhancement**: To resolve this, we plan to change the UUID generation to be based on the student's
+matriculation number instead, since this is unique to each student.
+
+### Feature 2 : Setting participation scores
+**Description**: Currently, ***markp*** and ***markallp*** commands as well as the corresponding unmark commands
+only increment or decrement participation scores by 1. To set a students score to 3 for example,
+the ***markp*** command must be executed multiple times.
+This can be an inconvenience for large scores.<br>
+
+**Enhancement**: We plan to implement a ***setp*** command that allows users to set a student's participation directly.
+
+### Feature 3 : Assignments to contain max score and weightage
+**Description**: Currently, the ***Assignment*** class only contain the name of the assignment and the score obtained by
+the student. This does not allow for the calculation of the student's grade based on the assignment, as well as how
+much an assignment grade affects a student's total score.<br>
+
+**Enhancement**: We plan to implement ***totalScore*** amd ***weightagePercent*** as Integer and Float fields 
+respectively as part of the **Assignment** class. These will be compulsory fields on the constructor and will
+be used to calculate the student's total score and grade.
+
+### Feature 4 : Accept floats for scores
+**Description**: Currently, the **assignmentScore** field in the **Assignment** class only accepts integers.
+This can be limiting if the assignment score is a float.<br>
+
+**Enhancement**: We plan to change the **assignmentScore** field to accept floats.
+
+### Feature 5 : ***unmarkalla*** and ***unmarkallp*** commands should work as long as one student has a nonzero participation or attendance score
+**Description**: Currently ***unmarkallp*** and ***unmarkalla*** commands will throw an error if one student has a zero as a
+participation score or attendance score respectively. This makes their use case extremely narrow and limited. <br>
+
+**Enhancement**: we plan to change this so that the commands will work as long as one student has a nonzero score.
+
+### Feature 6 : ***edit*** command should allow editing of a single field
+**Description**: Currently ***edit*** commands requires updating of all fields on a student. This can be cumbersome
+if only one field needs to be updated. <br>
+
+**Enhancement**: we plan to change this so that the ***edit*** command can be used to update a single field by providing
+the relevant prefix.
+
+### Feature 7 : ***ungrade*** command allow setting of assignment score to 0
+**Description**: Currently ***grade*** command only allows changing of assignment score to a non-zero positive integer.
+This is limiting if the score needs to be changed to 0 to be ungraded. <br>
+
+**Enhancement**: we plan to create an ***ungrade*** command to set assignment score to 0.
+
+
+### Feature 8 : ***ungradeall*** command allow setting of all assignment scores to 0
+**Description**: Currently no ***ungradeall*** command exists. There is no easy way to clear out all assignment 
+scores. This is limiting if all scores need to be reset to 0 to be ungraded. <br>
+
+**Enhancement**: we plan to create an ***ungradeall*** command to set all assignment scores to 0.
