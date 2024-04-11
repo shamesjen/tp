@@ -3,19 +3,19 @@
 skinparam ArrowFontStyle plain
 skinparam sequenceReferenceBackgroundColor white
 
-mainframe: **sd** Commit addressBook
+mainframe: **sd** Commit addressbook
 
-participant "mc:MarkCommand" as MarkCommand LOGIC_COLOR
+participant "mc:MarkParticipationCommand" as MarkParticipationCommand LOGIC_COLOR
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-activate MarkCommand
-MarkCommand -> Model : commitAddressBook(markCommandResult)
+activate MarkParticipationCommand
+MarkParticipationCommand -> Model : commitAddressBook(markParticipationCommandResult)
 activate Model
 
-Model -> MarkCommand
+Model -> MarkParticipationCommand
 deactivate Model
 
 @enduml

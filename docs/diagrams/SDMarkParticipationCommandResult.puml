@@ -3,18 +3,18 @@
 skinparam ArrowFontStyle plain
 skinparam sequenceReferenceBackgroundColor white
 
-mainframe: **sd** Mark person at specified week
+mainframe: **sd** Create successful CommandResult
 
-participant "mc:MarkCommand" as MarkCommand LOGIC_COLOR
+participant "mc:MarkParticipationCommand" as MarkParticipationCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 
-activate MarkCommand
+activate MarkParticipationCommand
 
 create CommandResult
-MarkCommand -> CommandResult : CommandResult(MESSAGE_MARK_PERSON_SUCCESS)
+MarkParticipationCommand -> CommandResult : CommandResult(MESSAGE_MARK_PERSON_SUCCESS)
 activate CommandResult
 
-CommandResult -> MarkCommand : r
+CommandResult -> MarkParticipationCommand : r
 deactivate CommandResult
 
 @enduml
