@@ -335,134 +335,542 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case UC01: Adding a student**
 
-**Main Success Scenario (MSS)**
-
+***Main Success Scenario (MSS)***
 1. User request to add student.
 2. nerdTrackerPlus adds the students with the relevant particulars.
 
     Use case ends.
 
-**Extensions**
-
-
-* 1a. The given particulars are invalid/missing.
-
-  * 1a1. nerdTrackerPlus shows an error message.
+***Extensions***
+* 1a. User inputs invalid particulars/is missing some particulars.
+  * 1a1. nerdTrackerPlus shows an error message indicating invalid input.
 
     Use case resumes at step 2.
 
 ---
 
-**Use case UC02: Delete a student**
+**Use case UC02: List students**
 
-**MSS**
+***MSS***
+1. User requests to list students.
+2. nerdTrackerPlus shows a list of students.
 
-1. User requests to list persons.
-2. nerdTrackerPlus shows a list of persons.
-3. User requests to delete a specific person in the list.
-4. nerdTrackerPlus deletes the person.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. nerdTrackerPlus shows an error message.
-
-      Use case resumes at step 2.
+   Use case ends.
 
 ---
 
-**Use case UC03: List students**
+**Use case UC03: Edit student details**
 
-**MSS**
+***MSS***
+1. User requests to list students.
+2. nerdTrackerPlus shows a list of students.
+3. User request to edit certain details of a specific student.
+4. nerdTrackerPlus successfully edits student's details.
 
-1. User requests to list persons.
-2. nerdTrackerPlus shows a list of persons.
+   Use case ends.
 
+***Extensions***
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 3a. User inputs invalid index or student particulars.
+    * 3a1. nerdTrackerPlus shows an error message indicating invalid index/student particulars.
+  
     Use case ends.
 
 ---
 
 **Use case UC04: Find student**
 
-**MSS**
-
-1. User requests to search a student in the contacts list by name.
+***MSS***
+1. User requests to search for a specific student/students in the contacts list by name.
 2. nerdTrackerPlus shows all students in the list with the matching name.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. User searches with invalid input.
-
-  * 1a1. nerdTrackerPlus shows an error message.
-
-    Use case resumes at step 1.
-
----
-
-**Use case UC05: Edit student details**
-
-**MSS**
-
-1. User requests to list persons.
-2. nerdTrackerPlus shows a list of persons.
-3. User request to edit certain details of a particular student.
-4. nerdTrackerPlus successfully edits student's details.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty.
-
-    Use case ends.
-
-* 3a. User inputs invalid index or student particulars.
-
-    * 3a1. nerdTrackerPlus shows an error message
-
-        Use case ends.
-
----
-
-**Use case UC06: Mark participation scores**
-
-**MSS**
-
-1. User requests to list persons.
-2. nerdTrackerPlus shows a list of persons.
-3. User request to mark the participation score of a specific student in a specific week.
-4. nerdTrackerPlus successfully marks the student's participation score.
 
    Use case ends.
 
-**Extensions**
+***Extensions***
+* 1a. User searches with invalid input.
+    * 1a1. nerdTrackerPlus shows an error message indicating invalid search input.
+
+      Use case resumes at step 1.
+
+---
+
+**Use case UC05: Delete a student**
+
+***MSS***
+1. User requests to list students.
+2. nerdTrackerPlus shows a list of students.
+3. User requests to delete a specific student in the list.
+4. nerdTrackerPlus deletes the student.
+
+    Use case ends.
+
+***Extensions***
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. User inputs invalid index.
+    * 3a1. nerdTrackerPlus shows an error message indicating invalid index for deletion.
+
+      Use case resumes at step 2.
+
+---
+**Use case UC06: Remove tag from individual student**
+
+***Precondition***: User has added a tag(s) to the specified student.
+
+***MSS***
+
+1. User requests to list students.
+2. nerdTrackerPlus shows a list of students.
+3. User requests to remove a specific tag(s) from a specific student.
+4. nerdTrackerPlus successfully removes the specified tag(s) from that student.
+
+   Use case ends.
+
+***Extensions***
 
 * 1a. The list is empty.
 
   Use case ends.
 
-* 3a. User inputs invalid index or week number.
+* 3a. User inputs invalid index or tag.
+    * 3a1. nerdTrackerPlus shows an error message indicating invalid index or tag.
 
-    * 3a1. nerdTrackerPlus shows an error message
+        Use case resumes at step 2.
 
-      Use case ends.
+* 3b. User inputs tag that does not exist on the student.
+    * 3b1. nerdTrackerPlus shows an error message indicating that the specified student does not have the specified tag.
+  
+        Use case resumes at step 2.
+
+**Use case UC07: Remove tag from all students**
+
+***Precondition***: User has added a tag(s) to all students.
+
+***MSS***
+
+1. User requests to list students.
+2. nerdTrackerPlus shows a list of students.
+3. User requests to remove a specific tag(s) from all students.
+4. nerdTrackerPlus successfully removes the specified tag(s) from all students who have that tag.
+
+   Use case ends.
+
+***Extensions***
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 3a. User inputs invalid index or tag.
+    * 3a1. nerdTrackerPlus shows an error message indicating invalid index or tag.
+
+    Use case resumes at step 2.
+  
+* 3b. User inputs tag that does not exist on any student.
+    * 3b1. nerdTrackerPlus shows an error message indicating that the specified tag does not exist on any student.
+
+    Use case resumes at step 2.
 
 ---
 
-**Use case UC07: Undo a previously issued command**
+**Use case UC08: Filter students by tag**
 
-**Precondition**: User has issued a command that can be undone (changed data).
+***MSS***
+1. User requests to filter students by a specific tag(s).
+2. nerdTrackerPlus filters the list of students based on the specified tag(s).
+3. nerdTrackerPlus displays the filtered list of students.
 
-**MSS**
+   Use case ends.
+
+***Extensions***
+
+* 1a. No students match the specified tag.
+    * 1a1. nerdTrackerPlus shows an error message indicating no students match the specified tag.
+
+      Use case ends.
+
+* 1b. Invalid tag input.
+    * 1b1. nerdTrackerPlus shows an error message indicating invalid tag input.
+
+      Use case resumes at step 1.
+
+---
+
+**Use case UC09: Mark individual participation score for a student**
+
+***MSS***
+
+1. User requests to list students/filter students by a specific tag.
+2. nerdTrackerPlus shows a (filtered) list of students.
+3. User requests to mark the participation score of a specific student in a specific week.
+4. nerdTrackerPlus successfully marks the student's participation score.
+
+   Use case ends.
+
+***Extensions***
+
+* 1a. The list is empty.
+
+    Use case ends.
+
+* 1b. No students match the specified tag.
+    * 1b1. nerdTrackerPlus shows an error message indicating no students match the specified tag.
+
+    Use case ends.
+
+* 3a. User inputs invalid index or week number.
+    * 3a1. nerdTrackerPlus shows an error message indicating invalid index or week number.
+
+    Use case resumes at step 3.
+
+* 3b. User inputs invalid participation score.
+    * 3b1. nerdTrackerPlus shows an error message indicating invalid participation score.
+
+    Use case resumes at step 3.
+
+---
+
+**Use case UC10: Unmark individual participation score for a student**
+
+***Precondition***: User has marked participation for the specified student.
+
+***MSS***
+
+1. User requests to list students/filter students by a specific tag.
+2. nerdTrackerPlus shows a (filtered) list of students.
+3. User requests to unmark the participation score of a specific student in a specific week.
+4. nerdTrackerPlus successfully unmarks the student's participation score.
+
+   Use case ends.
+
+***Extensions***
+
+* 1a. The list is empty.
+
+    Use case ends.
+
+* 1b. No students match the specified tag.
+    * 1b1. nerdTrackerPlus shows an error message indicating no students match the specified tag.
+
+    Use case ends.
+
+* 3a. User inputs invalid index or week number.
+    * 3a1. nerdTrackerPlus shows an error message indicating invalid index or week number.
+
+    Use case resumes at step 3.
+
+* 3b. User inputs invalid participation score.
+    * 3b1. nerdTrackerPlus shows an error message indicating invalid participation score.
+
+    Use case resumes at step 3.
+
+* 3c. User tries to unmark a student's participation score that has not been marked.
+    * 3c1. nerdTrackerPlus shows an error message indicating that the student's participation score has not been marked.
+
+    Use case resumes at step 3.
+
+---
+
+**Use case UC11: Mark individual attendance for a student**
+
+***MSS***
+
+1. User requests to list students/filter students by a specific tag.
+2. nerdTrackerPlus shows a (filtered) list of students.
+3. User requests to mark the attendance of a specific student in a specific week.
+4. nerdTrackerPlus successfully marks the student's attendance.
+
+   Use case ends.
+
+***Extensions***
+
+* 1a. The list is empty.
+
+    Use case ends.
+
+* 1b. No students match the specified tag.
+    * 1b1. nerdTrackerPlus shows an error message indicating no students match the specified tag.
+
+    Use case ends.
+
+* 3a. User inputs invalid index or week number.
+    * 3a1. nerdTrackerPlus shows an error message indicating invalid index or week number.
+
+    Use case resumes at step 3.
+
+---
+
+**Use case UC12: Unmark individual attendance for a student**
+
+***Precondition***: User has marked attendance for the specified student.
+
+***MSS***
+
+1. User requests to list students/filter students by a specific tag.
+2. nerdTrackerPlus shows a (filtered) list of students.
+3. User requests to unmark the attendance of a specific student in a specific week.
+4. nerdTrackerPlus successfully unmarks the student's attendance.
+
+   Use case ends.
+
+***Extensions***
+
+* 1a. The list is empty.
+
+    Use case ends.
+
+* 1b. No students match the specified tag.
+    * 1b1. nerdTrackerPlus shows an error message indicating no students match the specified tag.
+
+    Use case ends.
+
+* 3a. User inputs invalid index or week number.
+    * 3a1. nerdTrackerPlus shows an error message indicating invalid index or week number.
+
+    Use case resumes at step 3.
+
+* 3b. User inputs invalid participation score.
+    * 3b1. nerdTrackerPlus shows an error message indicating invalid participation score.
+
+    Use case resumes at step 3.
+
+* 3c. User tries to unmark a student's attendance that has not been marked.
+    * 3c1. nerdTrackerPlus shows an error message indicating that the student's attendance has not been marked.
+
+    Use case resumes at step 3.
+
+---
+
+**Use case UC13: Mark all participation scores for all students**
+
+***MSS***
+
+1. User requests to list students/filter students by a specific tag.
+2. nerdTrackerPlus shows a (filtered) list of students.
+3. User requests to mark all students' participation scores for a specific week.
+4. nerdTrackerPlus marks the participation score for all students for the specified week.
+
+   Use case ends.
+
+***Extensions***
+
+* 1a. The list is empty.
+
+    Use case ends.
+
+* 1b. No students match the specified tag.
+    * 1b1. nerdTrackerPlus shows an error message indicating no students match the specified tag.
+
+    Use case ends.
+
+* 2a. The specified week is invalid.
+    * 2a1. nerdTrackerPlus shows an error message indicating an invalid week.
+
+    Use case ends.
+
+---
+
+**Use case UC14: Unmark all participation scores for all students**
+
+***Precondition***: User has marked participation for all students.
+
+***MSS***
+
+1. User requests to list students/filter students by a specific tag.
+2. nerdTrackerPlus shows a (filtered) list of students.
+3. User requests to unmark all students' participation scores for a specific week.
+4. nerdTrackerPlus unmarks the participation score for all students for the specified week.
+
+   Use case ends.
+
+***Extensions***
+
+* 1a. The list is empty.
+
+    Use case ends.
+
+* 1b. No students match the specified tag.
+    * 1b1. nerdTrackerPlus shows an error message indicating no students match the specified tag.
+
+    Use case ends.
+
+* 2a. The specified week is invalid.
+    * 2a1. nerdTrackerPlus shows an error message indicating an invalid week.
+
+    Use case ends.
+
+* 2b. 1 or more students in the filtered list has participation score equal to 0 for the specified week.
+  * 2b1. nerdTrackerPlus shows an error message indicating that the participation score for 1 or more students is already 0 for the specified week.
+
+    Use case ends.
+
+---
+
+**Use case UC15: Mark all attendance for all students**
+
+***MSS***
+
+1. User requests to list students/filter students by a specific tag.
+2. nerdTrackerPlus shows a (filtered) list of students.
+3. User requests to mark all students' attendance for a specific week.
+4. nerdTrackerPlus marks the attendance for all students for the specified week.
+
+   Use case ends.
+
+***Extensions***
+
+* 1a. The list is empty.
+
+    Use case ends.
+
+* 1b. No students match the specified tag.
+    * 1b1. nerdTrackerPlus shows an error message indicating no students match the specified tag.
+
+    Use case ends.
+
+* 2a. The specified week is invalid.
+    * 2a1. nerdTrackerPlus shows an error message indicating an invalid week.
+
+    Use case ends.
+
+---
+
+**Use case UC16: Unmark all attendance for all students**
+
+***Precondition***: User has marked attendance for all students.
+
+***MSS***
+
+1. User requests to list students/filter students by a specific tag.
+2. nerdTrackerPlus shows a (filtered) list of students.
+3. User requests to unmark all students' attendance for a specific week.
+4. nerdTrackerPlus unmarks the attendance for all students for the specified week.
+
+   Use case ends.
+
+***Extensions***
+
+* 1a. The list is empty.
+
+    Use case ends.
+
+* 1b. No students match the specified tag.
+    * 1b1. nerdTrackerPlus shows an error message indicating no students match the specified tag.
+
+    Use case ends.
+
+* 2a. The specified week is invalid.
+    * 2a1. nerdTrackerPlus shows an error message indicating an invalid week.
+
+    Use case ends.
+
+* 2b. 1 or more students in the filtered list has attendance equal to 0 for the specified week.
+    * 2b1. nerdTrackerPlus shows an error message indicating that the attendance for 1 or more students is already 0 for the specified week.
+
+    Use case ends.
+
+---
+
+**Use case UC17: Add assignment for all students**
+
+***MSS***
+
+1. User requests to list students/filter students by a specific tag.
+2. nerdTrackerPlus shows a (filtered) list of students.
+3. User requests to add a new assignment with specific details.
+4. nerdTrackerPlus adds the assignment with the specified details to the filtered.
+
+   Use case ends.
+
+***Extensions***
+
+* 1a. The list is empty.
+
+    Use case ends.
+
+* 1b. No students match the specified tag.
+    * 1b1. nerdTrackerPlus shows an error message indicating no students match the specified tag.
+
+    Use case ends.
+
+* 2a. User provides incomplete or invalid details for the assignment.
+    * 2a1. nerdTrackerPlus shows an error message indicating the incomplete or invalid details.
+
+    Use case resumes at step 1.
+
+* 2b. User attempts to add assignment that already exists for all students.
+    * 2b1. nerdTrackerPlus shows an error message indicating that the assignment already exists for all students.
+
+    Use case resumes at step 1.
+
+---
+
+**Use case UC18: Remove assignment for all students**
+
+***Precondition***: User has added an assignment for at least 1 student.
+
+***MSS***
+
+1. User requests to remove a specific assignment from all students.
+2. nerdTrackerPlus removes the assignment from all students.
+
+   Use case ends.
+
+***Extensions***
+
+* 1a. The specified assignment does not exist on any student.
+    * 1a1. nerdTrackerPlus displays a message indicating that the assignment does not exist on any student.
+
+    Use case resumes at step 1.
+
+---
+
+**Use case UC19: Grade assignment for a student**
+
+***Precondition***: User has added an assignment for the specified student.
+
+***MSS***
+
+1. User requests to grade a specific assignment for a specific student with a specific score.
+2. nerdTrackerPlus assigns the specified score for the specified assignment to the specified student.
+
+   Use case ends.
+
+***Extensions***
+
+* 1a. The specified assignment or student does not exist.
+    * 1a1. nerdTrackerPlus shows an error message indicating an invalid assignment or student.
+
+    Use case resumes at step 1.
+
+* 2a. The provided grade is invalid.
+    * 2a1. nerdTrackerPlus shows an error message indicating an invalid grade input.
+
+    Use case resumes at step 1.
+
+---
+
+**Use case UC20: View help**
+
+***MSS***
+
+1. User requests to view help.
+2. nerdTrackerPlus shows a link to the nerdTrackerPlus User Guide.
+
+   Use case ends.
+
+---
+
+**Use case UC21: Undo a previously issued command**
+
+***Precondition***: User has issued a command that can be undone (changed data).
+
+***MSS***
 
 1. User requests to undo the previously issued command.
 2. nerdTrackerPlus undoes the previously issued command.
@@ -470,20 +878,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Extensions**
+***Extensions***
 
 * 1a. There is no command to undo.
-  * 1a1. nerdTrackerPlus shows an error message.
+    * 1a1. nerdTrackerPlus shows an error message.
 
   Use case ends.
 
 ---
 
-**Use case UC08: Redo a previously undone command**
+**Use case UC22: Redo a previously undone command**
 
-**Precondition**: User has undone at least 1 command immediately prior.
+***Precondition***: User has undone at least 1 command immediately prior.
 
-**MSS**
+***MSS***
 
 1. User requests to redo the previously undone command.
 2. nerdTrackerPlus redoes the previously undone command.
@@ -491,16 +899,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Extensions**
+***Extensions***
 
 * 1a. There is no command to redo.
-  * 1a1. nerdTrackerPlus shows an error message.
+    * 1a1. nerdTrackerPlus shows an error message.
 
   Use case ends.
 
 ---
 
-*{More to be added}*
+**Use case UC23: Clear all students**
+
+***MSS***
+
+1. User requests to clear all students.
+2. nerdTrackerPlus clears all students from the list.
+
+   Use case ends.
+
+---
+
+**Use case UC24: Exit nerdTrackerPlus**
+
+***MSS***
+
+1. User requests to exit nerdTrackerPlus.
+2. nerdTrackerPlus exits.
+
+   Use case ends.
+
+---
 
 ### Non-Functional Requirements
 
