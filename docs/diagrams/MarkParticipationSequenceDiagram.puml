@@ -1,0 +1,61 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor white
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":MarkParticipationCommandParser" as MarkParticipationCommandParser LOGIC_COLOR
+participant "mc:MarkParticipationCommand" as MarkParticipationCommand LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("markp 1 3")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("markp 1 3")
+activate AddressBookParser
+
+create MarkParticipationCommandParser
+AddressBookParser -> MarkParticipationCommandParser : MarkParticipationCommandParser()
+activate MarkParticipationCommandParser
+
+MarkParticipationCommandParser --> AddressBookParser
+deactivate MarkParticipationCommandParser
+
+AddressBookParser -> MarkParticipationCommandParser : parse("mark 1 3")
+activate MarkParticipationCommandParser
+
+create MarkParticipationCommand
+MarkParticipationCommandParser -> MarkParticipationCommand : MarkParticipationCommand(1, 3)
+activate MarkParticipationCommand
+
+MarkParticipationCommand --> MarkParticipationCommandParser : mc
+deactivate MarkParticipationCommand
+
+MarkParticipationCommandParser --> AddressBookParser : mc
+deactivate MarkParticipationCommandParser
+MarkParticipationCommandParser -[hidden]-> AddressBookParser
+destroy MarkParticipationCommandParser
+
+AddressBookParser --> LogicManager : mc
+deactivate AddressBookParser
+
+LogicManager -> MarkParticipationCommand : execute(mc)
+activate MarkParticipationCommand
+
+ref over MarkParticipationCommand : Mark person at specified week
+
+ref over MarkParticipationCommand : Create successful CommandResult
+
+ref over MarkParticipationCommand : Commit addressbook
+
+MarkParticipationCommand --> LogicManager : r
+deactivate MarkParticipationCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+MarkParticipationCommand -[hidden]-> LogicManager
+destroy MarkParticipationCommand
+
+[<--LogicManager : r
+deactivate LogicManager
+@enduml

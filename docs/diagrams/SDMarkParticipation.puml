@@ -5,35 +5,35 @@ skinparam sequenceReferenceBackgroundColor white
 
 mainframe: **sd** Mark person at specified week
 
-participant "mc:MarkCommand" as MarkCommand LOGIC_COLOR
+participant "mc:MarkParticipationCommand" as MarkParticipationCommand LOGIC_COLOR
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-activate MarkCommand
+activate MarkParticipationCommand
 
-MarkCommand -> Model : getFilteredPersonList()
+MarkParticipationCommand -> Model : getFilteredPersonList()
 activate Model
 
-Model -> MarkCommand : lastShownList
+Model -> MarkParticipationCommand : lastShownList
 deactivate Model
 
-MarkCommand -> MarkCommand : createMarkedPerson(personToMark, newParticipationScores)
-activate MarkCommand
-MarkCommand -> MarkCommand : updatedPerson
-deactivate MarkCommand
+MarkParticipationCommand -> MarkParticipationCommand : createMarkedPerson(personToMark, newParticipationScores)
+activate MarkParticipationCommand
+MarkParticipationCommand -> MarkParticipationCommand : updatedPerson
+deactivate MarkParticipationCommand
 
-MarkCommand -> Model : setPerson(personToMark, updatedPerson)
+MarkParticipationCommand -> Model : setPerson(personToMark, updatedPerson)
 activate Model
 
-Model -> MarkCommand
+Model -> MarkParticipationCommand
 deactivate Model
 
-MarkCommand -> Model : updatedFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+MarkParticipationCommand -> Model : updatedFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
 activate Model
 
-Model -> MarkCommand
+Model -> MarkParticipationCommand
 deactivate Model
 
 @enduml

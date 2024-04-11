@@ -899,19 +899,19 @@ For signed integers, MAX_INT = 2147483647 while MIN_INT = -2147483647.
 
 ### Managing participation, attendance and assignments
 
-| Action                                                                                  | Format                             | Example                               |
-|:----------------------------------------------------------------------------------------|:-----------------------------------|:--------------------------------------|
-| [Mark individual participation](#marking-individual-participation-scores--markp)        | `markp INDEX WEEK_NUMBER`          | `markp 1 3`                           |
-| [Unmark individual participation](#un-marking-individual-participation-scores--unmarkp) | `unmarkp INDEX WEEK_NUMBER`        | `unmarkp 1 3`                         |
-| [Mark individual attendance](#marking-individual-attendance-scores--marka)              | `marka INDEX WEEK_NUMBER`          | `marka 1 3`                           |
-| [Unmark individual attendance](#un-marking-individual-attendance-scores--unmarka)       | `unmarka INDEX WEEK_NUMBER`        | `unmarka 1 3`                         |
-| [Mark all participation](#marking-all-participation-scores--markallp)                   | `markallp WEEK_NUMBER`             | `markallp 3`                          |
-| [Unmark all participation](#un-marking-all-participation-scores--unmarkallp)            | `umarkallp WEEK_NUMBER`            | `umarkallp 3`                         |
-| [Mark all attendance](#marking-all-attendance-scores--markalla)                         | `markalla WEEK_NUMBER`             | `markalla 3`                          |
-| [Unmark all attendance](#un-marking-all-attendance-scores--unmarkalla)                  | `unmarkalla WEEK_NUMBER`           | `unmarkalla 3`                        |
-| [Add assignment](#adding-a-custom-assignment--adda)                                     | `adda a/ASSIGNMENT…​`              | `adda a/assignment1 a/assignment2`    |
-| [Remove assignment](#removing-a-custom-assignment--removea)                             | `removea a/ASSIGNMENT…​`           | `removea a/assignment1 a/assignment2` |
-| [Grade assignment](#grading-a-custom-assignment--grade)                                 | `grade INDEX SCORE a/ASSIGNMENT`   | `grade 1 100 a/assignment1`           |
+| Action                                                                                  | Format                           | Example                               |
+|:----------------------------------------------------------------------------------------|:---------------------------------|:--------------------------------------|
+| [Mark individual participation](#marking-individual-participation-scores--markp)        | `markp INDEX WEEK_NUMBER`        | `markp 1 3`                           |
+| [Unmark individual participation](#un-marking-individual-participation-scores--unmarkp) | `unmarkp INDEX WEEK_NUMBER`      | `unmarkp 1 3`                         |
+| [Mark individual attendance](#marking-individual-attendance-scores--marka)              | `marka INDEX WEEK_NUMBER`        | `marka 1 3`                           |
+| [Unmark individual attendance](#un-marking-individual-attendance-scores--unmarka)       | `unmarka INDEX WEEK_NUMBER`      | `unmarka 1 3`                         |
+| [Mark all participation](#marking-all-participation-scores--markallp)                   | `markallp WEEK_NUMBER`           | `markallp 3`                          |
+| [Unmark all participation](#un-marking-all-participation-scores--unmarkallp)            | `unmarkallp WEEK_NUMBER`         | `unmarkallp 3`                        |
+| [Mark all attendance](#marking-all-attendance-scores--markalla)                         | `markalla WEEK_NUMBER`           | `markalla 3`                          |
+| [Unmark all attendance](#un-marking-all-attendance-scores--unmarkalla)                  | `unmarkalla WEEK_NUMBER`         | `unmarkalla 3`                        |
+| [Add assignment](#adding-a-custom-assignment--adda)                                     | `adda a/ASSIGNMENT…​`            | `adda a/assignment1 a/assignment2`    |
+| [Remove assignment](#removing-a-custom-assignment--removea)                             | `removea a/ASSIGNMENT…​`         | `removea a/assignment1 a/assignment2` |
+| [Grade assignment](#grading-a-custom-assignment--grade)                                 | `grade INDEX SCORE a/ASSIGNMENT` | `grade 1 100 a/assignment1`           |
 
 ### General
 
