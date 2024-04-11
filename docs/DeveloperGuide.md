@@ -306,7 +306,7 @@ nerdTrackerPlus helps Computer Science TAs manage students contacts through a CL
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
- 
+
 | Priority   | As a …​                | I want to …​                                                  | So that I can…​                                                                               |
 |------------|------------------------|---------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
 | `* * *`    | new user               | see usage instructions                                        | refer to instructions when I forget how to use the App                                        |
@@ -602,7 +602,7 @@ This can be an inconvenience for large scores.<br>
 the student. This does not allow for the calculation of the student's grade based on the assignment, as well as how
 much an assignment grade affects a student's total score.<br>
 
-**Enhancement**: We plan to implement ***totalScore*** amd ***weightagePercent*** as Integer and Float fields 
+**Enhancement**: We plan to implement ***totalScore*** amd ***weightagePercent*** as Integer and Float fields
 respectively as part of the **Assignment** class. These will be compulsory fields on the constructor and will
 be used to calculate the student's total score and grade.
 
