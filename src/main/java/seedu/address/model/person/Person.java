@@ -168,9 +168,9 @@ public class Person {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("phone", matricNumber)
+                .add("matricNumber", matricNumber)
                 .add("email", email)
-                .add("address", telegramHandle)
+                .add("telegramHandle", telegramHandle)
                 .add("participationScores", participationScores)
                 .add("assignments", assignments)
                 .add("tags", tags)
