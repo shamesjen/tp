@@ -1254,14 +1254,14 @@ scores. This is limiting if all scores need to be reset to 0 to be ungraded. <br
 
 ### Ideation Phase
 
-NerdTrackerPlus was created by a collective desire to fill a niche that the group was deeply familiar
+nerdTrackerPlus was created by a collective desire to fill a niche that the group was deeply familiar
 with - supporting teaching assistants managing the administrative side of things so they could focus
 on the more important issue, teaching their classes.
 
 Armed with this understanding of the target users, we leveraged our experiences and insgihts to
 identify the unique challenges and requirements of teaching assistants.
 
-We wanted to address the day-to-day hurdles faced by Tas, such as tracking attendance, monitoring
+We wanted to address the day-to-day hurdles faced by TAs, such as tracking attendance, monitoring
 participation, managing assignments, and keeping track of the grades. The diversity of these challenges
 highlighted the need for a versatile tool capable of streamlining these tasks.
 
@@ -1287,12 +1287,12 @@ tackling the issues faced by our user group.
 
 ### OOP Principles
 
-NerdTrackerPlus was built upon the AB3 application so we already had a basis to start building upon.
+nerdTrackerPlus was built upon the AB3 application so we already had a basis to start building upon.
 However, to ensure that we are able to track the students, attendance, participation and assignments,
 we introduced new classes that adhered to OOP principles that allowed us to extend the use cases of the
 different classes that were already present. This can be seen from the creation of the
 versionedAddressBook.java which allowed for the undo and redo commands to function. We also created
-multiple classes for the different commands and updated the model to include Assignments(which includes
+multiple classes for the different commands and updated the model to include Assignments (which includes
 both the Assignment and the grade of the assignment).
 
 Another example is in the filter command. The filter command differs from the find command as the filter
