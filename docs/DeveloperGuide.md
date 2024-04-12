@@ -318,7 +318,7 @@ nerdTrackerPlus helps Computer Science TAs manage students contacts through a CL
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
- 
+
 | Priority | As a …​                | I want to …​                                                     | So that I can…​                                                                               |
 |----------|------------------------|------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
 | `* * *`  | new user               | see usage instructions                                           | refer to instructions when I forget how to use the App                                        |
@@ -393,7 +393,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. User inputs invalid index or student particulars.
     * 3a1. nerdTrackerPlus shows an error message indicating invalid index/student particulars.
-  
+
     Use case ends.
 
 ---
@@ -461,7 +461,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3b. User inputs tag that does not exist on the student.
     * 3b1. nerdTrackerPlus shows an error message indicating that the specified student does not have the specified tag.
-  
+
         Use case resumes at step 2.
 
 **Use case UC07: Remove tag from all students**
@@ -487,7 +487,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. nerdTrackerPlus shows an error message indicating invalid index or tag.
 
     Use case resumes at step 2.
-  
+
 * 3b. User inputs tag that does not exist on any student.
     * 3b1. nerdTrackerPlus shows an error message indicating that the specified tag does not exist on any student.
 
@@ -982,13 +982,13 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch 
+1. Initial launch
 
     1. Download `nerdTrackerPlus.jar` and copy into an empty folder
 
     2. Double-click the jar file or run `java -jar nerdTrackerPlus.jar`. <br> Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-2. Saving window preferences 
+2. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
@@ -1012,7 +1012,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `add n/Danielle Marsh e/daniellemarsh@u.nus.edu m/A9876543Z tl/danimarsh12` <br>
        Expected: If there is no student named Danielle Marsh currently in nerdTrackerPlus, Danielle Marsh will be added to nerdTrackerPlus with the corresponding details. Otherwise, an error message will be shown.
 
-    3. Incorrect test cases to try: `add`, `add n/Danielle`, `add n/Danielle* e/dani@u.nus.edu tl/danimarsh12 m/A9876543Z`, `add n/Danielle* e/dani@u.nus.edu tl/danimarsh12`..., where one or more compulsory fields are missing, incorrect command format etc. <br> 
+    3. Incorrect test cases to try: `add`, `add n/Danielle`, `add n/Danielle* e/dani@u.nus.edu tl/danimarsh12 m/A9876543Z`, `add n/Danielle* e/dani@u.nus.edu tl/danimarsh12`..., where one or more compulsory fields are missing, incorrect command format etc. <br>
        Expected: No student is added. Error message is shown.
 
 ### Listing students
@@ -1049,7 +1049,7 @@ testers are expected to do more *exploratory* testing.
 ### Finding students
 
 1. Finding students in nerdTrackerPlus
-    
+
     1. Prerequisites: nerdTrackerPlus contains some students.
 
     2. Test case: `find charlotte` <br>
@@ -1159,9 +1159,9 @@ testers are expected to do more *exploratory* testing.
 1. Saving and loading data from data file.
 
     1. Prerequisites: Current data located at `data/addressbook.json` is valid.
-    
+
     2. Perform some commands that changes data in nerdTrackerPlus (e.g. adding a student, editing student details)
-    
+
     3. Close and launch nerdTrackerPlus again. <br>
        Expected: nerdTrackerPlus correctly displays the updated data.
 
@@ -1243,7 +1243,7 @@ This is limiting if the score needs to be changed to 0 to be ungraded. <br>
 
 
 ### Feature 8 : ***ungradeall*** command allow setting of all assignment scores to 0
-**Description**: Currently no ***ungradeall*** command exists. There is no easy way to clear out all assignment 
+**Description**: Currently no ***ungradeall*** command exists. There is no easy way to clear out all assignment
 scores. This is limiting if all scores need to be reset to 0 to be ungraded. <br>
 
 **Enhancement**: we plan to create an ***ungradeall*** command to set all assignment scores to 0.
@@ -1314,7 +1314,7 @@ application on initialisation.
 ### Built for Students, by Students
 
 Our main focus for the nerdTrackerPlus was to create a seamless, integrated and efficient tool for
-teaching assistants. To save time reduce the hassle from having too many GUI items, we chose a 
+teaching assistants. To save time reduce the hassle from having too many GUI items, we chose a
 Command Line Interface (CLI) approach to using our application.
 This was also due to the fact that being Computer Science Teaching Assistants, our user group was highly
 likely to be adept at using the CLI and would feel right at home with it compared to maybe a different
