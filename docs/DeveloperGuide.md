@@ -1254,14 +1254,14 @@ scores. This is limiting if all scores need to be reset to 0 to be ungraded. <br
 
 ### Ideation Phase
 
-NerdTrackerPlus was created by a collective desire to fill a niche that the group was deeply familiar 
-with - supporting teaching assistants managing the administrative side of things so they could focus 
+NerdTrackerPlus was created by a collective desire to fill a niche that the group was deeply familiar
+with - supporting teaching assistants managing the administrative side of things so they could focus
 on the more important issue, teaching their classes.
 
-Armed with this understanding of the target users, we leveraged our experiences and insgihts to 
+Armed with this understanding of the target users, we leveraged our experiences and insgihts to
 identify the unique challenges and requirements of teaching assistants.
 
-We wanted to address the day-to-day hurdles faced by Tas, such as tracking attendance, monitoring 
+We wanted to address the day-to-day hurdles faced by Tas, such as tracking attendance, monitoring
 participation, managing assignments, and keeping track of the grades. The diversity of these challenges
 highlighted the need for a versatile tool capable of streamlining these tasks.
 
@@ -1273,7 +1273,7 @@ the nerdTrackerPlus effectively address the issues faced by the TAs.
 
 From this process, we were able to successfully distill the first set of features, namely the edit,
 removetags, filter and mark commands. With these basic commands, we were able to consult our peers and
-professors for feedback. 
+professors for feedback.
 
 We received many pieces of feedback that were extremely useful to the development of our project. Many
 pieces of feedback allowed us to see the areas that we as the developers missed out on when we were
@@ -1318,7 +1318,7 @@ teaching assistants. To save time reduce the hassle from having too many GUI ite
 Command Line Interface (CLI) approach to using our application.
 This was also due to the fact that being Computer Science Teaching Assistants, our user group was highly
 likely to be adept at using the CLI and would feel right at home with it compared to maybe a different
-target audience. 
+target audience.
 The nerdTrackerPlus empowers our users to manage the academic details efficiently. The TAs can easily add
 update, filter, mark both students and assignments easily, all in the application. This is helped by the
 use of the index of displayed items for quick interactions. The find and filter commands are also
