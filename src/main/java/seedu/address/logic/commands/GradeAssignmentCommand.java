@@ -60,6 +60,25 @@ public class GradeAssignmentCommand extends Command {
         }
 
         Person personToMark = lastShownList.get(targetIndex.getZeroBased());
+        Person gradedPerson = createGradedPerson(personToMark);
+        model.setPerson(personToMark, gradedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        if (model.shouldPurgeAddressBook()) {
+            model.purgeAddressBook();
+        }
+        CommandResult gradeCommandResult;
+        if (assignmentScore > 0) {
+            gradeCommandResult = new CommandResult(String.format(MESSAGE_SUCCESS_GRADE, assignmentName,
+            assignmentScore, personToMark.getName()));
+        } else {
+            gradeCommandResult = new CommandResult(String.format(MESSAGE_SUCCESS_UNGRADE, assignmentName,
+            assignmentScore, personToMark.getName()));
+        }
+        model.commitAddressBook(gradeCommandResult);
+        return gradeCommandResult;
+    }
+
+    private Person createGradedPerson(Person personToMark) throws CommandException {
         Set<Assignment> assignments = personToMark.getAssignments();
         Set<Assignment> newAssignments = new HashSet<>(assignments);
         boolean assignmentFound = false;
@@ -77,24 +96,9 @@ public class GradeAssignmentCommand extends Command {
         if (!assignmentFound) {
             throw new CommandException(MESSAGE_ASSIGNMENT_NOT_FOUND);
         }
-        Person newPerson = new Person(personToMark.getName(), personToMark.getMatricNumber(),
+        return new Person(personToMark.getName(), personToMark.getMatricNumber(),
                 personToMark.getEmail(), personToMark.getTelegramHandle(), personToMark.getTags(),
                     newAssignments, personToMark.getParticipationScores(), personToMark.getAttendanceScores());
-        model.setPerson(personToMark, newPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        if (model.shouldPurgeAddressBook()) {
-            model.purgeAddressBook();
-        }
-        CommandResult gradeCommandResult;
-        if (assignmentScore > 0) {
-            gradeCommandResult = new CommandResult(String.format(MESSAGE_SUCCESS_GRADE, assignmentName,
-            assignmentScore, personToMark.getName()));
-        } else {
-            gradeCommandResult = new CommandResult(String.format(MESSAGE_SUCCESS_UNGRADE, assignmentName,
-            assignmentScore, personToMark.getName()));
-        }
-        model.commitAddressBook(gradeCommandResult);
-        return gradeCommandResult;
     }
 
     @Override

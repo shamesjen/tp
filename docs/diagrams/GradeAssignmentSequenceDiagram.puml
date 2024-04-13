@@ -1,0 +1,61 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor white
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":GradeAssignmentCommandParser" as GradeAssignmentCommandParser LOGIC_COLOR
+participant "gc:GradeAssignmentCommand" as GradeAssignmentCommand LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("grade 1 10 a/Assignment1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("grade 1 10 a/Assignment1")
+activate AddressBookParser
+
+create GradeAssignmentCommandParser
+AddressBookParser -> GradeAssignmentCommandParser : GradeAssignmentCommandParser()
+activate GradeAssignmentCommandParser
+
+GradeAssignmentCommandParser --> AddressBookParser
+deactivate GradeAssignmentCommandParser
+
+AddressBookParser -> GradeAssignmentCommandParser : parse("grade 1 10 a/Assignment1")
+activate GradeAssignmentCommandParser
+
+create GradeAssignmentCommand
+GradeAssignmentCommandParser -> GradeAssignmentCommand : GradeAssignmentCommand(1, "Assignment1", 10)
+activate GradeAssignmentCommand
+
+GradeAssignmentCommand --> GradeAssignmentCommandParser : gc
+deactivate GradeAssignmentCommand
+
+GradeAssignmentCommandParser --> AddressBookParser : gc
+deactivate GradeAssignmentCommandParser
+GradeAssignmentCommandParser -[hidden]-> AddressBookParser
+destroy GradeAssignmentCommandParser
+
+AddressBookParser --> LogicManager : gc
+deactivate AddressBookParser
+
+LogicManager -> GradeAssignmentCommand : execute(gc)
+activate GradeAssignmentCommand
+
+ref over GradeAssignmentCommand : Grade assignment for specified student
+
+ref over GradeAssignmentCommand : Create successful CommandResult
+
+ref over GradeAssignmentCommand : Commit addressbook
+
+GradeAssignmentCommand --> LogicManager : r
+deactivate GradeAssignmentCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+GradeAssignmentCommand -[hidden]-> LogicManager
+destroy GradeAssignmentCommand
+
+[<--LogicManager : r
+deactivate LogicManager
+@enduml

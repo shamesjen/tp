@@ -1,0 +1,20 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor white
+
+mainframe: **sd** Create successful CommandResult
+
+participant "gc:GradeAssignmentCommand" as GradeAssignmentCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+
+activate GradeAssignmentCommand
+
+create CommandResult
+GradeAssignmentCommand -> CommandResult : CommandResult(MESSAGE_SUCCESS_GRADE)
+activate CommandResult
+
+CommandResult -> GradeAssignmentCommand : r
+deactivate CommandResult
+
+@enduml
