@@ -38,11 +38,11 @@ public class Messages {
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
-                .append("; Phone: ")
+                .append("; Matric Number: ")
                 .append(person.getMatricNumber())
                 .append("; Email: ")
                 .append(person.getEmail())
-                .append("; Address: ")
+                .append("; Telegram Handle: ")
                 .append(person.getTelegramHandle())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);

@@ -319,25 +319,30 @@ nerdTrackerPlus helps Computer Science TAs manage students contacts through a CL
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority   | As a …​                | I want to …​                                                  | So that I can…​                                                                               |
-|------------|------------------------|---------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
-| `* * *`    | new user               | see usage instructions                                        | refer to instructions when I forget how to use the App                                        |
-| `* * *`    | CS2109S teaching staff | add a new student                                             | keep track of their contact details                                                           |
-| `* * *`    | CS2109S teaching staff | delete a student                                              | remove student entries that I no longer need                                                  |
-| `* * *`    | CS2109S teaching staff | list students                                                 | view all students currently in my contacts                                                    |
-| `* * *`    | CS2109S teaching staff | find a student by name                                        | locate details of students without having to go through the entire list                       |
-| `* * *`    | CS2109S teaching staff | edit student details                                          | ensure that student details is always updated                                                 |
-| `* * *`    | CS2109S teaching staff | filter students by tag                                        | make it easier to search for particular students                                              |
-| `* * *`    | CS2109S teaching staff | add tags to students                                          | categorize student contacts for reference                                                     |
-| `* * *`    | CS2109S teaching staff | delete tags                                                   | remove tags that are currently unused                                                         |
-| `* * *`    | CS2109S teaching staff | delete tags from students                                     | remove tags from students that do not belong to that category                                 |
-| `* * *`    | CS2109S teaching staff | mark the participation score for a student for specific weeks | so that I can keep track of their tutorial participation scores over the course of the module |
-| `* * *`    | CS2109S teaching staff | undo a previously issued command                              | so that it is convenient to undo any mistakes made                                            |
-| `* * *`    | CS2109S teaching staff | redo a previously undone command                              | so that I can restore the last changes that were undone                                       |
-| `* * *`    | user                   | close and exit the app                                        |                                                                                               |
+| Priority | As a …​                | I want to …​                                                     | So that I can…​                                                                               |
+|----------|------------------------|------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| `* * *`  | new user               | see usage instructions                                           | refer to instructions when I forget how to use the App                                        |
+| `* * *`  | CS2109S teaching staff | add a new student                                                | keep track of their contact details                                                           |
+| `* * *`  | CS2109S teaching staff | delete a student                                                 | remove student entries that I no longer need                                                  |
+| `* * *`  | CS2109S teaching staff | list students                                                    | view all students currently in my contacts                                                    |
+| `* * *`  | CS2109S teaching staff | find a student by name                                           | locate details of students without having to go through the entire list                       |
+| `* * *`  | CS2109S teaching staff | edit student details                                             | ensure that student details are always updated                                                |
+| `* * *`  | CS2109S teaching staff | filter students by tag                                           | make it easier to search for students in a specific module or class                           |
+| `* * *`  | CS2109S teaching staff | add tags to students                                             | categorize student contacts for reference                                                     |
+| `* * *`  | CS2109S teaching staff | delete tags from students                                        | remove tags from students that do not belong to that category                                 |
+| `* * *`  | CS2109S teaching staff | mark the attendance for a student for a specific week            | so that I can keep track of their tutorial attendance over the course of the module           |
+| `* * *`  | CS2109S teaching staff | mark the participation score for a student for a specific week   | so that I can keep track of their tutorial participation scores over the course of the module |
+| `* * *`  | CS2109S teaching staff | mark the attendance for all students for a specific week         | so that I can easily mark the attendance of a tutorial class                                  |
+| `* * *`  | CS2109S teaching staff | mark the participation score for all student for a specific week | so that I can easily mark the participation of the entire tutorial class                      |
+| `* * *`  | CS2109S teaching staff | unmark the attendance for a student for a specific week          | so that I can correct myself in case attendance was marked wrongly                            |
+| `* * *`  | CS2109S teaching staff | unmark the participation score for a student for a specific week | so that I can correct myself in case participation scores were marked wrongly                 |
+| `* * *`  | CS2109S teaching staff | add assignments based on my course's assessment structure        | so that I can keep track of my student's assignments                                          |
+| `* * *`  | CS2109S teaching staff | remove assignments                                               | so that I can remove assignments that were added by mistake                                   |
+| `* * *`  | CS2109S teaching staff | grade assignments that were added                                | so that I can keep track of the grades that my students received for the various assignments  |
+| `* * *`  | CS2109S teaching staff | undo a previously issued command                                 | so that it is convenient to undo any mistakes made                                            |
+| `* * *`  | CS2109S teaching staff | redo a previously undone command                                 | so that I can restore the last changes that were undone                                       |
+| `* * *`  | user                   | close and exit the app                                           |                                                                                               |
 
-
-*{More to be added}*
 
 ### Use cases
 
@@ -388,7 +393,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. User inputs invalid index or student particulars.
     * 3a1. nerdTrackerPlus shows an error message indicating invalid index/student particulars.
-  
+
     Use case ends.
 
 ---
@@ -456,7 +461,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3b. User inputs tag that does not exist on the student.
     * 3b1. nerdTrackerPlus shows an error message indicating that the specified student does not have the specified tag.
-  
+
         Use case resumes at step 2.
 
 **Use case UC07: Remove tag from all students**
@@ -482,7 +487,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. nerdTrackerPlus shows an error message indicating invalid index or tag.
 
     Use case resumes at step 2.
-  
+
 * 3b. User inputs tag that does not exist on any student.
     * 3b1. nerdTrackerPlus shows an error message indicating that the specified tag does not exist on any student.
 
@@ -977,13 +982,13 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch 
+1. Initial launch
 
     1. Download `nerdTrackerPlus.jar` and copy into an empty folder
 
     2. Double-click the jar file or run `java -jar nerdTrackerPlus.jar`. <br> Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-2. Saving window preferences 
+2. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
@@ -1007,7 +1012,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `add n/Danielle Marsh e/daniellemarsh@u.nus.edu m/A9876543Z tl/danimarsh12` <br>
        Expected: If there is no student named Danielle Marsh currently in nerdTrackerPlus, Danielle Marsh will be added to nerdTrackerPlus with the corresponding details. Otherwise, an error message will be shown.
 
-    3. Incorrect test cases to try: `add`, `add n/Danielle`, `add n/Danielle* e/dani@u.nus.edu tl/danimarsh12 m/A9876543Z`, `add n/Danielle* e/dani@u.nus.edu tl/danimarsh12`..., where one or more compulsory fields are missing, incorrect command format etc. <br> 
+    3. Incorrect test cases to try: `add`, `add n/Danielle`, `add n/Danielle* e/dani@u.nus.edu tl/danimarsh12 m/A9876543Z`, `add n/Danielle* e/dani@u.nus.edu tl/danimarsh12`..., where one or more compulsory fields are missing, incorrect command format etc. <br>
        Expected: No student is added. Error message is shown.
 
 ### Listing students
@@ -1044,7 +1049,7 @@ testers are expected to do more *exploratory* testing.
 ### Finding students
 
 1. Finding students in nerdTrackerPlus
-    
+
     1. Prerequisites: nerdTrackerPlus contains some students.
 
     2. Test case: `find charlotte` <br>
@@ -1154,9 +1159,9 @@ testers are expected to do more *exploratory* testing.
 1. Saving and loading data from data file.
 
     1. Prerequisites: Current data located at `data/addressbook.json` is valid.
-    
+
     2. Perform some commands that changes data in nerdTrackerPlus (e.g. adding a student, editing student details)
-    
+
     3. Close and launch nerdTrackerPlus again. <br>
        Expected: nerdTrackerPlus correctly displays the updated data.
 
@@ -1238,7 +1243,111 @@ This is limiting if the score needs to be changed to 0 to be ungraded. <br>
 
 
 ### Feature 8 : ***ungradeall*** command allow setting of all assignment scores to 0
-**Description**: Currently no ***ungradeall*** command exists. There is no easy way to clear out all assignment 
+**Description**: Currently no ***ungradeall*** command exists. There is no easy way to clear out all assignment
 scores. This is limiting if all scores need to be reset to 0 to be ungraded. <br>
 
 **Enhancement**: we plan to create an ***ungradeall*** command to set all assignment scores to 0.
+
+1. _{ more test cases …​ }_
+
+## **Appendix: Effort**
+
+### Ideation Phase
+
+nerdTrackerPlus was created by a collective desire to fill a niche that the group was deeply familiar
+with - supporting teaching assistants managing the administrative side of things so they could focus
+on the more important issue, teaching their classes.
+
+Armed with this understanding of the target users, we leveraged our experiences and insgihts to
+identify the unique challenges and requirements of teaching assistants.
+
+We wanted to address the day-to-day hurdles faced by TAs, such as tracking attendance, monitoring
+participation, managing assignments, and keeping track of the grades. The diversity of these challenges
+highlighted the need for a versatile tool capable of streamlining these tasks.
+
+At this point, we started drafting user stories that will serve as a foundation for the nerdTrackerPlus.
+These stories were diverse, covering scenarios like a TA struggling to keep track of participation or
+also difficulties in managing keeping track of the grades of the students for their different assignments.
+From the set of user stories, we then carefully dissected them to extract key features that would allow
+the nerdTrackerPlus effectively address the issues faced by the TAs.
+
+From this process, we were able to successfully distill the first set of features, namely the edit,
+removetags, filter and mark commands. With these basic commands, we were able to consult our peers and
+professors for feedback.
+
+We received many pieces of feedback that were extremely useful to the development of our project. Many
+pieces of feedback allowed us to see the areas that we as the developers missed out on when we were
+ideating for the application. Such examples included things like having a mark command to handle both
+participation and attendance was confusing and unnecessary. Following this critical part of our
+application's development, we decided on the new feature list and this resulted in a vast repertoire of a
+total of 24 commands, all with the goal of addressing the issues faced by our user group.
+This expansion in the commands allowed us to focus on the specific needs and we split each issue into
+smaller parts. This allowed for a more comprehensive and meaningful feature set that is more robust in
+tackling the issues faced by our user group.
+
+### OOP Principles
+
+nerdTrackerPlus was built upon the AB3 application so we already had a basis to start building upon.
+However, to ensure that we are able to track the students, attendance, participation and assignments,
+we introduced new classes that adhered to OOP principles that allowed us to extend the use cases of the
+different classes that were already present. This can be seen from the creation of the
+versionedAddressBook.java which allowed for the undo and redo commands to function. We also created
+multiple classes for the different commands and updated the model to include Assignments (which includes
+both the Assignment and the grade of the assignment).
+
+Another example is in the filter command. The filter command differs from the find command as the filter
+command is searching through the tags. Hence, it was vital for us to create a new
+PersonContainsTagPredicate class to allow the filter command to search through the tags.
+Many other examples of this exists in the different commands we have like the markattendance and
+markparticipation commands. These commands are reflected directly onto the GUI so changes must be
+incorporated into the existing code seamlessly and to do that, we had to first understand the existing
+code before writing our own commands.
+
+Finally, the last and most important thing was to incorporate our new features into the existing save and
+load commands. We basically switched out the current implementation with our own implementation that saves
+the updated information like the assignments, participation scores, attendance and also the student
+(including the name, matric number, telehandle and email address). This new implementation allows us to
+parse all the information we want to save into a JSON file and because we created the new implementation
+on storing, we also created the corresponding load functions to load the saved JSON data into the
+application on initialisation.
+
+### Built for Students, by Students
+
+Our main focus for the nerdTrackerPlus was to create a seamless, integrated and efficient tool for
+teaching assistants. To save time reduce the hassle from having too many GUI items, we chose a
+Command Line Interface (CLI) approach to using our application.
+This was also due to the fact that being Computer Science Teaching Assistants, our user group was highly
+likely to be adept at using the CLI and would feel right at home with it compared to maybe a different
+target audience.
+The nerdTrackerPlus empowers our users to manage the academic details efficiently. The TAs can easily add
+update, filter, mark both students and assignments easily, all in the application. This is helped by the
+use of the index of displayed items for quick interactions. The find and filter commands are also
+extremely helpful to the TAs, allowing them to quickly locate and update the necessary student or students.
+We also have messages to reflect the status of a command, like SUCCESS or in the case of an error, we
+would help the user by giving a sample use case and also show the parameters for the command. The help
+command also directs the user to the user guide, enhancing the support for users.
+
+### GUI updates
+
+The most important GUI update is the color coded nature of our updated GUI. For participation and
+attendance, if a student is missing in either, the corresponding field will be colored red to indicate an
+absence or lack of participation and this will allow the teaching staff to easily identify who did not
+participate or was absent. For assignments, the same color coding is applied, but with different colors to
+differentiate the assignments with the attendance and participation scores.
+
+### Testing
+
+nerdTrackerPlus has a Testing Coverage of above 75% which is an indication of rigourous testing on the
+part of the developer team. Having a high testing coverage is extremely important as it allows us to test
+new code and see if the new code that we push may have any negative side effects.
+
+### Software Engineering Practices
+
+Our development process embraced rigorous software engineering practices. We adopted the standard format
+in the course for clearer commit messages and enforced a review process requiring approval from at least
+one team members for each pull request, enhancing code quality and team awareness.
+
+We standardized pull request templates for detailed descriptions and checklists, ensuring thorough testing
+and maintenance of code coverage standards. Additionally, we experimented with git workflows to optimize
+productivity, employing both forking and feature workflows based on the nature of the task to facilitate
+collaborative development and efficient integration of changes.

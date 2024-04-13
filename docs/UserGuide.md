@@ -777,7 +777,7 @@ Removes assignment(s) from all users in the filtered list if they have them.
 |     Field     | Prefix |                     Required                     | Requirements                                                                                                       |
 |:-------------:|:------:|:------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------|
 | `ASSIGNMENT…` |   a/   | <img width=30px src="assets/ug/green_tick.svg">  | Assignment(s) should only contain alphanumeric characters. At least 1 assignment specified must exist on students. |
-    
+
 <h4>Notes:</h4>
 
 * Each assignment is case-sensitive e.g. `a/assignment1` and `a/Assignment1` are 2 different assignments.
