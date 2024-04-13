@@ -1,0 +1,68 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor white
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FilterCommandParser" as FilterCommandParser LOGIC_COLOR
+participant "PersonContainsTagPredicate" as PersonContainsTagPredicate LOGIC_COLOR
+
+participant "fc:FilterCommand" as FilterCommand LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("filter G19Group1 family")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("filter G19Group1 family")
+activate AddressBookParser
+
+create FilterCommandParser
+AddressBookParser -> FilterCommandParser : FilterCommandParser()
+activate FilterCommandParser
+
+FilterCommandParser --> AddressBookParser
+deactivate FilterCommandParser
+
+AddressBookParser -> FilterCommandParser : parse("filter G19Group1 family")
+activate FilterCommandParser
+
+create PersonContainsTagPredicate
+FilterCommandParser -> PersonContainsTagPredicate : new(G19Group1, family)
+activate PersonContainsTagPredicate
+
+PersonContainsTagPredicate --> FilterCommandParser : predicate
+deactivate PersonContainsTagPredicate
+
+create FilterCommand
+FilterCommandParser -> FilterCommand : FilterCommand(predicate)
+activate FilterCommand
+
+FilterCommand --> FilterCommandParser : fc
+deactivate FilterCommand
+
+FilterCommandParser --> AddressBookParser : fc
+deactivate FilterCommandParser
+FilterCommandParser -[hidden]-> AddressBookParser
+destroy FilterCommandParser
+
+AddressBookParser --> LogicManager : fc
+deactivate AddressBookParser
+
+LogicManager -> FilterCommand : execute(fc)
+activate FilterCommand
+
+ref over FilterCommand : Filter the students shown
+
+ref over FilterCommand : Create successful CommandResult
+
+FilterCommand --> LogicManager : r
+deactivate FilterCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FilterCommand -[hidden]-> LogicManager
+destroy FilterCommand
+
+[<--LogicManager : r
+deactivate LogicManager
+@enduml
