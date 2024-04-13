@@ -171,19 +171,59 @@ The sequence diagrams below provide information for the respective reference fra
 
 ![CreateMarkCommandResult](assets/dg/SDMarkParticipationCommandResult.png)
 
-![CommitAddressbook](assets/dg/SDCommitAddressbook.png)
+![CommitAddressbook](assets/dg/SDMarkParticipationCommitAddressbook.png)
 
 #### Design considerations
 
 **Aspect: How to mark a student's participation score:**
 
 * **Current implementation:** Creates a new person with updated participation scores.
-    * Pros: Ensures immutability of each person object, which reduces the potential for unintended side effects caused my mutable state changes.
+    * Pros: Ensures immutability of each person object, which reduces the potential for unintended side effects caused by mutable state changes.
     * Cons: May incur some performance overhead since we are creating a new copy of a person each time the command is called.
 
 * **Alternative:** Update the participation field of the existing person object.
     * Pros: Will use less memory since we are not recreating a person object.
     * Cons: Person become mutable, which might be challenging to test and ensure correctness as the state changes constantly.
+
+### Grade Assignment feature
+
+#### Implementation
+
+The `grade` command allows users to assign a score to a particular student for a particular assignment. It takes in an index representing the index of the person to grade in the list, the name of the assignment to be graded, as well as a grade representing the grade to assign.
+
+To better understand how the grade command is executed, below is a sequence diagram to provide a visual representation.
+
+![GradeAssignmentSequenceDiagram](assets/dg/GradeAssignmentSequenceDiagram.png)
+
+The sequence diagrams below provide information for the respective reference frames.
+
+![GradeAssignment](assets/dg/SDGradeAssignment.png)
+
+![CreateGradeAssignmentCommandResult](assets/dg/SDGradeAssignmentCommandResult.png)
+
+![CommitAddressbook](assets/dg/SDGradeAssignmentCommitAddressbook.png)
+
+#### Design considerations
+
+**Aspect: How to grade a student for a specific assignment:**
+
+* **Current implementation:** Creates a new person with updated assignment grade.
+    * Pros: Ensures immutability of each person object, which reduces the potential for unintended side effects caused by mutable state changes.
+    * Cons: May incur some performance overhead since we are creating a new copy of a person each time the command is called.
+
+* **Alternative:** Update the assignment field of the existing person object.
+    * Pros: Will use less memory since we are not recreating a person object.
+    * Cons: Person become mutable, which might be challenging to test and ensure correctness as the state changes constantly.
+
+**Aspect: Range and state of grades that can be assigned for an assignment:**
+
+* **Current implementation:** Grades are defaulted to 0 upon the creation of an assignment, and are displayed as yellow text boxes.
+    * Pros: Allows for easy visual distinction between assignments with 0 and nonzero grades.
+    * Cons: Does not allow for distinction between assignments with grade 0 and ungraded assignments.
+
+* **Alternative:** Implement a new state for assignments: ungraded, displayed as red text boxes.
+    * Pros: Will allow for distinction between assignments with grade 0 and ungraded assignments.
+    * Cons: Requires additional work by users to assign grades to ungraded assignments, since there would no longer be a default grade of 0.
 
 ### Undo/redo feature
 
@@ -951,7 +991,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
 4. The commands should be clear and concise that are easy for teaching assistants to understand and use without extensive training.
 5. The application should only be designed for a single user.
 6. The application should respond promptly to user inputs, with minimal latency between command execution and feedback.
