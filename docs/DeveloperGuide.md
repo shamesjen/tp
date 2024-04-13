@@ -304,11 +304,11 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Has a need to manage a significant number students from tutorial classes
+* Prefer desktop apps over other types
+* Can type fast
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
 
 **Value proposition**:
 
@@ -339,8 +339,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | CS2109S teaching staff | add assignments based on my course's assessment structure        | so that I can keep track of my student's assignments                                          |
 | `* * *`  | CS2109S teaching staff | remove assignments                                               | so that I can remove assignments that were added by mistake                                   |
 | `* * *`  | CS2109S teaching staff | grade assignments that were added                                | so that I can keep track of the grades that my students received for the various assignments  |
-| `* * *`  | CS2109S teaching staff | undo a previously issued command                                 | so that it is convenient to undo any mistakes made                                            |
-| `* * *`  | CS2109S teaching staff | redo a previously undone command                                 | so that I can restore the last changes that were undone                                       |
+| `* *`    | CS2109S teaching staff | undo a previously issued command                                 | so that it is convenient to undo any mistakes made                                            |
+| `* *`    | CS2109S teaching staff | redo a previously undone command                                 | so that I can restore the last changes that were undone                                       |
 | `* * *`  | user                   | close and exit the app                                           |                                                                                               |
 
 
@@ -950,13 +950,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The commands should be clear and concise that are easy for teaching assistants to understand and use without extensive training.
 5. The application should only be designed for a single user.
 6. The application should respond promptly to user inputs, with minimal latency between command execution and feedback.
-
-*{More to be added}*
 
 ### Glossary
 
@@ -964,6 +962,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **API**: Application Programming Interface, a set of rules, protocols, and tools that allows different software applications to communicate with each other.
 * **GUI**: Graphical User Interface, a type of user interface that allows users to interact with a computer system using graphical elements on the screen such as windows, icons, menus, and buttons.
+* **CLI**: Command Line Interface, a text based interface used to interact with computer programs and operating systems by typing commands into a terminal or command prompt.
+* **MSS**: Main Success Scenario, a sequence of events or steps that occur when a system or software application operates as intended, without any errors or exceptions.
+* **JSON**: JavaScript Object Notation, a lightweight data interchange format used for transmitting structured data between systems in a human-readable and machine-parseable way.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1183,8 +1184,6 @@ testers are expected to do more *exploratory* testing.
     3. Close and launch nerdTrackerPlus again. <br>
        Expected: New data file created at `data/addressbook.json` containing some sample data.
 
-## **Appendix: Effort**
-
 ## **Appendix: Planned Enhancements**
 
 **Team Size**: 4 members <br>
@@ -1192,73 +1191,80 @@ testers are expected to do more *exploratory* testing.
 Given below are the planned future enhancements for our application.
 Once the current version is stable, we plan to implement the following features:
 
-### Feature 1 : Change UUID from Student Name to Student Matriculation Number
-**Description**: Currently, the UUID of each student is generated based on the student's name.
-This can be problematic if there are multiple students with the same name. <br>
+1. Change unique identifier from Student Name to Student Matriculation Number
 
-**Enhancement**: To resolve this, we plan to change the UUID generation to be based on the student's
-matriculation number instead, since this is unique to each student.
+   * **Description**: Currently, the unique identifier for each student is generated based on the student's name.
+   This can be problematic since the matriculation number is unique for each student, and it is possible for multiple students to have the same name. <br>
 
-### Feature 2 : Setting participation scores
-**Description**: Currently, ***markp*** and ***markallp*** commands as well as the corresponding unmark commands
+   * **Enhancement**: To resolve this, we plan to change the unique identifier of each student to be based on the student's
+   matriculation number instead, since this is unique to each student.
+
+   * **Example**: If a user adds a new student with name `Alex Yeoh` when `Alex Yeoh` already exists in nerdTrackerPlus, the command will successfully execute so long as their matriculation number is unique.
+
+2. Setting participation scores
+
+    * **Description**: Currently, `markp` and `markallp` commands as well as the corresponding unmark commands
 only increment or decrement participation scores by 1. To set a students score to 3 for example,
-the ***markp*** command must be executed multiple times.
-This can be an inconvenience for large scores.<br>
+the `markp` command must be executed multiple times.
+This can be an inconvenient for teaching assistant who might want to increment scores by more than 1.<br>
 
-**Enhancement**: We plan to implement a ***setp*** command that allows users to set a student's participation directly.
+    * **Enhancement**: We plan to modify `markp` commands and its variants to allow users to set specific scores instead of just incrementing it by 1.
 
-### Feature 3 : Assignments to contain max score and weightage
-**Description**: Currently, the ***Assignment*** class only contain the name of the assignment and the score obtained by
-the student. This does not allow for the calculation of the student's grade based on the assignment, as well as how
-much an assignment grade affects a student's total score.<br>
+    * **Example**: Users can now input `markp 1 3 s/5` to mark the participation score of the first student in week 3 to be 5 by specifying the score with the `s/` prefix.
 
-**Enhancement**: We plan to implement ***totalScore*** amd ***weightagePercent*** as Integer and Float fields
-respectively as part of the **Assignment** class. These will be compulsory fields on the constructor and will
-be used to calculate the student's total score and grade.
+3. Assignments to contain max score and weightage
 
-### Feature 4 : Accept floats for scores
-**Description**: Currently, the **assignmentScore** field in the **Assignment** class only accepts integers.
-This can be limiting if the assignment score is a float.<br>
+   * **Description**: Currently, the **Assignment** class only contains the name of the assignment and the score obtained by
+   the student. This does not allow for the calculation of the student's grade based on the assignment, as well as how
+   much an assignment grade affects a student's total score.<br>
 
-**Enhancement**: We plan to change the **assignmentScore** field to accept floats.
+   * **Enhancement**: We can modify the Assignment class to contain **totalScore** and **weightagePercent** as Integer and Float fields respectively. These will be compulsory fields on the constructor and will be used to calculate the student's total score and grade.
 
-### Feature 5 : ***unmarkalla*** and ***unmarkallp*** commands should work as long as one student has a nonzero participation or attendance score
-**Description**: Currently ***unmarkallp*** and ***unmarkalla*** commands will throw an error if one student has a zero as a
-participation score or attendance score respectively. This makes their use case extremely narrow and limited. <br>
+   * **Example**: If `assignment1` has a maximum score of 100 and a student has scored 50 for that assignment, instead of displaying `assignment1` as `assignment1: 50`, it will be displayed as `assignment1: 50/100`.
 
-**Enhancement**: we plan to change this so that the commands will work as long as one student has a nonzero score.
+4. Accept floats for scores
 
-### Feature 6 : ***edit*** command should allow editing of a single field
-**Description**: Currently ***edit*** commands requires updating of all fields on a student. This can be cumbersome
-if only one field needs to be updated. <br>
+   * **Description**: Currently, the **assignmentScore** field in the **Assignment** class only accepts integers.
+   This can be limiting as assignment scores might contain decimals.<br>
 
-**Enhancement**: we plan to change this so that the ***edit*** command can be used to update a single field by providing
-the relevant prefix.
+   * **Enhancement**: We plan to change the **assignmentScore** field to accept floats.
 
-### Feature 7 : ***ungrade*** command allow setting of assignment score to 0
-**Description**: Currently ***grade*** command only allows changing of assignment score to a non-zero positive integer.
+   * **Example**: Users can now input `grade 1 50.5 a/assignment1` to grade the first student's assignment1 score to 50.5.
+
+5.  **unmarkalla** and **unmarkallp** commands should work as long as one student has a nonzero participation or attendance score
+
+    * **Description**: Currently **unmarkallp** and **unmarkalla** commands will throw an error if one student has zero participation score or attendance score respectively. This makes their use case extremely narrow and limited. <br>
+
+    * **Enhancement**: We plan to change this so that the commands will work as long as one student has a nonzero score.
+
+    * **Example**: Suppose the first student in the list has a participation score of 0 for week 3, while the rest of the students have a score of 1. `unmarkp 3` will successfully unmark the participation score of all students in week 3 except for the first student.
+
+6. **grade** command to allow setting of assignment score to 0
+
+    * **Description**: Currently **grade** command only allows changing of assignment score to a non-zero positive integer.
 This is limiting if the score needs to be changed to 0 to be ungraded. <br>
 
-**Enhancement**: we plan to create an ***ungrade*** command to set assignment score to 0.
+    * **Enhancement**: We plan to modify the **grade** command to allow users to grade an assignment score as 0.
 
+    * **Example**: Users can now input `grade 1 0 a/assignment1` to grade the first student's assignment1 score to 0.
 
-### Feature 8 : ***ungradeall*** command allow setting of all assignment scores to 0
-**Description**: Currently no ***ungradeall*** command exists. There is no easy way to clear out all assignment
-scores. This is limiting if all scores need to be reset to 0 to be ungraded. <br>
+7. Specific error messages for commands with multiple parameters
 
-**Enhancement**: we plan to create an ***ungradeall*** command to set all assignment scores to 0.
+    * **Description**: Our error messages are currently too general for certain commands such as `add` that requires several parameters. This might make it difficult for users to identify the specific parameter that has an incorrect format. <br>
 
-1. _{ more test cases …​ }_
+    * **Enhancement**: Modify error messages to pinpoint the specific parameters that the users have incorrectly entered, instead of just showing `Invalid command format` as an error message.
+
+    * **Example**: If a user inputs `add n/Michael* e/michael@u.nus.edu tl/michael01 m/A1234567Z` as a command, the error message will be `Name field has incorrect format`.
 
 ## **Appendix: Effort**
 
 ### Ideation Phase
 
 nerdTrackerPlus was created by a collective desire to fill a niche that the group was deeply familiar
-with - supporting teaching assistants managing the administrative side of things so they could focus
+with - supporting teaching assistants managing the administrative side of things so that they could focus
 on the more important issue, teaching their classes.
 
-Armed with this understanding of the target users, we leveraged our experiences and insgihts to
+Armed with this understanding of the target users, we leveraged our experiences and insights to
 identify the unique challenges and requirements of teaching assistants.
 
 We wanted to address the day-to-day hurdles faced by TAs, such as tracking attendance, monitoring
@@ -1298,15 +1304,15 @@ both the Assignment and the grade of the assignment).
 Another example is in the filter command. The filter command differs from the find command as the filter
 command is searching through the tags. Hence, it was vital for us to create a new
 PersonContainsTagPredicate class to allow the filter command to search through the tags.
-Many other examples of this exists in the different commands we have like the markattendance and
-markparticipation commands. These commands are reflected directly onto the GUI so changes must be
+Many other examples of this exists in the different commands we have like the mark attendance and
+mark participation commands. These commands are reflected directly onto the GUI so changes must be
 incorporated into the existing code seamlessly and to do that, we had to first understand the existing
 code before writing our own commands.
 
 Finally, the last and most important thing was to incorporate our new features into the existing save and
 load commands. We basically switched out the current implementation with our own implementation that saves
 the updated information like the assignments, participation scores, attendance and also the student
-(including the name, matric number, telehandle and email address). This new implementation allows us to
+(including the name, matric number, telegram handle and email address). This new implementation allows us to
 parse all the information we want to save into a JSON file and because we created the new implementation
 on storing, we also created the corresponding load functions to load the saved JSON data into the
 application on initialisation.
@@ -1337,7 +1343,7 @@ differentiate the assignments with the attendance and participation scores.
 
 ### Testing
 
-nerdTrackerPlus has a Testing Coverage of above 75% which is an indication of rigourous testing on the
+nerdTrackerPlus has a Testing Coverage of above 75% which is an indication of rigorous testing on the
 part of the developer team. Having a high testing coverage is extremely important as it allows us to test
 new code and see if the new code that we push may have any negative side effects.
 
