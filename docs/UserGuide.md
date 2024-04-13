@@ -79,7 +79,7 @@ nerdTrackerPlus contains several key features to address these issues such as `m
 
 #### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Shows you a message explaining how to access the help page.
 
 ![help message](images/ug/helpMessage.png)
 
@@ -89,7 +89,7 @@ Shows a message explaining how to access the help page.
 
 #### Undoing a previous command : `undo`
 
-Undoes the previous command that changed data.
+Undoes the previous command you executed that changed data.
 
 <h4>Format:</h4>
 
@@ -116,7 +116,7 @@ Undoes the previous command that changed data.
 
 #### Redoing a previously undone command : `redo`
 
-Redoes the previously undone command.
+Redoes the previous command that you undid.
 
 <h4>Format:</h4>
 
@@ -145,7 +145,7 @@ Redoes the previously undone command.
 
 #### Clearing all entries : `clear`
 
-Clears all entries from nerdTrackerPlus.
+Clears all your student entries from nerdTrackerPlus.
 
 <h4>Format:</h4>
 
@@ -175,7 +175,7 @@ Exits the program.
 
 #### Adding a student : `add`
 
-Adds a student to nerdTrackerPlus.
+Adds a student from your tutorial class to nerdTrackerPlus.
 
 <h4>Format:</h4>
 
@@ -223,7 +223,7 @@ A student can have any number of tags (including 0)
 
 #### Listing all students : `list`
 
-Shows a list of all students in nerdTrackerPlus.
+Shows you a list of all students in nerdTrackerPlus.
 
 <h4>Format:</h4>
 
@@ -238,7 +238,7 @@ Shows a list of all students in nerdTrackerPlus.
 
 #### Editing a student : `edit`
 
-Edits an existing student in nerdTrackerPlus.
+Edits your students' details in nerdTrackerPlus.
 
 <h4>Format:</h4>
 
@@ -326,7 +326,7 @@ Finds students whose names contain any of the given keywords.
 
 #### Deleting a student : `delete`
 
-Deletes the specified student from nerdTrackerPlus.
+Deletes a student from your student list nerdTrackerPlus.
 
 <h4>Format</h4>
 
@@ -430,7 +430,7 @@ Deletes the specified tag(s) from all students that have the tag(s).
 
 #### Filtering by tags : `filter`
 
-Filters all students with the specified tags.
+Filters all students from your list of students in nerdTrackerPlus with the specified tags.
 
 <h4>Format</h4>
 
@@ -463,7 +463,7 @@ Filters all students with the specified tags.
 
 #### Marking individual participation scores : `markp`
 
-Marks the participation score of a specific student.
+Marks the participation score of a specific student from your tutorial class.
 
 <h4>Format:</h4>
 
@@ -499,7 +499,7 @@ Marks the participation score of a specific student.
 
 #### Un-marking individual participation scores : `unmarkp`
 
-Un-marks the participation score of a specific student.
+Un-marks the participation score of a specific student from your tutorial class.
 
 <h4>Format:</h4>
 
@@ -536,7 +536,7 @@ Un-marks the participation score of a specific student.
 
 #### Marking individual attendance scores : `marka`
 
-Marks the attendance of a specific student.
+Marks the attendance of a specific student from your tutorial class.
 
 <h4>Format:</h4>
 
@@ -572,7 +572,7 @@ Marks the attendance of a specific student.
 
 #### Un-marking individual attendance scores : `unmarka`
 
-Un-marks the attendance of a specific student.
+Un-marks the attendance of a specific student from your tutorial class.
 
 <h4>Format:</h4>
 
@@ -733,7 +733,7 @@ Un-marks the attendance of all students in the filtered list for a given week.
 
 #### Adding a custom assignment : `adda`
 
-Adds assignment(s) to all users in the filtered list if they do not already exist.
+Adds assignment(s) to all students in your filtered list if they do not already exist.
 
 <h4>Format:</h4>
 
@@ -766,7 +766,7 @@ Adds assignment(s) to all users in the filtered list if they do not already exis
 
 #### Removing a custom assignment : `removea`
 
-Removes assignment(s) from all users in the filtered list if they have them.
+Removes assignment(s) from all students in your filtered list if they have them.
 
 <h4>Format:</h4>
 
@@ -800,7 +800,7 @@ Removes assignment(s) from all users in the filtered list if they have them.
 
 #### Grading a custom assignment : `grade`
 
-Grades and assigns a score to an assignment for a given student.
+Grades and assigns a score to an assignment for a given student in your tutorial class.
 
 <h4>Format:</h4>
 
@@ -837,7 +837,7 @@ Grades and assigns a score to an assignment for a given student.
 
 ## Saving the data
 
-nerdTrackerPlus data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+nerdTrackerPlus data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ## Editing the data file
 

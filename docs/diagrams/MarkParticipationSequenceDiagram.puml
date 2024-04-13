@@ -23,7 +23,7 @@ activate MarkParticipationCommandParser
 MarkParticipationCommandParser --> AddressBookParser
 deactivate MarkParticipationCommandParser
 
-AddressBookParser -> MarkParticipationCommandParser : parse("mark 1 3")
+AddressBookParser -> MarkParticipationCommandParser : parse("markp 1 3")
 activate MarkParticipationCommandParser
 
 create MarkParticipationCommand

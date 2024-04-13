@@ -112,7 +112,8 @@ public class EditCommandParserTest {
                 + EMAIL_DESC_AMY + TELEGRAM_HANDLE_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_MATRIC_NUMBER_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_TELEGRAM_HANDLE_AMY)
+                .withPhone(VALID_MATRIC_NUMBER_BOB).withEmail(VALID_EMAIL_AMY)
+                .withTelegramHandle(VALID_TELEGRAM_HANDLE_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -154,7 +155,7 @@ public class EditCommandParserTest {
 
         // address
         userInput = targetIndex.getOneBased() + TELEGRAM_HANDLE_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withAddress(VALID_TELEGRAM_HANDLE_AMY).build();
+        descriptor = new EditPersonDescriptorBuilder().withTelegramHandle(VALID_TELEGRAM_HANDLE_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 

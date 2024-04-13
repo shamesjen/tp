@@ -30,9 +30,9 @@ public class GradeAssignmentCommand extends Command {
 
 
     public static final String MESSAGE_SUCCESS_GRADE =
-        "Assignment %1$s marked as done with score: %2$d from this person : %3$s.";
+            "Assignment %1$s marked as done with score: %2$d from this person : %3$s.";
     public static final String MESSAGE_SUCCESS_UNGRADE =
-        "Assignment %1$s unmarked as with score %2$d from this person : %3$s.";
+            "Assignment %1$s unmarked as with score %2$d from this person : %3$s.";
 
     public static final String MESSAGE_ASSIGNMENT_NOT_FOUND = "Assignment not found.";
 
@@ -69,10 +69,10 @@ public class GradeAssignmentCommand extends Command {
         CommandResult gradeCommandResult;
         if (assignmentScore > 0) {
             gradeCommandResult = new CommandResult(String.format(MESSAGE_SUCCESS_GRADE, assignmentName,
-            assignmentScore, personToMark.getName()));
+                    assignmentScore, personToMark.getName()));
         } else {
             gradeCommandResult = new CommandResult(String.format(MESSAGE_SUCCESS_UNGRADE, assignmentName,
-            assignmentScore, personToMark.getName()));
+                    assignmentScore, personToMark.getName()));
         }
         model.commitAddressBook(gradeCommandResult);
         return gradeCommandResult;
@@ -98,7 +98,7 @@ public class GradeAssignmentCommand extends Command {
         }
         return new Person(personToMark.getName(), personToMark.getMatricNumber(),
                 personToMark.getEmail(), personToMark.getTelegramHandle(), personToMark.getTags(),
-                    newAssignments, personToMark.getParticipationScores(), personToMark.getAttendanceScores());
+                newAssignments, personToMark.getParticipationScores(), personToMark.getAttendanceScores());
     }
 
     @Override

@@ -65,10 +65,12 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_MATRIC_NUMBER_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_TELEGRAM_HANDLE_AMY)
+                .withPhone(VALID_MATRIC_NUMBER_AMY).withEmail(VALID_EMAIL_AMY)
+                .withTelegramHandle(VALID_TELEGRAM_HANDLE_AMY)
                 .withTags(VALID_TAG_FRIEND).withAssignments("Test1").build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_MATRIC_NUMBER_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_TELEGRAM_HANDLE_BOB)
+                .withPhone(VALID_MATRIC_NUMBER_BOB).withEmail(VALID_EMAIL_BOB)
+                .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withAssignments("Test1").build();
     }
 
