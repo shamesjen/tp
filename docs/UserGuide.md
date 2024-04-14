@@ -445,7 +445,7 @@ Filters all students from your list of students in nerdTrackerPlus with the spec
 <h4>Notes:</h4>
 
 * If `filter` is used and more than 1 tag is used to filter, students that match any one of the tags will be shown.
-* Tags are case-sensitive.
+* Tags are case-insensitive. e.g. `cs2109s` will match `CS2109S`
 
 <h4>Example:</h4>
 * `filter family`

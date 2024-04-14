@@ -204,7 +204,7 @@ The sequence diagrams below provide information for the respective reference fra
 
 #### Design Consideration
 
-**Aspect: How to filter the students shown by tag: **
+**Aspect: How to filter the students shown by tag:**
 
 * **Current implementation:** By using a PersonContainsTagPredicate, we update the filteredList in the Model which displays the students in the GUI.
     * Pros: Allows the filter command to use existing methods in the Model to filter the list of students. This reduces the negative side effects of the filter command.
