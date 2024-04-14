@@ -1,0 +1,22 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor white
+
+mainframe: **sd** Filter the students shown
+
+participant "fc:FilterCommand" as FilterCommand LOGIC_COLOR
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+activate FilterCommand
+
+FilterCommand -> Model : updateFilteredPersonList(predicate)
+activate Model
+
+Model -> FilterCommand
+deactivate Model
+
+@enduml

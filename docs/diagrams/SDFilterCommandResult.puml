@@ -1,0 +1,20 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor white
+
+mainframe: **sd** Create successful CommandResult
+
+participant "fc:FilterCommand" as FilterCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+
+activate FilterCommand
+
+create CommandResult
+FilterCommand -> CommandResult : CommandResult(MESSAGE_PERSONS_LISTED_OVERVIEW)
+activate CommandResult
+
+CommandResult -> FilterCommand : r
+deactivate CommandResult
+
+@enduml
