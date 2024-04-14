@@ -280,6 +280,21 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
+### Add Assignment Feature
+
+#### Implementation
+The Add Assignment feature allows users to add assignments to users in the address book. An Assignment is represented by 
+the Assignment class, which contains the assignment name and score. The command takes in a list of assignment
+names then creates and adds a list of those assignments to the Assignment list of all users that do not already
+have an assignment with the same name. The assignments are initiated with a score of 0 and saved to the storage file.
+
+To better understand how the add assignment command is executed, below is a sequence diagram to provide a visual representation.
+
+![AddAssignmentSequenceDiagram](assets/dg/AddAssignmentSequenceDiagram.png)
+
+The sequence diagrams below provide information for the respective reference frames.
+
+![AddAssignment](assets/dg/SDAddAssignment.png)
 
 ### \[Proposed\] Data archiving
 
