@@ -185,6 +185,35 @@ The sequence diagrams below provide information for the respective reference fra
     * Pros: Will use less memory since we are not recreating a person object.
     * Cons: Person become mutable, which might be challenging to test and ensure correctness as the state changes constantly.
 
+### Filter feature
+
+#### Implementation
+
+The 'filter' command allows users to filter the currently shown list of students based on tags that match any of the specified tags given with
+the command. It takes in the 'filter' keyword as well as one or more alphanumeric tags separated by a space.
+
+To better understand how the filter command is executed, below is a sequence diagram to provide a visual representation.
+
+![FilterCommandSequenceDiagram](assets/dg/FilterCommandSequenceDiagram.png)
+
+The sequence diagrams below provide information for the respective reference frames.
+
+![FilterCommand](assets/dg/SDFilterStudents.png)
+
+![FilterCommandResult](assets/dg/SDFilterCommandResult.png)
+
+#### Design Consideration
+
+**Aspect: How to filter the students shown by tag: **
+
+* **Current implementation:** By using a PersonContainsTagPredicate, we update the filteredList in the Model which displays the students in the GUI.
+    * Pros: Allows the filter command to use existing methods in the Model to filter the list of students. This reduces the negative side effects of the filter command.
+    * Cons: The current implementation is dependent on the Model class and any bugs there renders the method useless.
+
+* **Alternative:** By using a separate class to filter the students.
+    * Pros: Reduces the dependency on the Model class and allows for easier testing of the filter command.
+    * Cons: Requires additional classes to be created which may increase the complexity of the codebase.
+
 ### Grade Assignment feature
 
 #### Implementation

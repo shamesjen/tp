@@ -44,7 +44,7 @@ deactivate AddressBookParser
 LogicManager -> MarkParticipationCommand : execute(mc)
 activate MarkParticipationCommand
 
-ref over MarkParticipationCommand : Mark person at specified week
+ref over MarkParticipationCommand : Mark person at specified weeks
 
 ref over MarkParticipationCommand : Create successful CommandResult
 

@@ -43,7 +43,6 @@ public class PersonContainsTagPredicate implements Predicate<Person> {
 
     @Override
     public String toString() {
-        // Assuming ToStringBuilder works similarly for lists
         return new seedu.address.commons.util.ToStringBuilder(this)
                 .add("keywords", keywords)
                 .toString();
