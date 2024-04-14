@@ -29,7 +29,7 @@ AddressBookParser -> FilterCommandParser : parse("filter G19Group1 family")
 activate FilterCommandParser
 
 create PersonContainsTagPredicate
-FilterCommandParser -> PersonContainsTagPredicate : new(G19Group1, family)
+FilterCommandParser -> PersonContainsTagPredicate : PersonContainsTagPredicate(G19Group1, family)
 activate PersonContainsTagPredicate
 
 PersonContainsTagPredicate --> FilterCommandParser : predicate
