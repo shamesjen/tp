@@ -352,7 +352,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 ### Add Assignment Feature
 
 #### Implementation
-The Add Assignment feature allows users to add assignments to users in the address book. An Assignment is represented by 
+The Add Assignment feature allows users to add assignments to users in the address book. An Assignment is represented by
 the Assignment class, which contains the assignment name and score. The command takes in a list of assignment
 names then creates and adds a list of those assignments to the Assignment list of all users that do not already
 have an assignment with the same name. The assignments are initiated with a score of 0 and saved to the storage file.
