@@ -29,21 +29,27 @@ AddressBookParser -> AddAssignmentCommandParser : parse("adda a/Homework1")
 activate AddAssignmentCommandParser
 
 create Hashset
-AddAssignmentCommandParser -> Hashset : new()
+AddAssignmentCommandParser -> Hashset : Hashset()
 activate Hashset
 
 create Assignment
 Hashset -> Assignment : Assignment("Homework1")
+
 activate Assignment
 Assignment --> Hashset : homework1
 deactivate Assignment
 
-Hashset --> Hashset : add(homework1)
+
+Hashset -> Hashset : add(homework1)
+activate Hashset
+Hashset --> Hashset
+deactivate Hashset
+
 Hashset --> AddAssignmentCommandParser : hs
 deactivate Hashset
 
-
-AddAssignmentCommandParser --> AddAssignmentCommand : AddAssignmentCommand(hs)
+create AddAssignmentCommand
+AddAssignmentCommandParser -> AddAssignmentCommand : AddAssignmentCommand(hs)
 activate AddAssignmentCommand
 AddAssignmentCommand --> AddAssignmentCommandParser : ac
 deactivate AddAssignmentCommand
@@ -60,7 +66,7 @@ deactivate AddressBookParser
 LogicManager -> AddAssignmentCommand : execute(ac)
 activate AddAssignmentCommand
 
-ref over AddAssignmentCommand : Adds Assignment to every student in the addressbook
+ref over AddAssignmentCommand : Add specified assignment to all students
 
 ref over AddAssignmentCommand : Create successful CommandResult
 

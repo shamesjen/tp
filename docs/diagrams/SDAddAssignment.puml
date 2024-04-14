@@ -3,7 +3,7 @@
 skinparam ArrowFontStyle plain
 skinparam sequenceReferenceBackgroundColor white
 
-mainframe: **sd** Add specific Assignment for all students
+mainframe: **sd** Add specified assignment to all students
 
 participant "ac:AddAssignmentCommand" as AddAssignmentCommand LOGIC_COLOR
 
@@ -16,27 +16,27 @@ activate AddAssignmentCommand
 AddAssignmentCommand -> Model : getFilteredPersonList()
 activate Model
 
-Model -> AddAssignmentCommand : lastShownList
+Model --> AddAssignmentCommand : lastShownList
 deactivate Model
 loop person : lastShownList
     AddAssignmentCommand -> AddAssignmentCommand : generateAssignmentList(person, assignments)
     activate AddAssignmentCommand
-    AddAssignmentCommand -> AddAssignmentCommand : assignmentList
+    AddAssignmentCommand --> AddAssignmentCommand : assignmentList
     deactivate AddAssignmentCommand
     AddAssignmentCommand -> AddAssignmentCommand : newPerson(..., assignmentList)
     activate AddAssignmentCommand
-    AddAssignmentCommand -> AddAssignmentCommand : updatedPerson
+    AddAssignmentCommand --> AddAssignmentCommand : updatedPerson
     deactivate AddAssignmentCommand
     AddAssignmentCommand -> Model : setPerson(person, updatedPerson)
     activate Model
-    Model -> AddAssignmentCommand
+    Model --> AddAssignmentCommand
     deactivate Model
 end loop
 
 AddAssignmentCommand -> Model : updatedFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
 activate Model
 
-Model -> AddAssignmentCommand
+Model --> AddAssignmentCommand
 deactivate Model
 
 @enduml

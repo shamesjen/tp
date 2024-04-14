@@ -15,7 +15,7 @@ activate AddAssignmentCommand
 AddAssignmentCommand -> Model : commitAddressBook(addAssignmentCommandResult)
 activate Model
 
-Model -> AddAssignmentCommand
+Model --> AddAssignmentCommand
 deactivate Model
 
 @enduml

@@ -14,7 +14,7 @@ create CommandResult
 AddAssignmentCommand -> CommandResult : CommandResult(MESSAGE_SUCCESS)
 activate CommandResult
 
-CommandResult -> AddAssignmentCommand : r
+CommandResult --> AddAssignmentCommand : r
 deactivate CommandResult
 
 @enduml
