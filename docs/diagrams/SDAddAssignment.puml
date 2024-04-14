@@ -1,0 +1,42 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor white
+
+mainframe: **sd** Add specific Assignment for all students
+
+participant "ac:AddAssignmentCommand" as AddAssignmentCommand LOGIC_COLOR
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+activate AddAssignmentCommand
+
+AddAssignmentCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model -> AddAssignmentCommand : lastShownList
+deactivate Model
+loop person : lastShownList
+    AddAssignmentCommand -> AddAssignmentCommand : generateAssignmentList(person, assignments)
+    activate AddAssignmentCommand
+    AddAssignmentCommand -> AddAssignmentCommand : assignmentList
+    deactivate AddAssignmentCommand
+    AddAssignmentCommand -> AddAssignmentCommand : newPerson(..., assignmentList)
+    activate AddAssignmentCommand
+    AddAssignmentCommand -> AddAssignmentCommand : updatedPerson
+    deactivate AddAssignmentCommand
+    AddAssignmentCommand -> Model : setPerson(person, updatedPerson)
+    activate Model
+    Model -> AddAssignmentCommand
+    deactivate Model
+end loop
+
+AddAssignmentCommand -> Model : updatedFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+activate Model
+
+Model -> AddAssignmentCommand
+deactivate Model
+
+@enduml
