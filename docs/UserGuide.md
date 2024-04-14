@@ -87,6 +87,8 @@ Shows you a message explaining how to access the help page.
 
 `help`
 
+---
+
 #### Undoing a previous command : `undo`
 
 Undoes the previous command you executed that changed data.
@@ -113,6 +115,7 @@ Undoes the previous command you executed that changed data.
 | Unknown command                                                 | Ensure that the command word provided is correct.                                  |
 | Unable to undo since there were no previously issued commands.  | Ensure that at least 1 command was previously used before using the undo command.  |
 
+---
 
 #### Redoing a previously undone command : `redo`
 
@@ -142,6 +145,7 @@ Redoes the previous command that you undid.
 | Unknown command                                                | Ensure that the command word provided is correct.                                   |
 | Unable to redo since there were no previously issued commands. | Ensure that at least 1 command was previously undone before using the redo command. |
 
+---
 
 #### Clearing all entries : `clear`
 
@@ -157,6 +161,7 @@ Clears all your student entries from nerdTrackerPlus.
 
 ![clear](images/ug/clearExample.png)
 
+---
 
 #### Exiting the program : `exit`
 
@@ -170,6 +175,7 @@ Exits the program.
 
 * `exit`
 
+---
 
 ### Managing students
 
@@ -191,7 +197,7 @@ A student can have any number of tags (including 0)
 |:-----------------:|:------:|:-----------------------------------------------:|:------------------------------------------------------------------------------------------------------------------|
 |      `NAME`       |  `n/`  | <img width=30px src="assets/ug/green_tick.svg"> | Name of the student. It should only contain alphanumeric characters and spaces.                                   |
 |  `MATRIC_NUMBER`  |  `m/`  | <img width=30px src="assets/ug/green_tick.svg"> | Matriculation number of the student. It should start and end with a capital letter and have 7 digits in between.  |
-|      `EMAIL`      |  `e/`  | <img width=30px src="assets/ug/green_tick.svg"> | Email of the student. Email should match the format: `<local>@<domain>.<label>`.                                  |
+|      `EMAIL`      |  `e/`  | <img width=30px src="assets/ug/green_tick.svg"> | Email of the student. Email should match the format: `local-part@domain`.                                         |
 | `TELEGRAM_HANDLE` | `tl/`  | <img width=30px src="assets/ug/green_tick.svg"> | Telegram username of the student. It should only contain alphanumeric characters.                                 |
 |       `TAG`       |  `t/`  | <img width=25px src="assets/ug/red_cross.png">  | Tag(s) for the student. It should only contain alphanumeric characters and spaces. Tags specified must be unique. |
 
@@ -220,6 +226,7 @@ A student can have any number of tags (including 0)
 | This person already exists in the address book                                               | Ensure that the name of the new student to be added does not already exist in nerdTrackerPlus. |
 | Multiple values specified for the following single-valued field(s)                           | Ensure that there are no duplicates for single valued fields.                                  |
 
+---
 
 #### Listing all students : `list`
 
@@ -235,6 +242,7 @@ Shows you a list of all students in nerdTrackerPlus.
 
 ![listStudent](images/ug/listExample.png)
 
+---
 
 #### Editing a student : `edit`
 
@@ -251,7 +259,7 @@ Edits your students' details in nerdTrackerPlus.
 |      `INDEX`      | <img width=25px src="assets/ug/red_cross.png">  | <img width=30px src="assets/ug/green_tick.svg"> | `INDEX` **must be a positive integer** 1, 2, 3 …​ <br>`INDEX` cannot be greater than the number of students in the list. |
 |      `NAME`       |                      `n/`                       | <img width=25px src="assets/ug/red_cross.png">  | Name of the student. It should only contain alphanumeric characters and spaces.                                          |
 |  `MATRIC_NUMBER`  |                      `m/`                       | <img width=25px src="assets/ug/red_cross.png">  | Matriculation number of the student. It should start and end with a capital letter and have 7 digits in between.         |
-|      `EMAIL`      |                      `e/`                       | <img width=25px src="assets/ug/red_cross.png">  | Email of the student. Email should match the format: `<local>@<domain>.<label>`.                                         |
+|      `EMAIL`      |                      `e/`                       | <img width=25px src="assets/ug/red_cross.png">  | Email of the student. Email should match the format: `local-part@domain`.                                                |
 | `TELEGRAM_HANDLE` |                      `tl/`                      | <img width=25px src="assets/ug/red_cross.png">  | Telegram username of the student. It should only contain alphanumeric characters.                                        |
 |       `TAG`       |                      `t/`                       | <img width=25px src="assets/ug/red_cross.png">  | Tag(s) for the student. It should only contain alphanumeric characters and spaces.                                       |
 
@@ -286,6 +294,7 @@ Edits your students' details in nerdTrackerPlus.
 | This person already exists in the address book                                               | Ensure that the name of the new student to be added does not already exist in nerdTrackerPlus. |
 | Multiple values specified for the following single-valued field(s)                           | Ensure that there are no duplicates for single valued fields.                                  |
 
+---
 
 #### Locating students by name : `find`
 
@@ -323,6 +332,7 @@ Finds students whose names contain any of the given keywords.
 |:------------------|:--------------------------------------------------|
 | Unknown command   | Ensure that the command word provided is correct. |
 
+---
 
 #### Deleting a student : `delete`
 
@@ -357,6 +367,7 @@ Deletes a student from your student list nerdTrackerPlus.
 | Invalid command format                | Ensure that all required fields are provided.                                           |
 | The person index provided is invalid  | Ensure that the index provided is not greater than the number of students in the list.  |
 
+---
 
 #### Remove tag from a student : `removetag`
 
@@ -394,10 +405,11 @@ Deletes the specified tag from a student in nerdTrackerPlus.
 | This person does not have that tag       | Ensure that the person specified at the index contains the tag.                        |
 | Tags names should be alphanumeric        | Ensure that the tags does not contain any special characters or whitespaces.           |
 
+---
 
 ####  Remove tag(s) from all students : `removetagall`
 
-Deletes the specified tag(s) from all students that have the tag(s).
+Deletes the specified tag(s) from all students in the displayed list that have the tag(s).
 
 <h4>Format:</h4>
 
@@ -427,6 +439,7 @@ Deletes the specified tag(s) from all students that have the tag(s).
 | No persons have any of the tag(s)  | Ensure that at least 1 person has the tag specified.                         |
 | Tags names should be alphanumeric  | Ensure that the tags does not contain any special characters or whitespaces. |
 
+---
 
 #### Filtering by tags : `filter`
 
@@ -445,7 +458,7 @@ Filters all students from your list of students in nerdTrackerPlus with the spec
 <h4>Notes:</h4>
 
 * If `filter` is used and more than 1 tag is used to filter, students that match any one of the tags will be shown.
-* Tags are case-insensitive. e.g. `cs2109s` will match `CS2109S`
+* `filter` command is case-insensitive e.g. filter `G19Group1` will filter students with both `G19Group1` and `g19group1` tags.
 
 <h4>Example:</h4>
 * `filter family`
@@ -458,6 +471,8 @@ Filters all students from your list of students in nerdTrackerPlus with the spec
 |:-----------------------------------|:-----------------------------------------------------------------------------|
 | Unknown command                    | Ensure that the command word provided is correct.                            |
 | Invalid command format             | Ensure that all required fields are provided.                                |
+
+---
 
 ### Managing participation, attendance and assignments
 
@@ -496,6 +511,7 @@ Marks the participation score of a specific student from your tutorial class.
 | The person index provided is invalid  | Ensure that the index provided is not greater than the number of students in the list.  |
 | The week provided is invalid          | Ensure that the week number is in the range [3, 13] inclusive.                          |
 
+---
 
 #### Un-marking individual participation scores : `unmarkp`
 
@@ -533,6 +549,7 @@ Un-marks the participation score of a specific student from your tutorial class.
 | The week provided is invalid                                          | Ensure that the week number is in the range [3, 13] inclusive.                                |
 | Participation for `STUDENT_NAME` in Week `WEEK_NUMBER` is already 0   | Ensure that all students in the currently filtered list have at least 1 participation score.  |
 
+---
 
 #### Marking individual attendance scores : `marka`
 
@@ -569,6 +586,7 @@ Marks the attendance of a specific student from your tutorial class.
 | The person index provided is invalid  | Ensure that the index provided is not greater than the number of students in the list.  |
 | The week provided is invalid          | Ensure that the week number is in the range [3, 13] inclusive.                          |
 
+---
 
 #### Un-marking individual attendance scores : `unmarka`
 
@@ -605,6 +623,7 @@ Un-marks the attendance of a specific student from your tutorial class.
 | The person index provided is invalid  | Ensure that the index provided is not greater than the number of students in the list.  |
 | The week provided is invalid          | Ensure that the week number is in the range [3, 13] inclusive.                          |
 
+---
 
 #### Marking all participation scores : `markallp`
 
@@ -634,6 +653,7 @@ Marks the participation scores of all students in the filtered list for a given 
 | Invalid command format                | Ensure that all required fields are provided.                                           |
 | The week provided is invalid          | Ensure that the week number is in the range [3, 13] inclusive.                          |
 
+---
 
 #### Un-marking all participation scores : `unmarkallp`
 
@@ -668,6 +688,7 @@ Un-marks the participation scores of all students in the filtered list for a giv
 | The week provided is invalid                                         | Ensure that the week number is in the range [3, 13] inclusive.                               |
 | Participation for `STUDENT_NAME` in Week `WEEK_NUMBER` is already 0  | Ensure that all students in the currently filtered list have at least 1 participation score. |
 
+---
 
 #### Marking all attendance scores : `markalla`
 
@@ -697,6 +718,7 @@ Marks the attendance of all students in the filtered list for a given week.
 | Invalid command format                | Ensure that all required fields are provided.                                           |
 | The week provided is invalid          | Ensure that the week number is in the range [3, 13] inclusive.                          |
 
+---
 
 #### Un-marking all attendance scores : `unmarkalla`
 
@@ -730,6 +752,7 @@ Un-marks the attendance of all students in the filtered list for a given week.
 | Invalid command format                | Ensure that all required fields are provided.                                           |
 | The week provided is invalid          | Ensure that the week number is in the range [3, 13] inclusive.                          |
 
+---
 
 #### Adding a custom assignment : `adda`
 
@@ -763,6 +786,7 @@ Adds assignment(s) to all students in your filtered list if they do not already 
 | Assignment names should be alphanumeric                                           | Ensure that assignment names contain only alphanumeric characters.                                                |
 | No new assignments added. All students already have the assignment(s) specified.  | Ensure that the new assignment to be added does not currently exist on **ALL** the students in the filtered list. |
 
+---
 
 #### Removing a custom assignment : `removea`
 
@@ -797,6 +821,7 @@ Removes assignment(s) from all students in your filtered list if they have them.
 | Assignment names should be alphanumeric                                | Ensure that assignment names contain only alphanumeric characters. |
 | No assignments removed. No students have the assignment(s) specified.  | Ensure that the assigment specified exist on at least 1 student.   |
 
+---
 
 #### Grading a custom assignment : `grade`
 
@@ -808,11 +833,11 @@ Grades and assigns a score to an assignment for a given student in your tutorial
 
 <h4>Fields:</h4>
 
-|    Field     |                     Prefix                      |                     Required                     | Requirements                                                                                                          |
-|:------------:|:-----------------------------------------------:|:------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------|
-|   `INDEX`    | <img width=25px src="assets/ug/red_cross.png">  | <img width=30px src="assets/ug/green_tick.svg">  | INDEX **must be a positive integer** 1, 2, 3 …​ <br> INDEX cannot be greater than the number of students in the list. |
-|   `SCORE`    | <img width=25px src="assets/ug/red_cross.png">  | <img width=30px src="assets/ug/green_tick.svg">  | SCORE **must be a non-negative integer** 0, 1, 2 …​                                                                   |
-| `ASSIGNMENT` |                       a/                        | <img width=30px src="assets/ug/green_tick.svg">  | Assignment should only contain alphanumeric characters. Assignment must exist on the specified student.               |
+|    Field     |                     Prefix                      |                     Required                     | Requirements                                                                                                                  |
+|:------------:|:-----------------------------------------------:|:------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------|
+|   `INDEX`    | <img width=25px src="assets/ug/red_cross.png">  | <img width=30px src="assets/ug/green_tick.svg">  | INDEX **must be a positive integer** 1, 2, 3 …​ <br> INDEX cannot be greater than the number of students in the list.         |
+|   `SCORE`    | <img width=25px src="assets/ug/red_cross.png">  | <img width=30px src="assets/ug/green_tick.svg">  | SCORE **must be a positive integer** 1, 2 …​. <br> Score must be between the range [1, MAX_INT], where MAX_INT is 2147483647. |
+| `ASSIGNMENT` |                       a/                        | <img width=30px src="assets/ug/green_tick.svg">  | Assignment should only contain alphanumeric characters. Assignment must exist on the specified student.                       |
 
 <h4>Notes:</h4>
 
@@ -829,11 +854,12 @@ Grades and assigns a score to an assignment for a given student in your tutorial
 |:-----------------------------------------------|:----------------------------------------------------------------------------------------------------------|
 | Unknown command                                | Ensure that the command word provided is correct.                                                         |
 | Invalid command format                         | Ensure that all required fields are provided.                                                             |
-| Invalid arguments provided for Grade Command.  | Ensure that the score provided is an integer between the range [0, MAX_INT], where MAX_INT is 2147483647. |
+| Invalid arguments provided for Grade Command.  | Ensure that the score provided is an integer between the range [1, MAX_INT], where MAX_INT is 2147483647. |
 | Index is not a non-zero unsigned integer.      | Ensure that the index provided is a positive integer.                                                     |
 | The person index provided is invalid           | Ensure that the index provided is not greater than the number of students in the list.                    |
 | The week provided is invalid                   | Ensure that the week number is in the range [3, 13] inclusive.                                            |
 
+---
 
 ## Saving the data
 
@@ -893,8 +919,8 @@ For signed integers, MAX_INT = 2147483647 while MIN_INT = -2147483647.
 | [Edit student](#editing-a-student--edit)                                     | `edit INDEX [n/NAME] [m/MATRIC_NUMBER] [e/EMAIL] [tl/TELEGRAM_HANDLE] [t/TAG]…​` | `edit 1 m/A1111111Z e/johndoe@gmail.com`                    |
 | [Find student](#locating-students-by-name--find)                             | `find KEYWORD [MORE_KEYWORDS]`                                                   | `find alex david`                                           |
 | [Delete student](#deleting-a-student--delete)                                | `delete INDEX`                                                                   | `delete 2`                                                  |
-| [Remove tag from student](#remove-tag-from-a-student--removetag)             | `removetag INDEX [t/TAG]…`                                                       | `removetag 2 t/friend`                                      |
-| [Remove tag from all students](#remove-tags-from-all-students--removetagall) | `removetagall TAG…​`                                                             | `removetagall t/G19Group1 t/family`                         |
+| [Remove tag from student](#remove-tag-from-a-student--removetag)             | `removetag INDEX t/TAG…`                                                         | `removetag 2 t/friend`                                      |
+| [Remove tag from all students](#remove-tags-from-all-students--removetagall) | `removetagall t/TAG…​`                                                           | `removetagall t/G19Group1 t/family`                         |
 | [Filter student](#filtering-by-tags--filter)                                 | `filter TAG…​`                                                                   | `filter G19Group1 G19Group2`                                |
 
 ### Managing participation, attendance and assignments
