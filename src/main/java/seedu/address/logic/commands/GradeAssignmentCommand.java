@@ -25,14 +25,14 @@ public class GradeAssignmentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Grades an assignment as done for one student.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "SCORE (must be postivie integer)\n"
+            + "SCORE (must be positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1" + " " + "10 " + PREFIX_ASSIGNMENT + "Assignment1";
 
 
     public static final String MESSAGE_SUCCESS_GRADE =
             "Assignment %1$s marked as done with score: %2$d from this person : %3$s.";
     public static final String MESSAGE_SUCCESS_UNGRADE =
-            "Assignment %1$s unmarked as with score %2$d from this person : %3$s.";
+            "Assignment %1$s unmarked as with score %2$d for this person : %3$s.";
 
     public static final String MESSAGE_ASSIGNMENT_NOT_FOUND = "Assignment not found.";
 
