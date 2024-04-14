@@ -1,0 +1,40 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor white
+
+mainframe: **sd** Grade assignment for specified student
+
+participant "gc:GradeAssignmentCommand" as GradeAssignmentCommand LOGIC_COLOR
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+activate GradeAssignmentCommand
+
+GradeAssignmentCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model -> GradeAssignmentCommand : lastShownList
+deactivate Model
+
+GradeAssignmentCommand -> GradeAssignmentCommand : createGradedPerson(personToMark)
+activate GradeAssignmentCommand
+GradeAssignmentCommand -> GradeAssignmentCommand : gradedPerson
+deactivate GradeAssignmentCommand
+
+
+GradeAssignmentCommand -> Model : setPerson(personToMark, updatedPerson)
+activate Model
+
+Model -> GradeAssignmentCommand
+deactivate Model
+
+GradeAssignmentCommand -> Model : updatedFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+activate Model
+
+Model -> GradeAssignmentCommand
+deactivate Model
+
+@enduml
