@@ -1,0 +1,83 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor white
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddAssignmentCommandParser" as AddAssignmentCommandParser LOGIC_COLOR
+participant "homework1:Assignment" as Assignment LOGIC_COLOR
+participant "hs:Hashset" as Hashset LOGIC_COLOR
+participant "ac:AddAssignmentCommand" as AddAssignmentCommand LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("adda a/Homework1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("adda a/Homework1")
+activate AddressBookParser
+
+create AddAssignmentCommandParser
+AddressBookParser -> AddAssignmentCommandParser : AddAssignmentCommandParser()
+activate AddAssignmentCommandParser
+
+AddAssignmentCommandParser --> AddressBookParser
+deactivate AddAssignmentCommandParser
+
+AddressBookParser -> AddAssignmentCommandParser : parse("adda a/Homework1")
+activate AddAssignmentCommandParser
+
+create Hashset
+AddAssignmentCommandParser -> Hashset : Hashset()
+activate Hashset
+
+create Assignment
+Hashset -> Assignment : Assignment("Homework1")
+
+activate Assignment
+Assignment --> Hashset : homework1
+deactivate Assignment
+
+
+Hashset -> Hashset : add(homework1)
+activate Hashset
+Hashset --> Hashset
+deactivate Hashset
+
+Hashset --> AddAssignmentCommandParser : hs
+deactivate Hashset
+
+create AddAssignmentCommand
+AddAssignmentCommandParser -> AddAssignmentCommand : AddAssignmentCommand(hs)
+activate AddAssignmentCommand
+AddAssignmentCommand --> AddAssignmentCommandParser : ac
+deactivate AddAssignmentCommand
+
+
+AddAssignmentCommandParser --> AddressBookParser : ac
+deactivate AddAssignmentCommandParser
+AddAssignmentCommandParser -[hidden]-> AddressBookParser
+destroy AddAssignmentCommandParser
+
+AddressBookParser --> LogicManager : ac
+deactivate AddressBookParser
+
+LogicManager -> AddAssignmentCommand : execute(ac)
+activate AddAssignmentCommand
+
+ref over AddAssignmentCommand : Add specified assignment to all students
+
+ref over AddAssignmentCommand : Create successful CommandResult
+
+ref over AddAssignmentCommand : Commit addressbook
+
+AddAssignmentCommand --> LogicManager : r
+deactivate AddAssignmentCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddAssignmentCommand -[hidden]-> LogicManager
+destroy AddAssignmentCommand
+
+[<--LogicManager : r
+deactivate LogicManager
+@enduml

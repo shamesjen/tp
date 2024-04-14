@@ -349,6 +349,49 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
+### Add Assignment Feature
+
+#### Implementation
+The Add Assignment feature allows users to add assignments to users in the address book. An Assignment is represented by
+the Assignment class, which contains the assignment name and score. The command takes in a list of assignment
+names then creates and adds a list of those assignments to the Assignment list of all users that do not already
+have an assignment with the same name. The assignments are initiated with a score of 0 and saved to the storage file.
+
+To better understand how the add assignment command is executed, below is a sequence diagram to provide a visual representation.
+
+![AddAssignmentSequenceDiagram](assets/dg/AddAssignmentSequenceDiagram.png)
+
+The sequence diagrams below provide information for the respective reference frames.
+
+![AddAssignment](assets/dg/SDAddAssignment.png)
+
+![CreateAddAssignmentCommandResult](assets/dg/SDAddAssignmentCommandResult.png)
+
+![CommitAddressbook](assets/dg/SDAddAssignmentCommitAddressbook.png)
+
+#### Design considerations
+
+**Aspect: How to add assignments to students:**
+
+* **Current implementation:** Creates a new person with updated assignment list.
+    * Pros: Ensures immutability of each person object, which reduces the potential for unintended side effects caused by mutable state changes.
+    * Cons: May incur some performance overhead since we are creating a new copy of a person each time the command is called.
+    * Cons: May have performance issues in terms of memory usage.
+* **Alternative:** Update the assignment list of the existing person object.
+    * Pros: Will use less memory since we are not recreating a person object.
+    * Cons: Person become mutable, which might be challenging to test and ensure correctness as the state changes constantly.
+
+**Aspect: How to handle duplicate Assignments:**
+
+* **Current implementation:** Checks if the assignment already exists in the person's assignment list.
+Adds the assignment if it does not exist. Duplicates are ignored as long as one person on the list does not have the assignment.
+    * Pros: Ensures that duplicate assignments are not added to the person's assignment list.
+    * Cons: Does not tell user which are ignored.
+
+* **Alternative:** Checks if the duplicates exists in each person's assignment list, prompt user to confirm if they want to add the assignment.
+    * Pros: Ensures that the user is aware of the duplicates and can decide if they want to add the assignment.
+    * Cons: May be cumbersome for the user if they have many duplicates and have large student list.
+
 
 ### \[Proposed\] Data archiving
 

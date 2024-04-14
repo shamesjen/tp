@@ -1,0 +1,20 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor white
+
+mainframe: **sd** Create successful CommandResult
+
+participant "ac:AddAssignmentCommand" as AddAssignmentCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+
+activate AddAssignmentCommand
+
+create CommandResult
+AddAssignmentCommand -> CommandResult : CommandResult(MESSAGE_SUCCESS)
+activate CommandResult
+
+CommandResult --> AddAssignmentCommand : r
+deactivate CommandResult
+
+@enduml
