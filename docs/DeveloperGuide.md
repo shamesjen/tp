@@ -1360,13 +1360,21 @@ This is limiting if the score needs to be changed to 0 to be ungraded. <br>
 
     * **Example**: Users can now input `grade 1 0 a/assignment1` to grade the first student's assignment1 score to 0.
 
-7. Specific error messages for commands with multiple parameters
+7. More robust error handling for `marka` and `markalla` commands
 
-    * **Description**: Our error messages are currently too general for certain commands such as `add` that requires several parameters. This might make it difficult for users to identify the specific parameter that has an incorrect format. <br>
+   * **Description**: Our `marka` and `markalla` commands currently do not have checks to see if the current student has already been marked before. If a user has issued the same `marka` command multiple times, this would result in a user needing to perform several `undo` commands to before being able to undo the `marka` command.
 
-    * **Enhancement**: Modify error messages to pinpoint the specific parameters that the users have incorrectly entered, instead of just showing `Invalid command format` as an error message.
+   * **Enhancement**: Throw an error if the user attempts to mark the attendance of a student who has already been marked before.
 
-    * **Example**: If a user inputs `add n/Michael* e/michael@u.nus.edu tl/michael01 m/A1234567Z` as a command, the error message will be `Name field has incorrect format`.
+   * **Example**: If a user tries to mark a student who has already been marked before, an error message: `Student has already been marked` will be shown.
+
+8. **filter** command to be case-sensitive
+
+  * **Description**: Our filter command currently is case-insensitive, and users are unable to filter between 2 similar tags such as `G19Group1` and `g19group1`.
+
+  * **Enhancement**: Modify filter command to be case-sensitive.
+
+  * **Example**: Executing the command `filter cs2109s` would only filter students with tag `cs2109s`, even if some students have the tag `CS2109S`.
 
 ## **Appendix: Effort**
 
