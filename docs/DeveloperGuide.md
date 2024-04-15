@@ -165,6 +165,9 @@ To better understand how the mark command is executed, below is a sequence diagr
 
 ![MarkParticipationSequenceDiagram](assets/dg/MarkParticipationSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MarkParticipationCommandParser` and `MarkParticipationCommand`should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
+
 The sequence diagrams below provide information for the respective reference frames.
 
 ![MarkParticipation](assets/dg/SDMarkParticipation.png)
@@ -189,12 +192,15 @@ The sequence diagrams below provide information for the respective reference fra
 
 #### Implementation
 
-The 'filter' command allows users to filter the currently shown list of students based on tags that match any of the specified tags given with
-the command. It takes in the 'filter' keyword as well as one or more alphanumeric tags separated by a space.
+The `filter` command allows users to filter the currently shown list of students based on tags that match any of the specified tags given with
+the command. It takes in the `filter` keyword as well as one or more alphanumeric tags separated by a space.
 
 To better understand how the filter command is executed, below is a sequence diagram to provide a visual representation.
 
 ![FilterCommandSequenceDiagram](assets/dg/FilterCommandSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FilterCommandParser` and `FilterCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
 
 The sequence diagrams below provide information for the respective reference frames.
 
@@ -223,6 +229,9 @@ The `grade` command allows users to assign a score to a particular student for a
 To better understand how the grade command is executed, below is a sequence diagram to provide a visual representation.
 
 ![GradeAssignmentSequenceDiagram](assets/dg/GradeAssignmentSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `GradeAssignmentCommandParser` and `GradeAssignmentCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
 
 The sequence diagrams below provide information for the respective reference frames.
 
@@ -352,7 +361,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 ### Add Assignment Feature
 
 #### Implementation
-The Add Assignment feature allows users to add assignments to users in the address book. An Assignment is represented by
+The Add Assignment feature allows users to add assignments to users in nerdTrackerPlus. An Assignment is represented by
 the Assignment class, which contains the assignment name and score. The command takes in a list of assignment
 names then creates and adds a list of those assignments to the Assignment list of all users that do not already
 have an assignment with the same name. The assignments are initiated with a score of 0 and saved to the storage file.
@@ -360,6 +369,9 @@ have an assignment with the same name. The assignments are initiated with a scor
 To better understand how the add assignment command is executed, below is a sequence diagram to provide a visual representation.
 
 ![AddAssignmentSequenceDiagram](assets/dg/AddAssignmentSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentCommandParser` and `AddAssignmentCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
 
 The sequence diagrams below provide information for the respective reference frames.
 
@@ -379,7 +391,7 @@ The sequence diagrams below provide information for the respective reference fra
     * Cons: May have performance issues in terms of memory usage.
 * **Alternative:** Update the assignment list of the existing person object.
     * Pros: Will use less memory since we are not recreating a person object.
-    * Cons: Person become mutable, which might be challenging to test and ensure correctness as the state changes constantly.
+    * Cons: Person becomes mutable, which might be challenging to test and ensure correctness as the state changes constantly.
 
 **Aspect: How to handle duplicate Assignments:**
 
@@ -391,12 +403,6 @@ Adds the assignment if it does not exist. Duplicates are ignored as long as one 
 * **Alternative:** Checks if the duplicates exists in each person's assignment list, prompt user to confirm if they want to add the assignment.
     * Pros: Ensures that the user is aware of the duplicates and can decide if they want to add the assignment.
     * Cons: May be cumbersome for the user if they have many duplicates and have large student list.
-
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
