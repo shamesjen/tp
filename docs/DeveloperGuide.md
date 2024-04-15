@@ -1228,16 +1228,19 @@ testers are expected to do more *exploratory* testing.
     4. Incorrect test cases to try: `markp`, `unmarkp`, `markp 0 3`, `unmarkp 1 14`, where the `INDEX` or `WEEK_NUMBER` is not within the valid range. <br>
        Expected: Participation score is not marked / unmarked. Error message is shown.
 
-### Marking participation for all students
+### Marking / Un-marking participation for all students
 
-1. Marking the participation score of all shown students for a specific week
+1. Marking / Un-marking the participation score of all shown students for a specific week
 
    1. Prerequisites: nerdTrackerPlus contains some students.
 
-   3. Test case: `markallp 3` <br>
+   2. Test case: `markallp 3` <br>
       Expected: Participation score of all students (filtered students if filter command was applied) in the list is incremented by 1 for week 3.
 
-   3. Incorrect test cases to try: `markallp`, `markallp 0`, `markallp 14`, where the `WEEK_NUMBER` is not within the valid range. <br>
+   3. Test case: `unmarkallp 3` <br>
+      Expected: If the participation score of all students (filtered students if filter command was applied) in the list is greater than 0, it will be decremented by 1 for week 3.
+
+   4. Incorrect test cases to try: `markallp`, `unmarkallp`, `markallp 0`, `unmarkallp 0`, `markallp 14`, `unmarkallp 14`, where the `WEEK_NUMBER` is not within the valid range. <br>
       Expected: Participation score is not marked. Error message is shown.
 
 ### Marking / Un-marking attendance
@@ -1255,16 +1258,19 @@ testers are expected to do more *exploratory* testing.
     4. Incorrect test cases to try: `marka`, `unmarka`, `marka 0 3`, `unmarka 1 14`, where the `INDEX` or `WEEK_NUMBER` is not within the valid range. <br>
        Expected: Attendance is not marked / unmarked. Error message is shown.
 
-### Marking attendance for all students
+### Marking / Un-marking attendance for all students
 
-1. Marking the attendance of all shown students for a specific week
+1. Marking / Un-marking the attendance of all shown students for a specific week
 
     1. Prerequisites: nerdTrackerPlus contains some students.
 
     2. Test case: `markalla 3` <br>
        Expected: Attendance of all students (filtered students if filter command was applied) in the list is marked for week 3.
 
-    3. Incorrect test cases to try: `markalla`, `markalla 0`, `markalla 14`, where the `WEEK_NUMBER` is not within the valid range. <br>
+    3. Test case: `unmarkalla 3` <br>
+       Expected: Attendance of all students (filtered students if filter command was applied) in the list is unmarked for week 3.
+
+    4. Incorrect test cases to try: `markalla`, `unmarkalla`, `markalla 0`, `unmarkalla 0`, `markalla 14`, `unmarkalla 14` where the `WEEK_NUMBER` is not within the valid range. <br>
        Expected: Attendance is not marked. Error message is shown.
 
 ### Adding an assignment
