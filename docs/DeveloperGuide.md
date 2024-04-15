@@ -1201,7 +1201,7 @@ testers are expected to do more *exploratory* testing.
     3. Incorrect test cases to try: `delete`, `delete 0`, `delete x` (where x is larger than the number of students in the list) <br>
       Expected: No person is deleted. Error details shown in the status message.
 
-### Removing tag from a student
+### Removing tag from a specific student
 
 1. Removing a tag from a student
 
@@ -1212,6 +1212,18 @@ testers are expected to do more *exploratory* testing.
 
     3. Incorrect test cases to try: `removetag`, `removetag 0`, `removetag x` (where x is larger than the number of students in the list) <br>
       Expected: `removetag` command is not executed. Error message is shown.
+
+### Removing tag(s) from all students
+
+1. Remove tag(s) from all students
+
+    1. Prerequisites: Tag(s) to remove exists on students.
+
+    2. Test case: `removetagall t/CS2109S` <br>
+       Expected: If the tag `CS2109S` exists on at least 1 student in the list, the tag will be successfully removed. Otherwise, no tag is removed and an error message is shown.
+
+    3. Incorrect test cases to try: `removetagall`, `removetagall CS2109S`, `removetagall t/CS2109S*` <br>
+       Expected: `removetagall` command is not executed. Error message is shown.
 
 ### Marking / Un-marking participation
 
